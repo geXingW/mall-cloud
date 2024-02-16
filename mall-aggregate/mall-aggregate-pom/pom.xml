@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.gexingw</groupId>
+        <artifactId>mall-aggregate</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>mall-aggregate-pom</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <mysql.connector.java.version>8.0.22</mysql.connector.java.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <coommons-lang3.version>3.12.0</coommons-lang3.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-common-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-common-db</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-common-exception</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
+            <!-- Order Service -->
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-order-adapter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-order-application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-order-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-order-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-order-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-order-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- User Service -->
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-user-adapter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-user-application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-user-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-user-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${coommons-lang3.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>
