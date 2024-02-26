@@ -1,6 +1,6 @@
 package com.gexingw.mall.common.exception;
 
-import com.gexingw.mall.comm.core.enums.RespCode;
+import com.gexingw.mall.common.core.enums.CommonRespCode;
 
 /**
  * mall-user-service
@@ -12,15 +12,15 @@ import com.gexingw.mall.comm.core.enums.RespCode;
 public class ParamInvalidException extends BizErrorException {
 
     public ParamInvalidException(String message) {
-        super(RespCode.PARAMS_INVALID, message);
+        super(CommonRespCode.PARAMS_INVALID, message);
     }
 
-    public ParamInvalidException(RespCode respCode) {
-        super(respCode);
+    public ParamInvalidException(CommonRespCode commonRespCode) {
+        super(commonRespCode);
     }
 
-    public ParamInvalidException(RespCode respCode, String message) {
-        super(respCode, message);
+    public ParamInvalidException(CommonRespCode commonRespCode, String message) {
+        super(commonRespCode, message);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.gexingw.mall.user.infra.convert;
 
-import com.gexingw.mall.comm.core.convert.DomainDoConvert;
+import com.gexingw.mall.common.core.convert.DomainDoConvert;
 import com.gexingw.mall.user.domain.address.model.ShippingAddress;
 import com.gexingw.mall.user.infra.dataobject.ShippingAddressDO;
 import org.mapstruct.Mapper;

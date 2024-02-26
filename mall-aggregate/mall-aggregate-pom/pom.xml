@@ -15,11 +15,13 @@
         <mysql.connector.java.version>8.0.22</mysql.connector.java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <coommons-lang3.version>3.12.0</coommons-lang3.version>
+        <oauth2-server.version>0.4.5</oauth2-server.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
 
+            <!-- Common Modules -->
             <dependency>
                 <groupId>com.gexingw</groupId>
                 <artifactId>mall-common-core</artifactId>
@@ -38,6 +40,55 @@
                 <version>${revision}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-common-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-common-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-common-redis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
+            <!-- Auth Service-->
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-auth-adapter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-auth-application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-auth-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-auth-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-auth-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
             <!-- Order Service -->
             <dependency>
@@ -113,6 +164,25 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${coommons-lang3.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-authorization-server -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-authorization-server</artifactId>
+                <version>${oauth2-server.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2-extension-spring5</artifactId>
+                <version>${fastjson2.version}</version>
             </dependency>
 
         </dependencies>

@@ -1,7 +1,7 @@
 package com.gexingw.mall.common.exception.handler;
 
-import com.gexingw.mall.comm.core.enums.RespCode;
-import com.gexingw.mall.comm.core.util.R;
+import com.gexingw.mall.common.core.interfaces.IRespCode;
+import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.exception.BizErrorException;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.*;
@@ -32,7 +32,7 @@ public class DubboRpcExceptionHandler implements Filter {
 //            }
 
             if (exception instanceof BizErrorException) {
-                RespCode respCode = ((BizErrorException) exception).getRespCode();
+                IRespCode respCode = ((BizErrorException) exception).getRespCode();
                 invokeResult.setValue(R.fail(respCode));
                 invokeResult.setException(null);
 

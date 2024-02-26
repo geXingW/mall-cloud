@@ -1,0 +1,52 @@
+server:
+  port: 8000
+
+
+spring:
+  application:
+    name: mall-cloud-gateway
+
+  mvc:
+    servlet:
+      path: "/api"
+
+  cloud:
+    inetutils:
+      preferred-networks: "192.168.100"
+
+    gateway:
+      routes:
+        - id: mall-product
+          uri: lb://mall-cloud-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*), /$\{segment}
+
+    nacos:
+      server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:nacos}
+
+      discovery:
+        namespace: ${NACOS_NAMESPACE:mall-cloud}
+        group: DEFAULT_GROUP
+        service: ${spring.application.name}
+
+      config:
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: DEFAULT_GROUP
+        name: ${spring.application.name}
+        file-extension: yaml
+        refresh-enabled: true
+        extension-configs:
+          - data-id: mall-cloud-base.yaml
+            refresh: true
+
+debug: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway

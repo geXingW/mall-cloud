@@ -17,6 +17,9 @@
         <module>mall-common-core</module>
         <module>mall-common-db</module>
         <module>mall-common-exception</module>
+        <module>mall-common-web</module>
+        <module>mall-common-security</module>
+        <module>mall-common-redis</module>
     </modules>
 
     <properties>

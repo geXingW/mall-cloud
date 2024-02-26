@@ -1,8 +1,12 @@
 package com.gexingw.mall.order.adapter.app;
 
-import com.gexingw.mall.comm.core.util.R;
-import com.gexingw.mall.order.app.command.executor.OrderCommandExecutor;
-import com.gexingw.mall.order.app.dto.OrderAddCommand;
+import com.gexingw.mall.common.core.command.CommandBus;
+import com.gexingw.mall.common.core.enums.OrderRespCode;
+import com.gexingw.mall.common.core.enums.CommonRespCode;
+import com.gexingw.mall.common.core.util.R;
+import com.gexingw.mall.domain.command.order.AppOrderCancelCommand;
+import com.gexingw.mall.domain.command.order.AppOrderSubmitCommand;
+import com.gexingw.mall.domain.command.order.WebOrderDeleteCommand;
 import com.gexingw.mall.order.app.vo.order.AppOrderDetailVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
@@ -19,21 +23,39 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class AppOrderAdapter {
 
-    private final OrderCommandExecutor commandExecutor;
+    private final CommandBus commandBus;
+
+    @GetMapping
+    public R<Object> list() {
+        return R.ok();
+    }
 
     @GetMapping("/{id}")
     public R<AppOrderDetailVO> info(@PathVariable Long id) {
-        return R.ok(commandExecutor.getById(id));
+        return R.ok();
     }
 
     @PostMapping
-    public R<Long> add(@RequestBody OrderAddCommand addCommand) {
-        return R.ok(commandExecutor.add(addCommand));
+    public R<Long> add(@RequestBody AppOrderSubmitCommand addCommand) {
+        return R.ok(commandBus.send(addCommand, Long.class));
+    }
+
+    @PostMapping("/{id}/cancel")
+    public R<Object> cancel(@PathVariable Long id) {
+        if (!commandBus.send(new AppOrderCancelCommand(id), Boolean.class)) {
+            return R.fail(OrderRespCode.CANCEL_ERROR);
+        }
+
+        return R.ok();
     }
 
     @DeleteMapping("/{id}")
     public R<Object> delete(@PathVariable Long id) {
-        return R.ok(commandExecutor.delete(id));
+        if (commandBus.send(new WebOrderDeleteCommand(id), Boolean.class)) {
+            R.fail(CommonRespCode.DELETE_ERROR);
+        }
+
+        return R.ok();
     }
 
 }

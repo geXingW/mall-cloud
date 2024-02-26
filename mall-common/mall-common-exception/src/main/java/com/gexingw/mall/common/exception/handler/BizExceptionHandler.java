@@ -1,7 +1,7 @@
 package com.gexingw.mall.common.exception.handler;
 
-import com.gexingw.mall.comm.core.enums.RespCode;
-import com.gexingw.mall.comm.core.util.R;
+import com.gexingw.mall.common.core.interfaces.IRespCode;
+import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.exception.BizNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -21,7 +21,7 @@ public class BizExceptionHandler {
 
     @ExceptionHandler({BizNotFoundException.class})
     public R<Object> exceptionHandler(BizNotFoundException bizNotFoundException) {
-        RespCode respCode = bizNotFoundException.getRespCode();
+        IRespCode respCode = bizNotFoundException.getRespCode();
         return R.fail(respCode, bizNotFoundException.getMessage());
     }
 

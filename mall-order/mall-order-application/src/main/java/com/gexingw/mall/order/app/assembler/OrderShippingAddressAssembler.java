@@ -1,7 +1,7 @@
 package com.gexingw.mall.order.app.assembler;
 
 import com.gexingw.mall.domain.order.model.OrderShippingAddress;
-import com.gexingw.mall.order.app.dto.OrderAddCommand;
+import com.gexingw.mall.order.app.dto.order.AppOrderAddCommand;
 import com.gexingw.mall.order.app.vo.order.AppOrderDetailVO;
 import com.gexingw.mall.user.client.clientobject.address.ShippingAddressCO;
 import org.mapstruct.Mapper;
@@ -16,7 +16,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface OrderShippingAddressAssembler {
 
-    OrderShippingAddress toShippingAddress(OrderAddCommand.Shipping shipping);
+    OrderShippingAddress toShippingAddress(AppOrderAddCommand.Shipping shipping);
 
     OrderShippingAddress toShippingAddress(ShippingAddressCO shippingAddressCo);
 

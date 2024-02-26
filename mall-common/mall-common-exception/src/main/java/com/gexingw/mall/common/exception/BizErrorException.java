@@ -1,6 +1,7 @@
 package com.gexingw.mall.common.exception;
 
-import com.gexingw.mall.comm.core.enums.RespCode;
+import com.gexingw.mall.common.core.enums.CommonRespCode;
+import com.gexingw.mall.common.core.interfaces.IRespCode;
 
 /**
  * mall-user-service
@@ -11,16 +12,12 @@ import com.gexingw.mall.comm.core.enums.RespCode;
 public class BizErrorException extends BaseException {
 
     @SuppressWarnings("unused")
-    public BizErrorException(String message) {
-        super(RespCode.BIZ_ERROR, message);
-    }
-
-    public BizErrorException(RespCode respCode) {
+    public BizErrorException(IRespCode respCode) {
         super(respCode);
     }
 
-    public BizErrorException(RespCode respCode, String message) {
-        super(respCode, message);
+    public BizErrorException(CommonRespCode commonRespCode, String message) {
+        super(commonRespCode, message);
     }
 
 }

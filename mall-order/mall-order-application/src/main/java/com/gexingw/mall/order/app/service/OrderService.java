@@ -1,6 +1,6 @@
 package com.gexingw.mall.order.app.service;
 
-import com.gexingw.mall.order.app.dto.OrderAddCommand;
+import com.gexingw.mall.order.app.dto.order.AppOrderAddCommand;
 
 /**
  * mall-user-service
@@ -11,6 +11,6 @@ import com.gexingw.mall.order.app.dto.OrderAddCommand;
 public interface OrderService {
 
     @SuppressWarnings("unused")
-    Long add(OrderAddCommand addCommand);
+    Long add(AppOrderAddCommand addCommand);
 
 }

@@ -1,6 +1,6 @@
 package com.gexingw.mall.order.infra.gateway.rpc;
 
-import com.gexingw.mall.comm.core.util.R;
+import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.user.client.clientobject.address.ShippingAddressCO;
 import com.gexingw.mall.user.client.dubbo.ShippingAddressRpcService;
 import lombok.RequiredArgsConstructor;

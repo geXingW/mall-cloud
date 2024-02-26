@@ -1,6 +1,6 @@
 package com.gexingw.mall.user.adapter.web;
 
-import com.gexingw.mall.comm.core.util.R;
+import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.user.app.executor.shippingaddress.ShippingAddressAddCmdExecutor;
 import com.gexingw.mall.user.app.executor.shippingaddress.ShippingAddressQueryExecutor;
 import com.gexingw.mall.user.app.service.ShippingAddressService;

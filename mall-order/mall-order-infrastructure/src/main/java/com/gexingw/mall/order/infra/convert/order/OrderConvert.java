@@ -1,6 +1,6 @@
 package com.gexingw.mall.order.infra.convert.order;
 
-import com.gexingw.mall.comm.core.convert.DomainDoConvert;
+import com.gexingw.mall.common.core.convert.DomainDoConvert;
 import com.gexingw.mall.domain.order.model.Order;
 import com.gexingw.mall.order.infra.dataobject.OrderDO;
 import org.mapstruct.Mapper;

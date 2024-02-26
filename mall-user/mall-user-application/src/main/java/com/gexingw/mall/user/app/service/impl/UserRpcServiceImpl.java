@@ -1,6 +1,6 @@
 package com.gexingw.mall.user.app.service.impl;
 
-import com.gexingw.mall.comm.core.util.R;
+import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.exception.BizNotFoundException;
 import com.gexingw.mall.user.client.clientobject.user.UserCO;
 import com.gexingw.mall.user.client.dubbo.UserRpcService;

@@ -1,6 +1,6 @@
 package com.gexingw.mall.user.app.executor.shippingaddress;
 
-import com.gexingw.mall.comm.core.enums.RespCode;
+import com.gexingw.mall.common.core.enums.CommonRespCode;
 import com.gexingw.mall.common.exception.BizErrorException;
 import com.gexingw.mall.user.app.assembler.ShippingAddressAssembler;
 import com.gexingw.mall.user.domain.address.dto.ShippingAddressAddCommand;
@@ -26,7 +26,7 @@ public class ShippingAddressAddCmdExecutor {
     public Long execute(ShippingAddressAddCommand addCommand) {
         ShippingAddress shippingAddress = shippingAddressAssembler.toDomain(addCommand);
         if (!shippingAddressGateway.insert(shippingAddress)) {
-            throw new BizErrorException(RespCode.SAVE_ERROR, "地址信息保存失败！");
+            throw new BizErrorException(CommonRespCode.SAVE_ERROR, "地址信息保存失败！");
         }
 
         return shippingAddress.getId();

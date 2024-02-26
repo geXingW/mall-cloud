@@ -1,6 +1,6 @@
 package com.gexingw.mall.domain.user.model;
 
-import com.gexingw.mall.comm.core.domain.Aggregation;
+import com.gexingw.mall.common.core.domain.Aggregation;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

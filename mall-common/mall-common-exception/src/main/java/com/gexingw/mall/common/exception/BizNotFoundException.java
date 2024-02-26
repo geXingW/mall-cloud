@@ -1,6 +1,7 @@
 package com.gexingw.mall.common.exception;
 
-import com.gexingw.mall.comm.core.enums.RespCode;
+import com.gexingw.mall.common.core.enums.CommonRespCode;
+import com.gexingw.mall.common.core.interfaces.IRespCode;
 
 /**
  * mall-user-service
@@ -13,19 +14,19 @@ import com.gexingw.mall.comm.core.enums.RespCode;
 public class BizNotFoundException extends BizErrorException{
 
     public BizNotFoundException() {
-        super(RespCode.NOT_FOUND);
+        super(CommonRespCode.NOT_FOUND);
     }
 
     public BizNotFoundException(String message) {
-        super(RespCode.NOT_FOUND, message);
+        super(CommonRespCode.NOT_FOUND, message);
     }
 
-    public BizNotFoundException(RespCode respCode) {
+    public BizNotFoundException(IRespCode respCode) {
         super(respCode);
     }
 
-    public BizNotFoundException(RespCode respCode, String message) {
-        super(respCode, message);
+    public BizNotFoundException(CommonRespCode commonRespCode, String message) {
+        super(commonRespCode, message);
     }
 
 }

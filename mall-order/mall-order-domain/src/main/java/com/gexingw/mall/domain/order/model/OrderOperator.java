@@ -1,6 +1,6 @@
 package com.gexingw.mall.domain.order.model;
 
-import com.gexingw.mall.comm.core.domain.Entity;
+import com.gexingw.mall.common.core.domain.Entity;
 import lombok.Data;
 
 /**

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.gexingw.mall.comm.core.constant.DateTimeConstant;
+import com.gexingw.mall.common.core.constant.DateTimeConstant;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

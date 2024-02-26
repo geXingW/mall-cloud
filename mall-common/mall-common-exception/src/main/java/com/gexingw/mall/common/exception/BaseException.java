@@ -1,6 +1,7 @@
 package com.gexingw.mall.common.exception;
 
-import com.gexingw.mall.comm.core.enums.RespCode;
+import com.gexingw.mall.common.core.enums.CommonRespCode;
+import com.gexingw.mall.common.core.interfaces.IRespCode;
 import lombok.Getter;
 
 /**
@@ -13,22 +14,22 @@ import lombok.Getter;
 @SuppressWarnings("unused")
 public class BaseException extends RuntimeException {
 
-    protected RespCode respCode;
+    protected IRespCode respCode;
 
     public BaseException(String message) {
         super(message);
 
-        respCode = RespCode.SERVER_ERROR;
+        respCode = CommonRespCode.SERVER_ERROR;
     }
 
-    public BaseException(RespCode respCode) {
+    public BaseException(IRespCode respCode) {
         super(respCode.getMessage());
         this.respCode = respCode;
     }
 
-    public BaseException(RespCode respCode, String message) {
+    public BaseException(CommonRespCode commonRespCode, String message) {
         super(message);
-        this.respCode = respCode;
+        this.respCode = commonRespCode;
     }
 
 }
