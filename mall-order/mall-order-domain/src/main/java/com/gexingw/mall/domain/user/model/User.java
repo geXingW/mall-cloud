@@ -1,6 +1,6 @@
 package com.gexingw.mall.domain.user.model;
 
-import com.gexingw.mall.common.core.domain.Aggregation;
+import com.gexingw.mall.common.core.domain.AggregationRoot;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class User implements Aggregation {
+public class User implements AggregationRoot {
 
     private Long id;
 

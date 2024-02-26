@@ -9,6 +9,8 @@ import java.io.Serializable;
  * @author GeXingW
  * @date 2024/2/15 13:12
  */
-public interface Aggregation extends Serializable {
+public interface AggregationRoot extends Serializable {
+
+    Long getId();
 
 }

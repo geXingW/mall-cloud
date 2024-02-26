@@ -15,7 +15,9 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class AuthInfo implements Aggregation {
+public class AuthInfo implements AggregationRoot {
+
+    private Long id;
 
     private User authUser;
     private Client client;
@@ -62,6 +64,7 @@ public class AuthInfo implements Aggregation {
     }
 
     public AuthInfo(User authUser, Client client) {
+        this.id = authUser.getId();
         this.authUser = authUser;
         this.client = client;
     }

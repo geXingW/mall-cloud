@@ -1,6 +1,6 @@
 package com.gexingw.mall.auth.domain.model;
 
-import com.gexingw.mall.common.core.domain.Aggregation;
+import com.gexingw.mall.common.core.domain.AggregationRoot;
 import lombok.Data;
 
 /**
@@ -10,7 +10,7 @@ import lombok.Data;
  * @date 2024/2/16 17:02
  */
 @Data
-public class AuthUser implements Aggregation {
+public class AuthUser implements AggregationRoot {
 
     private Long id;
 
