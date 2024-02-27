@@ -22,8 +22,8 @@ public interface OrderAssembler {
     OrderItemAssembler ORDER_ITEM_ASSEMBLER = Mappers.getMapper(OrderItemAssembler.class);
     OrderShippingAddressAssembler ORDER_SHIPPING_ADDRESS_ASSEMBLER = Mappers.getMapper(OrderShippingAddressAssembler.class);
 
-    @Mapping(target = "items", source = "orderItems")
-    @Mapping(target = "shippingAddress", source = "orderShippingAddress", qualifiedByName = "toAppShippingAddressVO")
+    @Mapping(target = "items", source = "items")
+    @Mapping(target = "shippingAddress", source = "shippingAddress", qualifiedByName = "toAppShippingAddressVO")
     AppOrderDetailVO toAppVO(Order order);
 
     @Named("toAppItemVO")

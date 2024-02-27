@@ -47,14 +47,14 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         orderMapper.insert(orderDO);
 
         // 保存订单商品信息
-        for (OrderItem orderItem : order.getOrderItems()) {
+        for (OrderItem orderItem : order.getItems()) {
             OrderItemDO orderItemDO = orderItemConvert.toDO(orderItem);
             orderItemDO.setOrderId(orderDO.getId());
             orderItemMapper.insert(orderItemDO);
         }
 
         // 保存订单收货地址
-        OrderShippingAddressDO shippingAddressDO = orderShippingAddressConvert.toDO(order.getOrderShippingAddress());
+        OrderShippingAddressDO shippingAddressDO = orderShippingAddressConvert.toDO(order.getShippingAddress()s());
         shippingAddressDO.setOrderId(orderDO.getId());
         orderShippingAddressMapper.insert(shippingAddressDO);
 
@@ -92,12 +92,12 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         // 查询订单商品信息
         List<OrderItem> orderItems = orderItemMapper.selectList(new LambdaQueryWrapper<OrderItemDO>().eq(OrderItemDO::getOrderId, id))
                 .stream().map(orderItemConvert::toDomain).collect(Collectors.toList());
-        order.setOrderItems(orderItems);
+        order.setItems(orderItems);
 
         // 查询订单收货地址信息
         LambdaQueryWrapper<OrderShippingAddressDO> shippingAddressQryWp = new LambdaQueryWrapper<OrderShippingAddressDO>()
                 .eq(OrderShippingAddressDO::getOrderId, id);
-        order.setOrderShippingAddress(orderShippingAddressConvert.toDomain(orderShippingAddressMapper.selectOne(shippingAddressQryWp)));
+        order.setShippingAddress(orderShippingAddressConvert.toDomain(orderShippingAddressMapper.selectOne(shippingAddressQryWp)));
 
         return order;
     }

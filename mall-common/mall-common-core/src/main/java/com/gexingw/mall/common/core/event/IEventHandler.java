@@ -8,6 +8,6 @@ package com.gexingw.mall.common.core.event;
  */
 public interface IEventHandler {
 
-
+    Boolean handle(IEvent event);
 
 }

@@ -4,8 +4,8 @@ import com.gexingw.mall.common.core.command.CommandBus;
 import com.gexingw.mall.common.core.enums.OrderRespCode;
 import com.gexingw.mall.common.core.enums.CommonRespCode;
 import com.gexingw.mall.common.core.util.R;
-import com.gexingw.mall.domain.command.order.AppOrderCancelCommand;
-import com.gexingw.mall.domain.command.order.WebOrderDeleteCommand;
+import com.gexingw.mall.order.app.dto.order.AppOrderCancelCommand;
+import com.gexingw.mall.order.app.dto.order.AppOrderDeleteCommand;
 import com.gexingw.mall.order.app.dto.order.AppOrderSubmitCommand;
 import com.gexingw.mall.order.app.vo.order.AppOrderDetailVO;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +51,7 @@ public class AppOrderAdapter {
 
     @DeleteMapping("/{id}")
     public R<Object> delete(@PathVariable Long id) {
-        if (commandBus.send(new WebOrderDeleteCommand(id), Boolean.class)) {
+        if (commandBus.send(new AppOrderDeleteCommand(id), Boolean.class)) {
             R.fail(CommonRespCode.DELETE_ERROR);
         }
 

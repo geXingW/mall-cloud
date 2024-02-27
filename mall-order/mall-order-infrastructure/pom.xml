@@ -22,6 +22,7 @@
             <artifactId>mall-order-domain</artifactId>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>com.gexingw</groupId>
             <artifactId>mall-common-core</artifactId>
@@ -30,6 +31,11 @@
         <dependency>
             <groupId>com.gexingw</groupId>
             <artifactId>mall-common-db</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-common-exception</artifactId>
         </dependency>
 
         <dependency>

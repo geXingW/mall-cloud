@@ -10,9 +10,13 @@ import com.gexingw.mall.domain.order.model.Order;
  */
 public interface OrderGateway {
 
+    Order find(Long id);
+
     @SuppressWarnings("unused")
     Order getById(Long id);
 
     boolean exist(Long id);
+
+    Long insert(Order cancel);
 
 }

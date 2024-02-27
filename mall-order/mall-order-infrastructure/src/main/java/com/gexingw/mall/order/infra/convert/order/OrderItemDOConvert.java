@@ -14,4 +14,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface OrderItemDOConvert extends DomainDoConvert<OrderItem, OrderItemDO> {
 
+
 }

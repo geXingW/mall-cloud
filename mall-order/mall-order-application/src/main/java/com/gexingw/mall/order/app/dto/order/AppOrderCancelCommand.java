@@ -1,19 +1,17 @@
-package com.gexingw.mall.domain.command.order;
+package com.gexingw.mall.order.app.dto.order;
 
 import com.gexingw.mall.common.core.command.ICommand;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 /**
  * mall-user-service
  *
  * @author GeXingW
- * @date 2024/2/26 11:57
+ * @date 2024/2/26 18:24
  */
 @Data
 @NoArgsConstructor
-@Accessors(chain = true)
 public class AppOrderCancelCommand implements ICommand {
 
     private Long id;

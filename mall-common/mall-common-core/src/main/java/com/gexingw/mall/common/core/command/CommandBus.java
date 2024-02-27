@@ -61,12 +61,12 @@ public class CommandBus {
             CommandHandler commandHandlerAnnotation = handler.getClass().getAnnotation(CommandHandler.class);
 
             // 一个CommandHandler可以匹配多个Command类型的任务
-            for (Class<?> aClass : commandHandlerAnnotation.classes()) {
-                // 类型匹配检查
-                if (aClass.isAssignableFrom(commandClazz)) {
-                    return handler;
-                }
-            }
+//            for (Class<?> aClass : commandHandlerAnnotation.commands()) {
+//                // 类型匹配检查
+//                if (aClass.isAssignableFrom(commandClazz)) {
+//                    return handler;
+//                }
+//            }
         }
 
         throw new RuntimeException("CommandHandler for command " + commandClazz.getName() + " not found");

@@ -36,6 +36,11 @@ public class Order implements AggregationRoot {
     private BigDecimal totalAmount;
 
     /**
+     * 订单状态
+     */
+    private Integer status;
+
+    /**
      * 收货地址
      */
     private OrderShippingAddress shippingAddress;
@@ -50,13 +55,6 @@ public class Order implements AggregationRoot {
      */
     private OrderCreator creator;
 
-//    public Order create(OrderShippingAddress orderShippingAddress, List<OrderItem> orderItems, OrderCreator orderCreator) {
-//        Order order = new Order().setOrderItems(orderItems);
-//        this.orderShippingAddress = orderShippingAddress;
-//        this.orderItems = orderItems;
-//        this.orderCreator = orderCreator;
-//    }
-
     public Order(List<OrderItem> items, OrderCreator creator, OrderShippingAddress shippingAddress) {
         this.items = items;
         this.creator = creator;
@@ -66,6 +64,16 @@ public class Order implements AggregationRoot {
         this.totalAmount = items.stream().map(OrderItem::getTotalAmount).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
         this.number = LocalDateTimeUtil.format(LocalDateTime.now(), "yyyyMMddHHmmss");
         this.id = IdUtil.getSnowflakeNextId();
+    }
+
+    /**
+     * 取消订单
+     *
+     * @return Order
+     */
+    public Order cancel() {
+        this.status = 2;
+        return this;
     }
 
 }

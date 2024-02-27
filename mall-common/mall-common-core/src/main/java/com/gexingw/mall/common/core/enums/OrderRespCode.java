@@ -14,9 +14,13 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum OrderRespCode implements IRespCode {
 
+    NOT_FOUND(404, 404201, "订单信息不存在！"),
+
     SUBMIT_ERROR(500, 500201, "订单提交失败，请稍后重试！"),
 
-    CANCEL_ERROR(500, 500201, "取消失败，请稍后重试！"),
+    CANCEL_ERROR(500, 500202, "取消失败，请稍后重试！"),
+
+    DELETE_ERROR(500, 500203, "订单删除失败，请稍后重试！"),
 
     ;
 

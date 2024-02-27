@@ -16,7 +16,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface OrderShippingAddressConvert extends DomainDoConvert<OrderShippingAddress, OrderShippingAddressDO> {
 
-    @Mapping(source = "address", target = "details")
     OrderShippingAddress toDomain(ShippingAddressCO shippingAddressCo);
 
 }
