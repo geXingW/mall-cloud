@@ -17,7 +17,6 @@ public class MallUserApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MallUserApplication.class, args);
-//        new CountDownLatch(1).await();
     }
 
 }

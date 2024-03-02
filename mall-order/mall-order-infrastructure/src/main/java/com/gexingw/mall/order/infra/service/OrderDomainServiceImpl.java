@@ -1,6 +1,8 @@
 package com.gexingw.mall.order.infra.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.gexingw.mall.common.core.enums.OrderRespCode;
+import com.gexingw.mall.common.exception.BizErrorException;
 import com.gexingw.mall.domain.order.model.Order;
 import com.gexingw.mall.domain.order.model.OrderItem;
 import com.gexingw.mall.domain.service.OrderDomainService;
@@ -54,11 +56,34 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         }
 
         // 保存订单收货地址
-        OrderShippingAddressDO shippingAddressDO = orderShippingAddressConvert.toDO(order.getShippingAddress()s());
+        OrderShippingAddressDO shippingAddressDO = orderShippingAddressConvert.toDO(order.getShippingAddress());
         shippingAddressDO.setOrderId(orderDO.getId());
         orderShippingAddressMapper.insert(shippingAddressDO);
 
         return orderDO.getId();
+    }
+
+    @Override
+    public Boolean update(Order order) {
+        OrderDO orderDO = orderConvert.toDO(order);
+        // 更新订单信息
+        if (orderMapper.updateById(orderDO) == 0) {
+            throw new BizErrorException(OrderRespCode.CANCEL_ERROR);
+        }
+
+        // 更新订单商品信息
+        for (OrderItem item : order.getItems()) {
+            if (orderItemMapper.updateById(orderItemConvert.toDO(item)) == 0) {
+                throw new BizErrorException(OrderRespCode.CANCEL_ERROR);
+            }
+        }
+
+        // 保存订单的收货地址信息
+        if (orderShippingAddressMapper.updateById(orderShippingAddressConvert.toDO(order.getShippingAddress())) == 0) {
+            throw new BizErrorException(OrderRespCode.CANCEL_ERROR);
+        }
+
+        return false;
     }
 
     @Override
@@ -81,7 +106,7 @@ public class OrderDomainServiceImpl implements OrderDomainService {
     }
 
     @Override
-    public Order getById(Long id) {
+    public Order find(Long id) {
         // 查询订单主信息
         OrderDO orderDO = orderMapper.selectById(id);
         if (orderDO == null) {

@@ -50,8 +50,7 @@ dubbo:
     address: nacos://${spring.cloud.nacos.server-addr}
     parameters:
       namespace: ${spring.cloud.nacos.discovery.namespace}
-      group: DUBBO_SERVICE_GROUP
-  #      register-consumer-url: true
+    group: DUBBO_SERVICE_GROUP
 
   provider:
     filter: dubboRpcExceptionHandler

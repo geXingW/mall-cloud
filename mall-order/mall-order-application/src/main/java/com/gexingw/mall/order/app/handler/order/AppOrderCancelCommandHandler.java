@@ -7,6 +7,7 @@ import com.gexingw.mall.common.core.event.EventBus;
 import com.gexingw.mall.domain.event.order.OrderCanceledEvent;
 import com.gexingw.mall.domain.gateway.OrderGateway;
 import com.gexingw.mall.domain.order.model.Order;
+import com.gexingw.mall.domain.service.OrderDomainService;
 import com.gexingw.mall.order.app.dto.order.AppOrderCancelCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
@@ -22,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 @CommandHandler(AppOrderCancelCommand.class)
 public class AppOrderCancelCommandHandler implements ICommandHandler {
 
+    private final OrderDomainService orderDomainService;
+
     private final OrderGateway orderGateway;
     private final EventBus eventBus;
 
@@ -31,9 +34,9 @@ public class AppOrderCancelCommandHandler implements ICommandHandler {
         AppOrderCancelCommand command = (AppOrderCancelCommand) iCommand;
 
         // 查找聚合
-        Order order = orderGateway.find(command.getId());
+        Order order = orderDomainService.find(command.getId());
         // 保存聚合信息
-        orderGateway.insert(order.cancel());
+        orderDomainService.save(order.cancel());
 
         // 发送订单取消的事件
         eventBus.publish(new OrderCanceledEvent(order));

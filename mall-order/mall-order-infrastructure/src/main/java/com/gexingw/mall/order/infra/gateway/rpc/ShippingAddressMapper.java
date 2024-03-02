@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class ShippingAddressMapper {
 
-    @DubboReference
+    @DubboReference()
     private ShippingAddressRpcService shippingAddressRpcService;
 
     public ShippingAddressCO getById(Long id) {

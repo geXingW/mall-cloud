@@ -43,8 +43,6 @@ spring:
           - data-id: mall-cloud-base.yaml
             refresh: true
 
-debug: true
-
 management:
   endpoints:
     web:

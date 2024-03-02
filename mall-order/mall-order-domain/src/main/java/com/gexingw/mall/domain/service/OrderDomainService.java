@@ -12,8 +12,10 @@ public interface OrderDomainService {
 
     Long save(Order order);
 
+    Boolean update(Order order);
+
     boolean delete(Long id);
 
-    Order getById(Long id);
+    Order find(Long id);
 
 }
