@@ -1,6 +1,7 @@
 package com.gexingw.mall.common.core.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -58,15 +59,18 @@ public class CommandBus {
     public ICommandHandler getHandler(Class<? extends ICommand> commandClazz) {
         for (ICommandHandler handler : handlers) {
             // 获取CommandHandler注解标注的Command类型
-            CommandHandler commandHandlerAnnotation = handler.getClass().getAnnotation(CommandHandler.class);
+            CommandHandler commandHandlerAnnotation = AnnotationUtils.findAnnotation(handler.getClass(), CommandHandler.class);
+            if (commandHandlerAnnotation == null) {
+                continue;
+            }
 
             // 一个CommandHandler可以匹配多个Command类型的任务
-//            for (Class<?> aClass : commandHandlerAnnotation.commands()) {
-//                // 类型匹配检查
-//                if (aClass.isAssignableFrom(commandClazz)) {
-//                    return handler;
-//                }
-//            }
+            Class<?>[] commands = commandHandlerAnnotation.commands();
+            for (Class<?> command : commands) {
+                if (command.isAssignableFrom(commandClazz)) {
+                    return handler;
+                }
+            }
         }
 
         throw new RuntimeException("CommandHandler for command " + commandClazz.getName() + " not found");

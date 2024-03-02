@@ -20,6 +20,7 @@ public @interface CommandHandler {
     @AliasFor("commands")
     Class<?>[] value() default {};
 
+    @AliasFor("value")
     Class<?>[] commands() default {};
 
 }
