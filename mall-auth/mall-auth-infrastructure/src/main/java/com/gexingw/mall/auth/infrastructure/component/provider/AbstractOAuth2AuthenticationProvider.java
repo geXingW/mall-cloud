@@ -4,9 +4,9 @@ import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserDO;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
 import com.gexingw.mall.common.core.domain.AuthInfo;
 import com.gexingw.mall.common.core.util.SpringUtil;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -36,6 +36,7 @@ import java.security.Principal;
 @Slf4j
 public abstract class AbstractOAuth2AuthenticationProvider implements AuthenticationProvider {
 
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(AbstractOAuth2AuthenticationProvider.class);
 
     @Override
