@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>mall-product-adapter</artifactId>
+    <artifactId>mall-product-infrastructure</artifactId>
     <version>${revision}</version>
 
     <properties>
@@ -17,16 +17,9 @@
 
     <dependencies>
 
-        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>com.gexingw</groupId>
-            <artifactId>mall-common-core</artifactId>
-        </dependency>
-
-        <!--suppress VulnerableLibrariesLocal -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>mall-product-domain</artifactId>
         </dependency>
 
     </dependencies>

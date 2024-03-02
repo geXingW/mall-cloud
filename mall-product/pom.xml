@@ -14,6 +14,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>mall-product-adapter</module>
+        <module>mall-product-application</module>
+        <module>mall-product-client</module>
+        <module>mall-product-domain</module>
+        <module>mall-product-infrastructure</module>
+        <module>mall-product-starter</module>
     </modules>
 
     <properties>

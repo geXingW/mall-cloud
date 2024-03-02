@@ -152,6 +152,36 @@
                 <version>${revision}</version>
             </dependency>
 
+            <!-- Product Service -->
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-product-adapter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-product-application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-product-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-product-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-product-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
 
             <dependency>
