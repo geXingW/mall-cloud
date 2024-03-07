@@ -6,10 +6,10 @@ package com.gexingw.mall.common.core.convert;
  * @author GeXingW
  * @date 2024/2/7 9:59
  */
-public interface DomainDoConvert<Domain, ClientObject> {
+public interface DomainDoConvert<Domain, DataObject> {
 
-    ClientObject toDO(Domain domain);
+    DataObject toDO(Domain domain);
 
-    Domain toDomain(ClientObject dataObject);
+    Domain toDomain(DataObject dataObject);
 
 }

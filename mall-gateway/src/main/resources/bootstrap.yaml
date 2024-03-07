@@ -30,7 +30,7 @@ spring:
 
       discovery:
         namespace: ${NACOS_NAMESPACE:mall-cloud}
-        group: DEFAULT_GROUP
+        group: WEB_SERVICE_GROUP
         service: ${spring.application.name}
 
       config:

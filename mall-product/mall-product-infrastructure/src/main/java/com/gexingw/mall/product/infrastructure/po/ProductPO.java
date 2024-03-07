@@ -1,24 +1,18 @@
-package com.gexingw.mall.product.domain.model;
+package com.gexingw.mall.product.infrastructure.po;
 
+import com.gexingw.mall.common.db.dataobject.BaseDO;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * mall-user-service
  *
  * @author GeXingW
- * @date 2024/3/2 8:11
+ * @date 2024/3/2 8:56
  */
-@SuppressWarnings("unused")
 @Data
-public class Product implements Serializable {
-
-    /**
-     * id
-     */
-    private Long id;
+public class ProductPO extends BaseDO {
 
     /**
      * 商品编号

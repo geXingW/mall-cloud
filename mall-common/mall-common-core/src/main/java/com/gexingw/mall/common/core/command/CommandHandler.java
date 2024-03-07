@@ -18,9 +18,9 @@ import java.lang.annotation.*;
 public @interface CommandHandler {
 
     @AliasFor("commands")
-    Class<?>[] value() default {};
+    Class<? extends ICommand>[] value() default {};
 
     @AliasFor("value")
-    Class<?>[] commands() default {};
+    Class<? extends ICommand>[] commands() default {};
 
 }

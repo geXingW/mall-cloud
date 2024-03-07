@@ -15,4 +15,21 @@
     <properties>
     </properties>
 
+    <dependencies>
+
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-product-client</artifactId>
+        </dependency>
+
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-product-infrastructure</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
 </project>

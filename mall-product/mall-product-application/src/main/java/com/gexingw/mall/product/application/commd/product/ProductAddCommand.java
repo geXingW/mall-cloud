@@ -1,8 +1,9 @@
 package com.gexingw.mall.product.application.commd.product;
 
+import com.gexingw.mall.common.core.command.ICommand;
 import lombok.Data;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * mall-user-service
@@ -11,8 +12,14 @@ import java.io.Serializable;
  * @date 2024/3/2 8:09
  */
 @Data
-public class ProductAddCommand implements Serializable {
+public class ProductAddCommand implements ICommand {
 
     private String name;
+
+    private Integer stock;
+
+    private BigDecimal salePrice;
+
+    private BigDecimal marketPrice;
 
 }

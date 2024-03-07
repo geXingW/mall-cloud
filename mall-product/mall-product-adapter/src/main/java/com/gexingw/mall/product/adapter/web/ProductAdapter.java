@@ -1,10 +1,11 @@
 package com.gexingw.mall.product.adapter.web;
 
+import com.gexingw.mall.common.core.command.CommandBus;
 import com.gexingw.mall.common.core.util.R;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.gexingw.mall.product.application.commd.product.ProductAddCommand;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * mall-user-service
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2024/2/24 10:31
  */
 @RestController
-@RequestMapping("product")
+@RequestMapping("/web/product")
+@RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class ProductAdapter {
+
+    private final CommandBus commandBus;
 
     @GetMapping
     public R<Object> index() {
@@ -24,6 +28,11 @@ public class ProductAdapter {
     @GetMapping("/{id}")
     public R<Object> info(@PathVariable String id) {
         return R.ok("Product-" + id);
+    }
+
+    @PostMapping
+    public R<Object> save(@RequestBody ProductAddCommand addCommand) {
+        return R.ok(commandBus.send(addCommand, Long.class));
     }
 
 }

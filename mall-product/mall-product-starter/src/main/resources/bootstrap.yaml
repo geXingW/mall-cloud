@@ -18,9 +18,15 @@ spring:
       username: ${NACOS_USERNAME:nacos}
       password: ${NACOS_PASSWORD:nacos}
 
+      discovery:
+        namespace: ${NACOS_NAMESPACE:mall-cloud}
+        group: WEB_SERVICE_GROUP
+        service: ${spring.application.name}
+
       config:
         namespace: ${NACOS_NAMESPACE:mall-cloud}
         group: ${NACOS_GROUP:DEFAULT_GROUP}
+        name: ${spring.application.name}
         refresh-enabled: true
         file-extension: yaml
         extension-configs:

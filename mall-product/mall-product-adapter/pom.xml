@@ -25,6 +25,13 @@
 
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-product-application</artifactId>
+        </dependency>
+
+
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
