@@ -1,6 +1,6 @@
 package com.gexingw.mall.product.application.commd.product;
 
-import com.gexingw.mall.common.core.command.ICommand;
+import com.gexingw.mall.common.spring.command.ICommand;
 import lombok.Data;
 
 /**

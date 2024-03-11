@@ -33,6 +33,11 @@
             <artifactId>mall-common-exception</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-common-spring</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

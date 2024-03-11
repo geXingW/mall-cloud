@@ -1,7 +1,7 @@
 package com.gexingw.mall.domain;
 
-import com.gexingw.mall.common.core.event.IDomainEventService;
-import com.gexingw.mall.common.core.event.IEvent;
+import com.gexingw.mall.common.spring.event.IDomainEventService;
+import com.gexingw.mall.common.spring.event.IEvent;
 import com.gexingw.mall.domain.event.order.OrderBaseEvent;
 import com.gexingw.mall.domain.gateway.OrderDomainEventGateway;
 import lombok.RequiredArgsConstructor;

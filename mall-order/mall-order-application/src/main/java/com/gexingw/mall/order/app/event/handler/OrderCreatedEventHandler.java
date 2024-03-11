@@ -1,8 +1,8 @@
 package com.gexingw.mall.order.app.event.handler;
 
-import com.gexingw.mall.common.core.event.EventHandler;
-import com.gexingw.mall.common.core.event.IEvent;
-import com.gexingw.mall.common.core.event.IEventHandler;
+import com.gexingw.mall.common.spring.event.EventHandler;
+import com.gexingw.mall.common.spring.event.IEvent;
+import com.gexingw.mall.common.spring.event.IEventHandler;
 import com.gexingw.mall.domain.event.order.OrderCreatedEvent;
 
 /**

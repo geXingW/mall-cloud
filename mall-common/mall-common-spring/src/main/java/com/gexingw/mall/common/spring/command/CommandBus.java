@@ -1,4 +1,4 @@
-package com.gexingw.mall.common.core.command;
+package com.gexingw.mall.common.spring.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -11,10 +11,9 @@ import java.util.Map;
 
 /**
  * mall-user-service
- * 命令总线
  *
  * @author GeXingW
- * @date 2024/2/24 17:49
+ * @date 2024/3/11 9:53
  */
 @Component
 public class CommandBus {

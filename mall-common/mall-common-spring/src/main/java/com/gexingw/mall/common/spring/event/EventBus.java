@@ -1,4 +1,4 @@
-package com.gexingw.mall.common.core.event;
+package com.gexingw.mall.common.spring.event;
 
 import com.alibaba.fastjson2.JSON;
 import lombok.RequiredArgsConstructor;

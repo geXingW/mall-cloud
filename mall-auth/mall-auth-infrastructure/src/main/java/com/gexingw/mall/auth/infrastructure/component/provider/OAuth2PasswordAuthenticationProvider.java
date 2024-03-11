@@ -6,7 +6,7 @@ import com.gexingw.mall.auth.infrastructure.constant.ParameterConstant;
 import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserDO;
 import com.gexingw.mall.auth.infrastructure.gateway.authuser.db.AuthUserMapper;
 import com.gexingw.mall.common.core.domain.AuthInfo;
-import com.gexingw.mall.common.core.util.SpringUtil;
+import com.gexingw.mall.common.spring.util.SpringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

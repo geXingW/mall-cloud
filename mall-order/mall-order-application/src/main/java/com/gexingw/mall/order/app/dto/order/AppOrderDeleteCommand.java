@@ -1,6 +1,6 @@
 package com.gexingw.mall.order.app.dto.order;
 
-import com.gexingw.mall.common.core.command.ICommand;
+import com.gexingw.mall.common.spring.command.ICommand;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

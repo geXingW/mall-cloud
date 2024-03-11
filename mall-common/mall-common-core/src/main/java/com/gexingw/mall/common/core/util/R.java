@@ -3,8 +3,6 @@ package com.gexingw.mall.common.core.util;
 import com.gexingw.mall.common.core.enums.CommonRespCode;
 import com.gexingw.mall.common.core.interfaces.IRespCode;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.Serializable;
 
@@ -59,19 +57,16 @@ public class R<T> implements Serializable {
         this.success = CommonRespCode.SUCCESS.getCode().equals(code);
     }
 
-    @ResponseStatus(HttpStatus.OK)
     public static <T> R<T> ok() {
-        return new R<>(HttpStatus.OK.value(), CommonRespCode.SUCCESS.getSubCode(), null, CommonRespCode.SUCCESS.getMessage());
+        return new R<>(CommonRespCode.SUCCESS.getCode(), CommonRespCode.SUCCESS.getSubCode(), null, CommonRespCode.SUCCESS.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.OK)
     public static <T> R<T> ok(String message) {
         return new R<>(CommonRespCode.SUCCESS.getCode(), CommonRespCode.SUCCESS.getSubCode(), null, message);
     }
 
-    @ResponseStatus(HttpStatus.OK)
     public static <T> R<T> ok(T data) {
-        return new R<>(HttpStatus.OK.value(), CommonRespCode.SUCCESS.getSubCode(), data, CommonRespCode.SUCCESS.getMessage());
+        return new R<>(CommonRespCode.SUCCESS.getCode(), CommonRespCode.SUCCESS.getSubCode(), data, CommonRespCode.SUCCESS.getMessage());
     }
 
     public static <T> R<T> fail(IRespCode respCode, String message) {

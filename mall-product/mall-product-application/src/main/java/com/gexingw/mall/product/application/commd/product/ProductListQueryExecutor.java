@@ -1,7 +1,8 @@
 package com.gexingw.mall.product.application.commd.product;
 
-import com.gexingw.mall.common.core.command.CommandHandler;
-import com.gexingw.mall.common.core.command.ICommandHandler;
+
+import com.gexingw.mall.common.spring.command.CommandHandler;
+import com.gexingw.mall.common.spring.command.ICommandHandler;
 
 /**
  * mall-user-service

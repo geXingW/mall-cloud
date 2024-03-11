@@ -3,7 +3,7 @@ package com.gexingw.mall.auth.infrastructure.component.provider;
 import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserDO;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
 import com.gexingw.mall.common.core.domain.AuthInfo;
-import com.gexingw.mall.common.core.util.SpringUtil;
+import com.gexingw.mall.common.spring.util.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

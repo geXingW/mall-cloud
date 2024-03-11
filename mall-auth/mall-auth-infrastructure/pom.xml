@@ -29,10 +29,17 @@
             <artifactId>mall-common-db</artifactId>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>com.gexingw</groupId>
             <artifactId>mall-common-security</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-common-spring</artifactId>
+        </dependency>
+
 
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>

@@ -1,9 +1,9 @@
 package com.gexingw.mall.order.app.handler.order;
 
-import com.gexingw.mall.common.core.command.CommandHandler;
-import com.gexingw.mall.common.core.command.ICommand;
-import com.gexingw.mall.common.core.command.ICommandHandler;
-import com.gexingw.mall.common.core.event.EventBus;
+import com.gexingw.mall.common.spring.event.EventBus;
+import com.gexingw.mall.common.spring.command.CommandHandler;
+import com.gexingw.mall.common.spring.command.ICommand;
+import com.gexingw.mall.common.spring.command.ICommandHandler;
 import com.gexingw.mall.domain.event.order.OrderCanceledEvent;
 import com.gexingw.mall.domain.order.model.Order;
 import com.gexingw.mall.domain.service.OrderDomainService;

@@ -1,4 +1,4 @@
-package com.gexingw.mall.common.core.event;
+package com.gexingw.mall.common.spring.event;
 
 import com.gexingw.mall.common.core.domain.AggregationRoot;
 

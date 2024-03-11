@@ -1,4 +1,4 @@
-package com.gexingw.mall.common.core.util;
+package com.gexingw.mall.common.spring.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;

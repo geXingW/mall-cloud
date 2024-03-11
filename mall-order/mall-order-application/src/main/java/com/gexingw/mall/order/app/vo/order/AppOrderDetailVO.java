@@ -1,6 +1,7 @@
 package com.gexingw.mall.order.app.vo.order;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.util.List;
  * @date 2024/2/15 16:05
  */
 @Data
+@Accessors(chain = true)
 public class AppOrderDetailVO implements Serializable {
 
     private Long id;

@@ -23,6 +23,13 @@
             <artifactId>mall-common-core</artifactId>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-common-spring</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 </project>

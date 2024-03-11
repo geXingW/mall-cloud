@@ -1,4 +1,4 @@
-package com.gexingw.mall.common.core.command;
+package com.gexingw.mall.common.spring.event;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
@@ -9,18 +9,18 @@ import java.lang.annotation.*;
  * mall-user-service
  *
  * @author GeXingW
- * @date 2024/2/24 19:19
+ * @date 2024/2/26 17:09
  */
 @Component
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CommandHandler {
+public @interface EventHandler {
 
-    @AliasFor("commands")
-    Class<? extends ICommand>[] value() default {};
+    @AliasFor("handlers")
+    Class<?>[] value() default {};
 
-    @AliasFor("value")
-    Class<? extends ICommand>[] commands() default {};
+    @SuppressWarnings("unused")
+    Class<?>[] handlers() default {};
 
 }

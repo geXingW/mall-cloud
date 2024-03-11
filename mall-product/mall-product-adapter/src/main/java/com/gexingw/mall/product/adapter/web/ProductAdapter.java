@@ -1,7 +1,7 @@
 package com.gexingw.mall.product.adapter.web;
 
-import com.gexingw.mall.common.core.command.CommandBus;
 import com.gexingw.mall.common.core.util.R;
+import com.gexingw.mall.common.spring.command.CommandBus;
 import com.gexingw.mall.product.application.commd.product.ProductAddCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;

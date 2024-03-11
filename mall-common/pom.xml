@@ -20,6 +20,7 @@
         <module>mall-common-web</module>
         <module>mall-common-security</module>
         <module>mall-common-redis</module>
+        <module>mall-common-spring</module>
     </modules>
 
     <properties>

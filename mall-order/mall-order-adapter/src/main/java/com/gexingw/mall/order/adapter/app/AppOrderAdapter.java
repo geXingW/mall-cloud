@@ -1,8 +1,8 @@
 package com.gexingw.mall.order.adapter.app;
 
-import com.gexingw.mall.common.core.command.CommandBus;
 import com.gexingw.mall.common.core.enums.CommonRespCode;
 import com.gexingw.mall.common.core.util.R;
+import com.gexingw.mall.common.spring.command.CommandBus;
 import com.gexingw.mall.order.app.dto.order.AppOrderCancelCommand;
 import com.gexingw.mall.order.app.dto.order.AppOrderDeleteCommand;
 import com.gexingw.mall.order.app.dto.order.AppOrderSubmitCommand;
@@ -31,7 +31,7 @@ public class AppOrderAdapter {
 
     @GetMapping("/{id}")
     public R<AppOrderDetailVO> info(@PathVariable Long id) {
-        return R.ok();
+        return R.ok(new AppOrderDetailVO().setId(id));
     }
 
     @PostMapping
