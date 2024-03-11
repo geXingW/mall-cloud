@@ -29,12 +29,12 @@ public class CommandBus {
      * 1、自动匹配CommandHandler
      * 2、自动调用CommandHandler执行Command
      *
-     * @param command      命令
-     * @param responseType 响应类型
-     * @param <T>          响应类型的泛型，调用方自定义返回参数类型
+     * @param command 命令
+     * @param <T>     响应类型的泛型，调用方自定义返回参数类型
      * @return T
      */
-    public <T> T send(ICommand command, Class<T> responseType) {
+    @SuppressWarnings({"unused", "unchecked"})
+    public <T> T execute(ICommand command, Class<T> resultType) {
         // 从Repository中获取，避免遍历匹配
         ICommandHandler commandHandler = repository.get(command.getClass());
         if (commandHandler == null) {
@@ -46,7 +46,21 @@ public class CommandBus {
         }
 
         // 调用CommandHandler执行Command
-        return commandHandler.execute(command, responseType);
+        return (T) commandHandler.handleWithResult(command);
+    }
+
+    public void execute(ICommand command) {
+        ICommandHandler handler = getHandler(command.getClass());
+        handler.handleWithoutResult(command);
+    }
+
+    public ICommandHandler getHandler(Class<? extends ICommand> commandClazz) {
+        ICommandHandler commandHandler = repository.get(commandClazz);
+        if (commandHandler != null) {
+            return commandHandler;
+        }
+
+        return findHandler(commandClazz);
     }
 
     /**
@@ -56,7 +70,7 @@ public class CommandBus {
      * @param commandClazz Command类型
      * @return CommandHandler
      */
-    public ICommandHandler getHandler(Class<? extends ICommand> commandClazz) {
+    public ICommandHandler findHandler(Class<? extends ICommand> commandClazz) {
         for (ICommandHandler handler : handlers) {
             // 获取CommandHandler注解标注的Command类型
             CommandHandler commandHandlerAnnotation = AnnotationUtils.findAnnotation(handler.getClass(), CommandHandler.class);

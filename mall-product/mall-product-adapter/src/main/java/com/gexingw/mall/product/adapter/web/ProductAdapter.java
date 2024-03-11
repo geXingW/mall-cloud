@@ -32,7 +32,7 @@ public class ProductAdapter {
 
     @PostMapping
     public R<Object> save(@RequestBody ProductAddCommand addCommand) {
-        return R.ok(commandBus.send(addCommand, Long.class));
+        return R.ok(commandBus.execute(addCommand, Long.class));
     }
 
 }

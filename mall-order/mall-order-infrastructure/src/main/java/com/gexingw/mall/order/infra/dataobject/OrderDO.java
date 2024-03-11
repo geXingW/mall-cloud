@@ -3,6 +3,7 @@ package com.gexingw.mall.order.infra.dataobject;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gexingw.mall.common.db.dataobject.BaseDO;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
  */
 @Data
 @TableName("`order`")
+@Accessors(chain = true)
 public class OrderDO extends BaseDO {
 
     private String number;

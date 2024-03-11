@@ -13,10 +13,12 @@ public interface ICommandHandler {
      *
      * @param command 命令
      */
-    default <T> T execute(ICommand command, Class<T> responseType) {
-        System.out.println("Do noting...");
+    default Object handleWithResult(ICommand command) {
+        throw new RuntimeException("未实现该方法!");
+    }
 
-        return null;
+    default void handleWithoutResult(ICommand command) {
+        throw new RuntimeException("未实现该方法!");
     }
 
 }

@@ -30,7 +30,7 @@ public class AppOrderSubmitCommandHandler implements ICommandHandler {
     private final OrderItemAssembler orderItemAssembler;
 
     @Override
-    public <T> T execute(ICommand command, Class<T> responseType) {
+    public Long handleWithResult(ICommand command) {
         AppOrderSubmitCommand submitCommand = (AppOrderSubmitCommand) command;
 
         // 查询发货信息
@@ -39,7 +39,7 @@ public class AppOrderSubmitCommandHandler implements ICommandHandler {
         List<OrderItem> orderItems = submitCommand.getItems().stream().map(orderItemAssembler::toOrderItem).collect(Collectors.toList());
         Order order = new Order(orderItems, null, shippingAddress);
 
-        return null;
+        return order.getId();
     }
 
 }

@@ -1,7 +1,6 @@
 package com.gexingw.mall.order.adapter.app;
 
 import com.gexingw.mall.common.core.command.CommandBus;
-import com.gexingw.mall.common.core.enums.OrderRespCode;
 import com.gexingw.mall.common.core.enums.CommonRespCode;
 import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.order.app.dto.order.AppOrderCancelCommand;
@@ -37,21 +36,19 @@ public class AppOrderAdapter {
 
     @PostMapping
     public R<Long> add(@RequestBody AppOrderSubmitCommand addCommand) {
-        return R.ok(commandBus.send(addCommand, Long.class));
+        return R.ok(commandBus.execute(addCommand, Long.class));
     }
 
     @PostMapping("/{id}/cancel")
     public R<Object> cancel(@PathVariable Long id) {
-        if (!commandBus.send(new AppOrderCancelCommand(id), Boolean.class)) {
-            return R.fail(OrderRespCode.CANCEL_ERROR);
-        }
+        commandBus.execute(new AppOrderCancelCommand(id));
 
         return R.ok();
     }
 
     @DeleteMapping("/{id}")
     public R<Object> delete(@PathVariable Long id) {
-        if (commandBus.send(new AppOrderDeleteCommand(id), Boolean.class)) {
+        if (commandBus.execute(new AppOrderDeleteCommand(id), Boolean.class)) {
             R.fail(CommonRespCode.DELETE_ERROR);
         }
 

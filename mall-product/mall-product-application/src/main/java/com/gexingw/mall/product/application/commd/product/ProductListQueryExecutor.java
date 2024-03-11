@@ -1,7 +1,6 @@
 package com.gexingw.mall.product.application.commd.product;
 
 import com.gexingw.mall.common.core.command.CommandHandler;
-import com.gexingw.mall.common.core.command.ICommand;
 import com.gexingw.mall.common.core.command.ICommandHandler;
 
 /**
@@ -13,8 +12,5 @@ import com.gexingw.mall.common.core.command.ICommandHandler;
 @CommandHandler(ProductListQuery.class)
 public class ProductListQueryExecutor implements ICommandHandler {
 
-    @Override
-    public <T> T execute(ICommand command, Class<T> responseType) {
-        return ICommandHandler.super.execute(command, responseType);
-    }
+
 }
