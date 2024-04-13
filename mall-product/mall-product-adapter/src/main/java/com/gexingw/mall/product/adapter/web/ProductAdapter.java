@@ -3,6 +3,8 @@ package com.gexingw.mall.product.adapter.web;
 import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.spring.command.CommandBus;
 import com.gexingw.mall.product.application.commd.product.ProductAddCommand;
+import com.gexingw.mall.product.application.commd.product.ProductInfoQuery;
+import com.gexingw.mall.product.application.vo.product.ProductInfoVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +28,9 @@ public class ProductAdapter {
     }
 
     @GetMapping("/{id}")
-    public R<Object> info(@PathVariable String id) {
-        return R.ok("Product-" + id);
+    public R<ProductInfoVO> info(@PathVariable Long id) {
+        ProductInfoQuery productInfoQuery = new ProductInfoQuery().setId(id);
+        return R.ok(commandBus.execute(productInfoQuery, ProductInfoVO.class));
     }
 
     @PostMapping

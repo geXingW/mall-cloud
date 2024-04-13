@@ -2,7 +2,7 @@ package com.gexingw.mall.product.application.commd.product;
 
 
 import com.gexingw.mall.common.spring.command.CommandHandler;
-import com.gexingw.mall.common.spring.command.ICommandHandler;
+import com.gexingw.mall.common.spring.command.ICommandExecutor;
 
 /**
  * mall-user-service
@@ -11,7 +11,7 @@ import com.gexingw.mall.common.spring.command.ICommandHandler;
  * @date 2024/3/2 13:39
  */
 @CommandHandler(ProductAddCommand.class)
-public class ProductAddCommandExecutor implements ICommandHandler {
+public class ProductAddCommandExecutor implements ICommandExecutor {
 
 
 }

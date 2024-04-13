@@ -12,7 +12,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <mysql.connector.java.version>8.0.22</mysql.connector.java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <coommons-lang3.version>3.12.0</coommons-lang3.version>
         <oauth2-server.version>0.4.5</oauth2-server.version>
@@ -187,13 +186,6 @@
                 <groupId>com.gexingw</groupId>
                 <artifactId>mall-product-infrastructure</artifactId>
                 <version>${revision}</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.connector.java.version}</version>
             </dependency>
 
             <dependency>

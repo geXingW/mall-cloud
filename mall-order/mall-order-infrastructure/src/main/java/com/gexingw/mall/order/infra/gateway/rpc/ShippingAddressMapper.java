@@ -22,12 +22,15 @@ public class ShippingAddressMapper {
     private ShippingAddressRpcService shippingAddressRpcService;
 
     public ShippingAddressCO getById(Long id) {
-        R<ShippingAddressCO> getResult = shippingAddressRpcService.getById(id);
-        if(!getResult.isSuccess()) {
-            return null;
-        }
+        return new ShippingAddressCO().setId(1L).setName("User-1").setProvince("Province-1").setAddress("address-1");
+        /**
+         R<ShippingAddressCO> getResult = shippingAddressRpcService.getById(id);
+         if(!getResult.isSuccess()) {
+         return null;
+         }
 
-        return getResult.getData();
+         return getResult.getData();
+         */
     }
 
 }

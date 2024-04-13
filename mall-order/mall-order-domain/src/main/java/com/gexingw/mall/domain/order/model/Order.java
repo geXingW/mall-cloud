@@ -63,7 +63,6 @@ public class Order implements AggregationRoot {
         // 订单总金额
         this.totalAmount = items.stream().map(OrderItem::getTotalAmount).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
         this.number = LocalDateTimeUtil.format(LocalDateTime.now(), "yyyyMMddHHmmss");
-        this.id = IdUtil.getSnowflakeNextId();
     }
 
     /**

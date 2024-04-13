@@ -3,7 +3,7 @@ package com.gexingw.mall.order.app.handler.order;
 import com.gexingw.mall.common.spring.event.EventBus;
 import com.gexingw.mall.common.spring.command.CommandHandler;
 import com.gexingw.mall.common.spring.command.ICommand;
-import com.gexingw.mall.common.spring.command.ICommandHandler;
+import com.gexingw.mall.common.spring.command.ICommandExecutor;
 import com.gexingw.mall.domain.event.order.OrderCanceledEvent;
 import com.gexingw.mall.domain.order.model.Order;
 import com.gexingw.mall.domain.service.OrderDomainService;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
 @CommandHandler(AppOrderCancelCommand.class)
-public class AppOrderCancelCommandHandler implements ICommandHandler {
+public class AppOrderCancelCommandExecutor implements ICommandExecutor {
 
     private final OrderDomainService orderDomainService;
 

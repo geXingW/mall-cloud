@@ -18,11 +18,11 @@ import java.util.Map;
 @Component
 public class CommandBus {
 
-    private final Map<Class<? extends ICommand>, ICommandHandler> repository = new HashMap<>();
+    private final Map<Class<? extends ICommand>, ICommandExecutor> repository = new HashMap<>();
 
     @Autowired(required = false)
     @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
-    private List<ICommandHandler> handlers = new ArrayList<>();
+    private List<ICommandExecutor> handlers = new ArrayList<>();
 
     /**
      * 1、自动匹配CommandHandler
@@ -34,27 +34,18 @@ public class CommandBus {
      */
     @SuppressWarnings({"unused", "unchecked"})
     public <T> T execute(ICommand command, Class<T> resultType) {
-        // 从Repository中获取，避免遍历匹配
-        ICommandHandler commandHandler = repository.get(command.getClass());
-        if (commandHandler == null) {
-            // 如果从Repository获取不到，遍历Map
-            commandHandler = getHandler(command.getClass());
-
-            // 存入repository中，避免后续遍历
-            repository.put(command.getClass(), commandHandler);
-        }
-
+        ICommandExecutor handler = getHandler(command.getClass());
         // 调用CommandHandler执行Command
-        return (T) commandHandler.handleWithResult(command);
+        return (T) handler.handleWithResult(command);
     }
 
     public void execute(ICommand command) {
-        ICommandHandler handler = getHandler(command.getClass());
+        ICommandExecutor handler = getHandler(command.getClass());
         handler.handleWithoutResult(command);
     }
 
-    public ICommandHandler getHandler(Class<? extends ICommand> commandClazz) {
-        ICommandHandler commandHandler = repository.get(commandClazz);
+    public ICommandExecutor getHandler(Class<? extends ICommand> commandClazz) {
+        ICommandExecutor commandHandler = repository.get(commandClazz);
         if (commandHandler != null) {
             return commandHandler;
         }
@@ -69,8 +60,8 @@ public class CommandBus {
      * @param commandClazz Command类型
      * @return CommandHandler
      */
-    public ICommandHandler findHandler(Class<? extends ICommand> commandClazz) {
-        for (ICommandHandler handler : handlers) {
+    public ICommandExecutor findHandler(Class<? extends ICommand> commandClazz) {
+        for (ICommandExecutor handler : handlers) {
             // 获取CommandHandler注解标注的Command类型
             CommandHandler commandHandlerAnnotation = AnnotationUtils.findAnnotation(handler.getClass(), CommandHandler.class);
             if (commandHandlerAnnotation == null) {
@@ -81,6 +72,7 @@ public class CommandBus {
             Class<?>[] commands = commandHandlerAnnotation.commands();
             for (Class<?> command : commands) {
                 if (command.isAssignableFrom(commandClazz)) {
+                    repository.put(commandClazz, handler);
                     return handler;
                 }
             }

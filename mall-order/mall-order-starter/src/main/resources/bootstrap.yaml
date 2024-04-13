@@ -11,7 +11,7 @@ spring:
 
   cloud:
     inetutils:
-      preferred-networks: "192.168.100"
+      preferred-networks: "192.168.10"
 
     nacos:
       server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}
@@ -37,7 +37,7 @@ dubbo:
     id: dubbo
     name: dubbo
     port: -1
-    host: 192.168.100.168
+    host: 192.168.10.1
 
   registry:
     address: nacos://${spring.cloud.nacos.server-addr}

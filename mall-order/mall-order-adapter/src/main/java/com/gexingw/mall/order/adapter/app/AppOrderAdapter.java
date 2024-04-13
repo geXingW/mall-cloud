@@ -2,11 +2,15 @@ package com.gexingw.mall.order.adapter.app;
 
 import com.gexingw.mall.common.core.enums.CommonRespCode;
 import com.gexingw.mall.common.core.util.R;
+import com.gexingw.mall.common.db.support.PageData;
 import com.gexingw.mall.common.spring.command.CommandBus;
 import com.gexingw.mall.order.app.dto.order.AppOrderCancelCommand;
 import com.gexingw.mall.order.app.dto.order.AppOrderDeleteCommand;
 import com.gexingw.mall.order.app.dto.order.AppOrderSubmitCommand;
+import com.gexingw.mall.order.app.service.OrderService;
 import com.gexingw.mall.order.app.vo.order.AppOrderDetailVO;
+import com.gexingw.mall.order.app.vo.order.AppOrderListVO;
+import com.gexingw.mall.order.infra.query.order.AppOrderQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +22,16 @@ import org.springframework.web.bind.annotation.*;
  * @date 2024/1/27 15:31
  */
 @RestController
-@RequestMapping("/app")
+@RequestMapping("/app/order")
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class AppOrderAdapter {
 
     private final CommandBus commandBus;
+    private final OrderService orderService;
 
     @GetMapping
-    public R<Object> list() {
-        return R.ok();
+    public R<PageData<AppOrderListVO>> list(AppOrderQuery query) {
+        return R.ok(orderService.queryAppPage(query));
     }
 
     @GetMapping("/{id}")

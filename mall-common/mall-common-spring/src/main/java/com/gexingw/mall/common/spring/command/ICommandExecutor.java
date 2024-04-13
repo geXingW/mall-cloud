@@ -6,7 +6,7 @@ package com.gexingw.mall.common.spring.command;
  * @author GeXingW
  * @date 2024/2/24 21:01
  */
-public interface ICommandHandler {
+public interface ICommandExecutor {
 
     /**
      * 执行Command命令

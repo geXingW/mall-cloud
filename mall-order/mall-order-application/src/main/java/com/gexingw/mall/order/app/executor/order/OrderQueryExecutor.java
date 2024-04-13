@@ -1,6 +1,6 @@
 package com.gexingw.mall.order.app.executor.order;
 
-import com.gexingw.mall.domain.gateway.OrderGateway;
+import com.gexingw.mall.order.infra.gateway.OrderGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
