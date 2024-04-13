@@ -1,6 +1,6 @@
 package com.gexingw.mall.product.infrastructure.po;
 
-import com.gexingw.mall.common.db.dataobject.BaseDO;
+import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @date 2024/3/2 8:56
  */
 @Data
-public class ProductPO extends BaseDO {
+public class ProductPO extends BasePO {
 
     /**
      * 商品编号

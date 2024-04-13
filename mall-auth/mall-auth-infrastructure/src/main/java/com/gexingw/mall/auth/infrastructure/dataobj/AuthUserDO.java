@@ -1,7 +1,7 @@
 package com.gexingw.mall.auth.infrastructure.dataobj;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gexingw.mall.common.db.dataobject.BaseDO;
+import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("auth_user")
-public class AuthUserDO extends BaseDO {
+public class AuthUserDO extends BasePO {
 
     private String username;
 

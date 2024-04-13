@@ -1,6 +1,7 @@
 package com.gexingw.mall.product.infrastructure.gateway.db;
 
 import com.gexingw.mall.common.db.mapper.BaseMapper;
+import com.gexingw.mall.product.infrastructure.dto.WebProductInfoDTO;
 import com.gexingw.mall.product.infrastructure.po.ProductPO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,5 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ProductMapper extends BaseMapper<ProductPO> {
+
+    WebProductInfoDTO webInfo(Long id);
 
 }

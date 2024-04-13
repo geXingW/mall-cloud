@@ -2,7 +2,7 @@ package com.gexingw.mall.order.infra.dataobject;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gexingw.mall.common.core.domain.AggregationRoot;
-import com.gexingw.mall.common.db.dataobject.BaseDO;
+import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @TableName(value = "order_event", excludeProperty = {"updateUser", "updateTime", "isDeleted"})
-public class OrderDomainEventDO extends BaseDO {
+public class OrderDomainEventDO extends BasePO {
 
     private Long eventId;
 

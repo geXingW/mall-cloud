@@ -11,22 +11,16 @@ spring:
 
   cloud:
     inetutils:
-      preferred-networks: "192.168.100"
+      preferred-networks: "192.168.10"
 
     nacos:
       server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}
       username: ${NACOS_USERNAME:nacos}
       password: ${NACOS_PASSWORD:nacos}
 
-      discovery:
-        namespace: ${NACOS_NAMESPACE:mall-cloud}
-        group: WEB_SERVICE_GROUP
-        service: ${spring.application.name}
-
       config:
         namespace: ${NACOS_NAMESPACE:mall-cloud}
         group: ${NACOS_GROUP:DEFAULT_GROUP}
-        name: ${spring.application.name}
         refresh-enabled: true
         file-extension: yaml
         extension-configs:
@@ -43,7 +37,7 @@ dubbo:
     id: dubbo
     name: dubbo
     port: -1
-    host: 192.168.100.168
+    host: 192.168.10.1
 
   registry:
     address: nacos://${spring.cloud.nacos.server-addr}

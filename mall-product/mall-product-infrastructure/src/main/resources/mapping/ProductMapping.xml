@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gexingw.mall.product.infrastructure.gateway.db.ProductMapper">
+
+    <select id="webInfo" resultType="com.gexingw.mall.product.infrastructure.dto.WebProductInfoDTO">
+        select id, number, name, stock, sold_count, sale_price, market_price
+        from `product`
+        where id = #{id}
+    </select>
+
+</mapper>
