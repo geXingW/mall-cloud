@@ -32,8 +32,8 @@ public class PageData<T> implements Serializable {
         this(page, size, 0, Collections.emptyList());
     }
 
-    public PageData(IPage<?> page) {
-        this(page.getCurrent(), page.getSize(), page.getTotal(), Collections.emptyList());
+    public PageData(IPage<T> page) {
+        this(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords());
     }
 
 }

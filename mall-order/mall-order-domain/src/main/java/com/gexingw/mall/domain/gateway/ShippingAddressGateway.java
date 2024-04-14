@@ -1,6 +1,6 @@
 package com.gexingw.mall.domain.gateway;
 
-import com.gexingw.mall.domain.order.model.OrderShippingAddress;
+import com.gexingw.mall.domain.model.address.ShippingAddress;
 
 /**
  * mall-user-service
@@ -10,6 +10,8 @@ import com.gexingw.mall.domain.order.model.OrderShippingAddress;
  */
 public interface ShippingAddressGateway {
 
-    OrderShippingAddress getById(Long id);
+    ShippingAddress find(Long id);
+
+    Long save(ShippingAddress shippingAddress);
 
 }

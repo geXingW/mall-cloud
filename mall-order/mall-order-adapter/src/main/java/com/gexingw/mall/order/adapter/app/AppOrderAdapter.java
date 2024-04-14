@@ -2,17 +2,18 @@ package com.gexingw.mall.order.adapter.app;
 
 import com.gexingw.mall.common.core.enums.CommonRespCode;
 import com.gexingw.mall.common.core.util.R;
-import com.gexingw.mall.common.db.support.PageData;
+import com.gexingw.mall.common.db.support.Pager;
 import com.gexingw.mall.common.spring.command.CommandBus;
-import com.gexingw.mall.order.app.dto.order.AppOrderCancelCommand;
-import com.gexingw.mall.order.app.dto.order.AppOrderDeleteCommand;
-import com.gexingw.mall.order.app.dto.order.AppOrderSubmitCommand;
+import com.gexingw.mall.order.app.command.order.AppOrderCancelCommand;
+import com.gexingw.mall.order.app.command.order.AppOrderDeleteCommand;
+import com.gexingw.mall.order.app.command.order.AppOrderSubmitCommand;
 import com.gexingw.mall.order.app.service.OrderService;
 import com.gexingw.mall.order.app.vo.order.AppOrderDetailVO;
 import com.gexingw.mall.order.app.vo.order.AppOrderListVO;
-import com.gexingw.mall.order.infra.query.order.AppOrderQuery;
+import com.gexingw.mall.order.infrastructure.query.order.AppOrderQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -30,7 +31,7 @@ public class AppOrderAdapter {
     private final OrderService orderService;
 
     @GetMapping
-    public R<PageData<AppOrderListVO>> list(AppOrderQuery query) {
+    public R<Pager<AppOrderListVO>> list(AppOrderQuery query) {
         return R.ok(orderService.queryAppPage(query));
     }
 
@@ -40,7 +41,7 @@ public class AppOrderAdapter {
     }
 
     @PostMapping
-    public R<Long> add(@RequestBody AppOrderSubmitCommand addCommand) {
+    public R<Long> add(@Validated @RequestBody AppOrderSubmitCommand addCommand) {
         return R.ok(commandBus.execute(addCommand, Long.class));
     }
 

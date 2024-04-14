@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gexingw.mall.order.infrastructure.gateway.address.db.ShippingAddressMapper">
+
+    <select id="queryAppList" resultType="com.gexingw.mall.order.infrastructure.po.OrderPO">
+        select number, total_amount, total_quantity, id, create_time
+        from `order`
+        <where>
+            <if test="query.number != null and query.number != ''">
+                and number = #{query.number}
+            </if>
+        </where>
+    </select>
+    <select id="queryAppPage" resultType="com.gexingw.mall.order.infrastructure.dto.address.AppShippingAddressListDTO">
+        select id, name, phone, address, province, city, district, is_default, create_user, create_time
+        from shipping_address
+        <where>
+            and user_id = #{query.userId}
+        </where>
+    </select>
+
+</mapper>

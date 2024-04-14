@@ -1,5 +1,7 @@
 package com.gexingw.mall.order.app.vo.order;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -12,6 +14,9 @@ import java.math.BigDecimal;
 @Data
 @Accessors
 public class AppOrderListVO implements Serializable {
+
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long id;
 
     private String number;
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gexingw.mall.order.infra.gateway.db.OrderMapper">
+<mapper namespace="com.gexingw.mall.order.infrastructure.gateway.order.db.OrderMapper">
 
-    <select id="queryAppList" resultType="com.gexingw.mall.order.infra.po.OrderPO">
-        select number, total_amount, total_quantity, id, create_time
+    <select id="queryAppList" resultType="com.gexingw.mall.order.infrastructure.dto.order.AppOrderListDTO">
+        select id, number, total_amount, total_quantity, create_time
         from `order`
         <where>
             <if test="query.number != null and query.number != ''">

@@ -1,5 +1,7 @@
 package com.gexingw.mall.order.app.vo.order;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @Accessors(chain = true)
 public class AppOrderDetailVO implements Serializable {
 
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     private String number;
@@ -32,6 +35,7 @@ public class AppOrderDetailVO implements Serializable {
     @Data
     public static class Item {
 
+        @JsonSerialize(using = ToStringSerializer.class)
         private Long productId;
 
         private String name;
@@ -45,6 +49,7 @@ public class AppOrderDetailVO implements Serializable {
     @Data
     public static class ShippingAddress {
 
+        @JsonSerialize(using = ToStringSerializer.class)
         private Long addressId;
 
         private String name;

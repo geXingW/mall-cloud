@@ -1,9 +1,9 @@
 package com.gexingw.mall.order.app.assembler;
 
+import com.gexingw.mall.domain.model.address.ShippingAddress;
 import com.gexingw.mall.domain.order.model.OrderShippingAddress;
-import com.gexingw.mall.order.app.dto.order.AppOrderAddCommand;
+import com.gexingw.mall.order.app.command.order.AppOrderAddCommand;
 import com.gexingw.mall.order.app.vo.order.AppOrderDetailVO;
-import com.gexingw.mall.user.client.clientobject.address.ShippingAddressCO;
 import org.mapstruct.Mapper;
 
 /**
@@ -18,8 +18,8 @@ public interface OrderShippingAddressAssembler {
 
     OrderShippingAddress toShippingAddress(AppOrderAddCommand.Shipping shipping);
 
-    OrderShippingAddress toShippingAddress(ShippingAddressCO shippingAddressCo);
-
     AppOrderDetailVO.ShippingAddress toAppVO(OrderShippingAddress orderShippingAddress);
+
+    OrderShippingAddress fromShippingAddress(ShippingAddress shippingAddress);
 
 }

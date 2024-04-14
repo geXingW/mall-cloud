@@ -5,7 +5,7 @@ import com.gexingw.mall.domain.order.model.OrderItem;
 import com.gexingw.mall.domain.order.model.OrderShippingAddress;
 import com.gexingw.mall.order.app.vo.order.AppOrderDetailVO;
 import com.gexingw.mall.order.app.vo.order.AppOrderListVO;
-import com.gexingw.mall.order.infra.po.OrderPO;
+import com.gexingw.mall.order.infrastructure.dto.order.AppOrderListDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -28,7 +28,7 @@ public interface OrderAssembler {
     @Mapping(target = "shippingAddress", source = "shippingAddress", qualifiedByName = "toAppShippingAddressVO")
     AppOrderDetailVO toAppVO(Order order);
 
-    AppOrderListVO toAppListVO(OrderPO orderPO);
+    AppOrderListVO toAppListVO(AppOrderListDTO orderPO);
 
     @Named("toAppItemVO")
     default AppOrderDetailVO.Item toAppItemVO(OrderItem orderItem) {
