@@ -1,6 +1,6 @@
 package com.gexingw.mall.order.infrastructure.convert.order;
 
-import com.gexingw.mall.domain.order.model.OrderOperator;
+import com.gexingw.mall.domain.model.order.OrderOperator;
 import com.gexingw.mall.domain.user.model.User;
 import org.mapstruct.Mapper;
 

@@ -43,6 +43,11 @@
             <artifactId>mall-user-client</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-product-client</artifactId>
+        </dependency>
+
 
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>

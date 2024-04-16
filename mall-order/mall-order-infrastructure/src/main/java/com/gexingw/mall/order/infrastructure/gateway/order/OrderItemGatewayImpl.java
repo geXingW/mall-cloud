@@ -1,7 +1,7 @@
 package com.gexingw.mall.order.infrastructure.gateway.order;
 
-import com.gexingw.mall.domain.gateway.OrderItemGateway;
-import com.gexingw.mall.domain.order.model.OrderItem;
+import com.gexingw.mall.domain.gateway.order.OrderItemGateway;
+import com.gexingw.mall.domain.model.order.OrderItem;
 import com.gexingw.mall.order.infrastructure.convert.order.OrderItemConvert;
 import com.gexingw.mall.order.infrastructure.gateway.order.db.OrderItemMapper;
 import com.gexingw.mall.order.infrastructure.po.OrderItemPO;

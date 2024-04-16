@@ -1,6 +1,6 @@
 package com.gexingw.mall.domain.service;
 
-import com.gexingw.mall.domain.order.model.Order;
+import com.gexingw.mall.domain.model.order.Order;
 
 /**
  * mall-user-service

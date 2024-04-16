@@ -1,6 +1,11 @@
 package com.gexingw.mall.product.client.dubbo;
 
 import com.gexingw.mall.common.core.util.R;
+import com.gexingw.mall.product.client.co.product.DubboProductInfoCO;
+import com.gexingw.mall.product.client.co.product.DubboProductListCO;
+import com.gexingw.mall.product.client.query.product.DubboProductQuery;
+
+import java.util.List;
 
 /**
  * mall-user-service
@@ -11,6 +16,8 @@ import com.gexingw.mall.common.core.util.R;
 @SuppressWarnings("unused")
 public interface ProductDubboService {
 
-    R<Object> geyById(Long id);
+    R<DubboProductInfoCO> find(Long id);
+
+    R<List<DubboProductListCO>> queryList(DubboProductQuery query);
 
 }

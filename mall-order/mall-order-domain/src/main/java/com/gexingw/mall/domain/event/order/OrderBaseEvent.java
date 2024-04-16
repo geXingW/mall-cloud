@@ -2,7 +2,7 @@ package com.gexingw.mall.domain.event.order;
 
 import com.gexingw.mall.common.core.domain.AggregationRoot;
 import com.gexingw.mall.common.spring.event.IEvent;
-import com.gexingw.mall.domain.order.model.Order;
+import com.gexingw.mall.domain.model.order.Order;
 
 /**
  * mall-user-service

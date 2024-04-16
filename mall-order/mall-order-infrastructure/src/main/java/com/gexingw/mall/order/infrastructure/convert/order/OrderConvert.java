@@ -1,7 +1,7 @@
 package com.gexingw.mall.order.infrastructure.convert.order;
 
 import com.gexingw.mall.common.core.convert.DomainPOConvert;
-import com.gexingw.mall.domain.order.model.Order;
+import com.gexingw.mall.domain.model.order.Order;
 import com.gexingw.mall.order.infrastructure.po.OrderPO;
 import org.mapstruct.Mapper;
 

@@ -1,4 +1,4 @@
-package com.gexingw.mall.domain.order.model;
+package com.gexingw.mall.domain.model.order;
 
 import lombok.Data;
 

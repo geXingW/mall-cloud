@@ -24,7 +24,7 @@ public class ProductGatewayImpl implements ProductGateway {
     private final ProductConvert productConvert;
 
     @Override
-    public Product getById(Long id) {
+    public Product find(Long id) {
         return productConvert.toDomain(productMapper.selectById(id));
     }
 

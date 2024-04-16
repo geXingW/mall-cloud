@@ -1,12 +1,13 @@
 package com.gexingw.mall.order.infrastructure.repository;
 
-import com.gexingw.mall.domain.gateway.OrderGateway;
-import com.gexingw.mall.domain.gateway.OrderItemGateway;
-import com.gexingw.mall.domain.order.model.Order;
+import com.gexingw.mall.domain.gateway.order.OrderGateway;
+import com.gexingw.mall.domain.gateway.order.OrderItemGateway;
+import com.gexingw.mall.domain.model.order.Order;
 import com.gexingw.mall.domain.repository.order.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author GeXingW
@@ -19,6 +20,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     private final OrderItemGateway orderItemGateway;
 
     @Override
+    @Transactional
     public void save(Order order) {
         // 保存订单主信息
         Long orderId = orderGateway.insert(order);

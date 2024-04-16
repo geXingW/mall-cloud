@@ -4,19 +4,25 @@ import com.gexingw.mall.common.exception.BizNotFoundException;
 import com.gexingw.mall.common.spring.command.CommandHandler;
 import com.gexingw.mall.common.spring.command.ICommand;
 import com.gexingw.mall.common.spring.command.ICommandExecutor;
-import com.gexingw.mall.domain.gateway.ShippingAddressGateway;
+import com.gexingw.mall.domain.gateway.address.ShippingAddressGateway;
+import com.gexingw.mall.domain.gateway.product.ProductGateway;
 import com.gexingw.mall.domain.model.address.ShippingAddress;
-import com.gexingw.mall.domain.order.model.Order;
-import com.gexingw.mall.domain.order.model.OrderItem;
-import com.gexingw.mall.domain.order.model.OrderShippingAddress;
+import com.gexingw.mall.domain.model.order.Order;
+import com.gexingw.mall.domain.model.order.OrderItem;
+import com.gexingw.mall.domain.model.order.OrderShippingAddress;
+import com.gexingw.mall.domain.model.product.Product;
 import com.gexingw.mall.domain.repository.order.OrderRepository;
 import com.gexingw.mall.order.app.assembler.OrderItemAssembler;
 import com.gexingw.mall.order.app.assembler.OrderShippingAddressAssembler;
+import com.gexingw.mall.order.app.command.order.AppOrderAddCommand;
 import com.gexingw.mall.order.app.command.order.AppOrderSubmitCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -31,6 +37,7 @@ import java.util.stream.Collectors;
 public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
 
     private final ShippingAddressGateway shippingAddressGateway;
+    private final ProductGateway productGateway;
 
     private final OrderItemAssembler orderItemAssembler;
     private final OrderShippingAddressAssembler orderShippingAddressAssembler;
@@ -41,20 +48,39 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
     public Long handleWithResult(ICommand command) {
         AppOrderSubmitCommand submitCommand = (AppOrderSubmitCommand) command;
 
-        // 查询发货信息i
+        // 查询发货信息
         ShippingAddress shippingAddress = shippingAddressGateway.find(submitCommand.getShipping().getAddressId());
         if (shippingAddress == null) {
             throw new BizNotFoundException("收货地址不存在！");
         }
 
+        // 查询商品信息
+        Map<Long, Product> productMap = queryProducts(submitCommand);
+
+        List<AppOrderAddCommand.OrderItem> commandItems = submitCommand.getItems();
+        List<OrderItem> orderItems = new ArrayList<>(commandItems.size());
+        for (AppOrderAddCommand.OrderItem item : commandItems) {
+            Product product = productMap.get(item.getId());
+            if (product == null) {
+                throw new BizNotFoundException("商品不存在！");
+            }
+
+            orderItems.add(new OrderItem(product).setQuantity(item.getQuantity()));
+        }
+
         OrderShippingAddress orderShippingAddress = orderShippingAddressAssembler.fromShippingAddress(shippingAddress);
 
         // 构造订单商品信息
-        List<OrderItem> orderItems = submitCommand.getItems().stream().map(orderItemAssembler::toOrderItem).collect(Collectors.toList());
         Order order = new Order(orderItems, null, orderShippingAddress);
         orderRepository.save(order);
 
         return order.getId();
+    }
+
+    private Map<Long, Product> queryProducts(AppOrderSubmitCommand submitCommand) {
+        Set<Long> productIds = submitCommand.getItems().stream().map(AppOrderAddCommand.OrderItem::getId).collect(Collectors.toSet());
+
+        return productGateway.queryByIds(productIds).stream().collect(Collectors.toMap(Product::getId, o -> o, (k1, k2) -> k2));
     }
 
 }

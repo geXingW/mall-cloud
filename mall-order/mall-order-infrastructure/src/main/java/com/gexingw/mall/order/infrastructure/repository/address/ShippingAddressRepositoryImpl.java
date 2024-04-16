@@ -1,6 +1,6 @@
 package com.gexingw.mall.order.infrastructure.repository.address;
 
-import com.gexingw.mall.domain.gateway.ShippingAddressGateway;
+import com.gexingw.mall.domain.gateway.address.ShippingAddressGateway;
 import com.gexingw.mall.domain.model.address.ShippingAddress;
 import com.gexingw.mall.domain.repository.address.ShippingAddressRepository;
 import lombok.RequiredArgsConstructor;

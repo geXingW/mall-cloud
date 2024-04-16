@@ -1,7 +1,7 @@
 package com.gexingw.mall.order.infrastructure.gateway.order;
 
 import com.gexingw.mall.domain.event.order.OrderBaseEvent;
-import com.gexingw.mall.domain.gateway.OrderDomainEventGateway;
+import com.gexingw.mall.domain.gateway.order.OrderDomainEventGateway;
 import com.gexingw.mall.order.infrastructure.dataobject.OrderDomainEventDO;
 import com.gexingw.mall.order.infrastructure.gateway.order.db.OrderDomainEventMapper;
 import lombok.RequiredArgsConstructor;

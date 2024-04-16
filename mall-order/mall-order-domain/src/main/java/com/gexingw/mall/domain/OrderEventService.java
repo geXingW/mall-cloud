@@ -3,7 +3,7 @@ package com.gexingw.mall.domain;
 import com.gexingw.mall.common.spring.event.IDomainEventService;
 import com.gexingw.mall.common.spring.event.IEvent;
 import com.gexingw.mall.domain.event.order.OrderBaseEvent;
-import com.gexingw.mall.domain.gateway.OrderDomainEventGateway;
+import com.gexingw.mall.domain.gateway.order.OrderDomainEventGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;

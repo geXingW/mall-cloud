@@ -10,6 +10,6 @@ import com.gexingw.mall.product.domain.model.Product;
  */
 public interface ProductGateway {
 
-    Product getById(Long id);
+    Product find(Long id);
 
 }

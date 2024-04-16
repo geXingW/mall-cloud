@@ -5,7 +5,7 @@ import com.gexingw.mall.common.spring.command.ICommand;
 import com.gexingw.mall.common.spring.command.ICommandExecutor;
 import com.gexingw.mall.common.spring.event.EventBus;
 import com.gexingw.mall.domain.event.order.OrderCanceledEvent;
-import com.gexingw.mall.domain.order.model.Order;
+import com.gexingw.mall.domain.model.order.Order;
 import com.gexingw.mall.domain.service.OrderDomainService;
 import com.gexingw.mall.order.app.command.order.AppOrderCancelCommand;
 import lombok.RequiredArgsConstructor;

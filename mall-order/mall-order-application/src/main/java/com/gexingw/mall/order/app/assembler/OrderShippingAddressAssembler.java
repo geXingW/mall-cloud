@@ -1,7 +1,7 @@
 package com.gexingw.mall.order.app.assembler;
 
 import com.gexingw.mall.domain.model.address.ShippingAddress;
-import com.gexingw.mall.domain.order.model.OrderShippingAddress;
+import com.gexingw.mall.domain.model.order.OrderShippingAddress;
 import com.gexingw.mall.order.app.command.order.AppOrderAddCommand;
 import com.gexingw.mall.order.app.vo.order.AppOrderDetailVO;
 import org.mapstruct.Mapper;

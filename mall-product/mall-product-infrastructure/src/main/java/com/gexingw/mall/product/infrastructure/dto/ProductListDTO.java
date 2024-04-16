@@ -4,13 +4,15 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
+ * mall-cloud
+ *
  * @author GeXingW
+ * @date 2024/4/14 18:01
  */
 @Data
-public class WebProductInfoDTO implements Serializable {
+public class ProductListDTO implements Serializable {
 
     private Long id;
 
@@ -20,20 +22,8 @@ public class WebProductInfoDTO implements Serializable {
 
     private Integer stock;
 
-    private Integer soldCount;
-
     private BigDecimal salePrice;
 
     private BigDecimal marketPrice;
-
-    private List<Attribute> attributes;
-
-    public static class Attribute {
-
-        private Long id;
-
-        private String name;
-
-    }
 
 }

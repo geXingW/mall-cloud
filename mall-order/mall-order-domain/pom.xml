@@ -29,6 +29,10 @@
             <groupId>com.gexingw</groupId>
             <artifactId>mall-common-spring</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-common-exception</artifactId>
+        </dependency>
 
 
     </dependencies>

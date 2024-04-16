@@ -20,7 +20,9 @@
                     "ID",
                     "lastX",
                     "lastY",
-                    "PO"
+                    "PO",
+                    "CO",
+                    "DTO"
                 ]
             },
             "ClassNamingShouldBeCamelRule": {

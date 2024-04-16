@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gexingw.mall.common.db.support.PageData;
 import com.gexingw.mall.common.spring.command.CommandBus;
-import com.gexingw.mall.domain.gateway.ShippingAddressGateway;
 import com.gexingw.mall.order.app.command.address.ShippingAddressSaveCmd;
 import com.gexingw.mall.order.app.service.ShippingAddressService;
 import com.gexingw.mall.order.infrastructure.dto.address.AppShippingAddressListDTO;
@@ -20,8 +19,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class ShippingAddressServiceImpl implements ShippingAddressService {
-
-    private final ShippingAddressGateway shippingAddressGateway;
 
     private final CommandBus commandBus;
 

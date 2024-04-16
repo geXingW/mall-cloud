@@ -1,7 +1,7 @@
 package com.gexingw.mall.order.app.service.impl;
 
 import com.gexingw.mall.common.db.support.Pager;
-import com.gexingw.mall.domain.gateway.OrderGateway;
+import com.gexingw.mall.domain.gateway.order.OrderGateway;
 import com.gexingw.mall.order.app.assembler.OrderAssembler;
 import com.gexingw.mall.order.app.service.OrderService;
 import com.gexingw.mall.order.app.vo.order.AppOrderListVO;

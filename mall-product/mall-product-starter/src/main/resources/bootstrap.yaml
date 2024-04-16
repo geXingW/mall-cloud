@@ -10,8 +10,8 @@ spring:
       path: "/product"
 
   cloud:
-    inetutils:
-      preferred-networks: "192.168.10"
+    #    inetutils:
+    #      preferred-networks: "192.168.10"
 
     nacos:
       server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}
@@ -26,28 +26,4 @@ spring:
         extension-configs:
           - data-id: mall-cloud-base.yaml
             refresh: true
-
-dubbo:
-  application:
-    name: ${spring.application.name}
-    qos-enable: false
-    register-mode: instance
-
-  protocol:
-    id: dubbo
-    name: dubbo
-    port: -1
-    host: 192.168.10.1
-
-  registry:
-    address: nacos://${spring.cloud.nacos.server-addr}
-    parameters:
-      namespace: ${spring.cloud.nacos.config.namespace}
-      group: ${spring.cloud.nacos.config.group}
-    group: DUBBO_SERVICE_GROUP
-  #      register-consumer-url: true
-
-  consumer:
-    check: false
-
 

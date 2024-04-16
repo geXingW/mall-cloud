@@ -1,4 +1,4 @@
-package com.gexingw.mall.domain.gateway;
+package com.gexingw.mall.domain.gateway.order;
 
 import com.gexingw.mall.domain.event.order.OrderBaseEvent;
 

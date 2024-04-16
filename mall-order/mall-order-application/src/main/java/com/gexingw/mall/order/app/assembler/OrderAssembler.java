@@ -1,8 +1,8 @@
 package com.gexingw.mall.order.app.assembler;
 
-import com.gexingw.mall.domain.order.model.Order;
-import com.gexingw.mall.domain.order.model.OrderItem;
-import com.gexingw.mall.domain.order.model.OrderShippingAddress;
+import com.gexingw.mall.domain.model.order.Order;
+import com.gexingw.mall.domain.model.order.OrderItem;
+import com.gexingw.mall.domain.model.order.OrderShippingAddress;
 import com.gexingw.mall.order.app.vo.order.AppOrderDetailVO;
 import com.gexingw.mall.order.app.vo.order.AppOrderListVO;
 import com.gexingw.mall.order.infrastructure.dto.order.AppOrderListDTO;

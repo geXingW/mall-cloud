@@ -1,4 +1,4 @@
-package com.gexingw.mall.domain.gateway;
+package com.gexingw.mall.domain.gateway.address;
 
 import com.gexingw.mall.domain.model.address.ShippingAddress;
 

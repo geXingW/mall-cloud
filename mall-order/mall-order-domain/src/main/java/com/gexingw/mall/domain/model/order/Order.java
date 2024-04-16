@@ -1,4 +1,4 @@
-package com.gexingw.mall.domain.order.model;
+package com.gexingw.mall.domain.model.order;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.IdUtil;
@@ -56,6 +56,7 @@ public class Order implements AggregationRoot {
     private OrderCreator creator;
 
     public Order(List<OrderItem> items, OrderCreator creator, OrderShippingAddress shippingAddress) {
+        this.id = IdUtil.getSnowflakeNextId();
         this.items = items;
         this.creator = creator;
         this.shippingAddress = shippingAddress;
@@ -63,6 +64,8 @@ public class Order implements AggregationRoot {
         // 订单总金额
         this.totalAmount = items.stream().map(OrderItem::getTotalAmount).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
         this.number = LocalDateTimeUtil.format(LocalDateTime.now(), "yyyyMMddHHmmss");
+
+        this.items.forEach(item -> item.setOrder(this));
     }
 
     /**
