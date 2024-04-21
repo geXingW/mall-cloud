@@ -1,12 +1,16 @@
 package com.gexingw.mall.product.application.service.impl;
 
 import com.gexingw.mall.common.exception.BizNotFoundException;
+import com.gexingw.mall.common.spring.command.CommandBus;
 import com.gexingw.mall.product.application.assembler.ProductAssembler;
+import com.gexingw.mall.product.application.commd.product.ProductStockDecrCommand;
 import com.gexingw.mall.product.application.service.ProductService;
 import com.gexingw.mall.product.application.vo.product.WebProductInfoVO;
 import com.gexingw.mall.product.client.co.product.DubboProductInfoCO;
 import com.gexingw.mall.product.client.co.product.DubboProductListCO;
+import com.gexingw.mall.product.client.command.DecrStockCommand;
 import com.gexingw.mall.product.client.query.product.DubboProductQuery;
+import com.gexingw.mall.product.domain.repository.ProductRepository;
 import com.gexingw.mall.product.infrastructure.dto.ProductInfoDTO;
 import com.gexingw.mall.product.infrastructure.dto.ProductListDTO;
 import com.gexingw.mall.product.infrastructure.gateway.db.ProductMapper;
@@ -28,6 +32,10 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     private final ProductAssembler productAssembler;
+
+    private final CommandBus commandBus;
+
+    private final ProductRepository productRepository;
 
     @Override
     public WebProductInfoVO webInfo(Long id) {
@@ -52,6 +60,18 @@ public class ProductServiceImpl implements ProductService {
         List<ProductListDTO> select = productMapper.select(productQuery);
 
         return select.stream().map(productAssembler::DTOToDubboListCO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Boolean decrStock(Long productId, Integer quantity) {
+        commandBus.execute(new ProductStockDecrCommand(productId, quantity));
+        return true;
+    }
+
+    @Override
+    public Boolean decrStock(DecrStockCommand decrStockCommand) {
+        commandBus.execute(decrStockCommand);
+        return null;
     }
 
 }

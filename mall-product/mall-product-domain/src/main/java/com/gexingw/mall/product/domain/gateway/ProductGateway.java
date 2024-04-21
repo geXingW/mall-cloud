@@ -12,4 +12,10 @@ public interface ProductGateway {
 
     Product find(Long id);
 
+    Boolean insert(Product product);
+
+    Boolean update(Product product);
+
+    Boolean delete(Product product);
+
 }

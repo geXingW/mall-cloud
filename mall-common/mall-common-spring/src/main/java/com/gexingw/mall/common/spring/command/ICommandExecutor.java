@@ -1,5 +1,7 @@
 package com.gexingw.mall.common.spring.command;
 
+import com.gexingw.mall.common.core.support.ICommand;
+
 /**
  * mall-user-service
  *

@@ -1,8 +1,8 @@
 package com.gexingw.mall.order.app.executor.order;
 
+import com.gexingw.mall.common.core.support.ICommand;
 import com.gexingw.mall.common.exception.BizNotFoundException;
 import com.gexingw.mall.common.spring.command.CommandHandler;
-import com.gexingw.mall.common.spring.command.ICommand;
 import com.gexingw.mall.common.spring.command.ICommandExecutor;
 import com.gexingw.mall.domain.gateway.address.ShippingAddressGateway;
 import com.gexingw.mall.domain.gateway.product.ProductGateway;
@@ -16,6 +16,8 @@ import com.gexingw.mall.order.app.assembler.OrderItemAssembler;
 import com.gexingw.mall.order.app.assembler.OrderShippingAddressAssembler;
 import com.gexingw.mall.order.app.command.order.AppOrderAddCommand;
 import com.gexingw.mall.order.app.command.order.AppOrderSubmitCommand;
+import com.gexingw.mall.order.infrastructure.gateway.order.rpc.ProductRpcMapper;
+import com.gexingw.mall.product.client.command.DecrStockCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 
@@ -44,6 +46,8 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
 
     private final OrderRepository orderRepository;
 
+    private final ProductRpcMapper productRpcMapper;
+
     @Override
     public Long handleWithResult(ICommand command) {
         AppOrderSubmitCommand submitCommand = (AppOrderSubmitCommand) command;
@@ -59,6 +63,8 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
 
         List<AppOrderAddCommand.OrderItem> commandItems = submitCommand.getItems();
         List<OrderItem> orderItems = new ArrayList<>(commandItems.size());
+        List<DecrStockCommand.Item> items = new ArrayList<>(commandItems.size());
+
         for (AppOrderAddCommand.OrderItem item : commandItems) {
             Product product = productMap.get(item.getId());
             if (product == null) {
@@ -66,6 +72,13 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
             }
 
             orderItems.add(new OrderItem(product).setQuantity(item.getQuantity()));
+
+            items.add(new DecrStockCommand.Item(item.getId(), item.getQuantity()));
+        }
+
+        // 批量扣减库存
+        if (!productRpcMapper.decrStock(new DecrStockCommand(items))) {
+            throw new RuntimeException("库存扣减失败！");
         }
 
         OrderShippingAddress orderShippingAddress = orderShippingAddressAssembler.fromShippingAddress(shippingAddress);

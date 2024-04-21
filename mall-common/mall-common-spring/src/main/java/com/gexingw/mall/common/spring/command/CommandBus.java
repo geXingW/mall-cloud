@@ -1,5 +1,6 @@
 package com.gexingw.mall.common.spring.command;
 
+import com.gexingw.mall.common.core.support.ICommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;

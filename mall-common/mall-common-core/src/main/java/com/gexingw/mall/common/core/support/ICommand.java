@@ -1,4 +1,4 @@
-package com.gexingw.mall.common.spring.command;
+package com.gexingw.mall.common.core.support;
 
 import java.io.Serializable;
 

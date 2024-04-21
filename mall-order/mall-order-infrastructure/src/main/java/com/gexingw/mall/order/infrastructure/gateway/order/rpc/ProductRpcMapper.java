@@ -6,6 +6,7 @@ import com.gexingw.mall.order.infrastructure.po.product.ProductPO;
 import com.gexingw.mall.order.infrastructure.query.order.product.ProductQuery;
 import com.gexingw.mall.product.client.co.product.DubboProductInfoCO;
 import com.gexingw.mall.product.client.co.product.DubboProductListCO;
+import com.gexingw.mall.product.client.command.DecrStockCommand;
 import com.gexingw.mall.product.client.dubbo.ProductDubboService;
 import com.gexingw.mall.product.client.query.product.DubboProductQuery;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class ProductRpcMapper {
 
-    @DubboReference
+    @DubboReference(timeout = 10000)
     private ProductDubboService productDubboService;
 
     private final ProductConvert productConvert;
@@ -49,6 +50,12 @@ public class ProductRpcMapper {
         }
 
         return queryResult.getData().stream().map(productConvert::COToPO).collect(Collectors.toList());
+    }
+
+    public boolean decrStock(DecrStockCommand decrStockCommand) {
+        R<Boolean> decrResult = productDubboService.decrStock(decrStockCommand);
+
+        return decrResult.isSuccess();
     }
 
 }

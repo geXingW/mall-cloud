@@ -1,5 +1,6 @@
 package com.gexingw.mall.common.spring.command;
 
+import com.gexingw.mall.common.core.support.ICommand;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
 

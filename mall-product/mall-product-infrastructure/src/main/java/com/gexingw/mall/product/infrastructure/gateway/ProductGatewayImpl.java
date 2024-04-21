@@ -4,6 +4,7 @@ import com.gexingw.mall.product.domain.gateway.ProductGateway;
 import com.gexingw.mall.product.domain.model.Product;
 import com.gexingw.mall.product.infrastructure.convert.ProductConvert;
 import com.gexingw.mall.product.infrastructure.gateway.db.ProductMapper;
+import com.gexingw.mall.product.infrastructure.po.ProductPO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,28 @@ public class ProductGatewayImpl implements ProductGateway {
     public Product find(Long id) {
         return productConvert.toDomain(productMapper.selectById(id));
     }
+
+    @Override
+    public Boolean insert(Product product) {
+        ProductPO productPO = productConvert.toPO(product);
+        productMapper.insert(productPO);
+
+        product.setId(productPO.getId());
+
+        return true;
+    }
+
+    @Override
+    public Boolean update(Product product) {
+        ProductPO productPO = productConvert.toPO(product);
+
+        return productMapper.updateById(productPO) > 0;
+    }
+
+    @Override
+    public Boolean delete(Product product) {
+        return productMapper.deleteById(product.getId()) > 0;
+    }
+
 
 }

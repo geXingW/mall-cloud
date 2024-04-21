@@ -1,7 +1,7 @@
 package com.gexingw.mall.order.app.executor.address;
 
+import com.gexingw.mall.common.core.support.ICommand;
 import com.gexingw.mall.common.spring.command.CommandHandler;
-import com.gexingw.mall.common.spring.command.ICommand;
 import com.gexingw.mall.common.spring.command.ICommandExecutor;
 import com.gexingw.mall.domain.model.address.ShippingAddress;
 import com.gexingw.mall.domain.repository.address.ShippingAddressRepository;

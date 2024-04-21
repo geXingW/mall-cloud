@@ -1,8 +1,9 @@
 package com.gexingw.mall.product.domain.model;
 
+import com.gexingw.mall.common.core.domain.AggregationRoot;
+import com.gexingw.mall.common.exception.ParamInvalidException;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
  */
 @SuppressWarnings("unused")
 @Data
-public class Product implements Serializable {
+public class Product implements AggregationRoot {
 
     /**
      * id
@@ -49,5 +50,19 @@ public class Product implements Serializable {
      * 市场价
      */
     private BigDecimal marketPrice;
+
+    public Product decrStock(Integer quantity) {
+        if (quantity <= 0) {
+            throw new ParamInvalidException("库存数量不能小于0");
+        }
+
+        if (quantity > this.stock) {
+            throw new ParamInvalidException("库存不足！");
+        }
+
+        this.stock = this.stock - quantity;
+
+        return this;
+    }
 
 }

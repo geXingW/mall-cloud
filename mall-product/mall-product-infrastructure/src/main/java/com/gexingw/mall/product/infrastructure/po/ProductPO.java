@@ -1,5 +1,6 @@
 package com.gexingw.mall.product.infrastructure.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
  * @date 2024/3/2 8:56
  */
 @Data
+@TableName("product")
 public class ProductPO extends BasePO {
 
     /**

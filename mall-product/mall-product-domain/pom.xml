@@ -23,6 +23,11 @@
             <artifactId>mall-common-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-common-exception</artifactId>
+        </dependency>
+
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>com.gexingw</groupId>

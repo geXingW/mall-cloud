@@ -1,6 +1,6 @@
 package com.gexingw.mall.order.app.command.order;
 
-import com.gexingw.mall.common.spring.command.ICommand;
+import com.gexingw.mall.common.core.support.ICommand;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

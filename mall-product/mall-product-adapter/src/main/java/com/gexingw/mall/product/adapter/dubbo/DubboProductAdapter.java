@@ -5,6 +5,7 @@ import com.gexingw.mall.common.exception.BizNotFoundException;
 import com.gexingw.mall.product.application.service.ProductService;
 import com.gexingw.mall.product.client.co.product.DubboProductInfoCO;
 import com.gexingw.mall.product.client.co.product.DubboProductListCO;
+import com.gexingw.mall.product.client.command.DecrStockCommand;
 import com.gexingw.mall.product.client.dubbo.ProductDubboService;
 import com.gexingw.mall.product.client.query.product.DubboProductQuery;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,16 @@ public class DubboProductAdapter implements ProductDubboService {
     @Override
     public R<List<DubboProductListCO>> queryList(DubboProductQuery query) {
         return R.ok(productService.queryDubboList(query));
+    }
+
+    @Override
+    public R<Boolean> decrStock(Long productId, Integer quantity) {
+        return R.ok(productService.decrStock(productId, quantity));
+    }
+
+    @Override
+    public R<Boolean> decrStock(DecrStockCommand decrStockCommand) {
+        return R.ok(productService.decrStock(decrStockCommand));
     }
 
 }
