@@ -18,6 +18,7 @@ import com.gexingw.mall.order.app.command.order.AppOrderAddCommand;
 import com.gexingw.mall.order.app.command.order.AppOrderSubmitCommand;
 import com.gexingw.mall.order.infrastructure.gateway.order.rpc.ProductRpcMapper;
 import com.gexingw.mall.product.client.command.DecrStockCommand;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 
@@ -49,6 +50,7 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
     private final ProductRpcMapper productRpcMapper;
 
     @Override
+    @GlobalTransactional
     public Long handleWithResult(ICommand command) {
         AppOrderSubmitCommand submitCommand = (AppOrderSubmitCommand) command;
 

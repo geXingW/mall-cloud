@@ -50,6 +50,31 @@ dubbo:
   consumer:
     check: false
 
+seata:
+  tx-service-group: mall-cloud-tx-group
+  service:
+    vgroup-mapping:
+      mall-cloud-tx-group: default
+
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      namespace: ${spring.cloud.nacos.config.namespace}
+      serverAddr: ${spring.cloud.nacos.server-addr}
+      group: SEATA_GROUP
+      username: ${spring.cloud.nacos.username}
+      password: ${spring.cloud.nacos.password}
+
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.nacos.server-addr}
+      namespace: ${spring.cloud.nacos.config.namespace}
+      group: SEATA_GROUP
+      username: ${spring.cloud.nacos.username}
+      password: ${spring.cloud.nacos.password}
+
 
 mybatis-plus:
   global-config:
