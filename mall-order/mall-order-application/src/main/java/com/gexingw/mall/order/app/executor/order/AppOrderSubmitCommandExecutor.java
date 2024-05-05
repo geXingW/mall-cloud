@@ -59,6 +59,7 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
         if (shippingAddress == null) {
             throw new BizNotFoundException("收货地址不存在！");
         }
+        OrderShippingAddress orderShippingAddress = orderShippingAddressAssembler.fromShippingAddress(shippingAddress);
 
         // 查询商品信息
         Map<Long, Product> productMap = queryProducts(submitCommand);
@@ -82,8 +83,6 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
         if (!productRpcMapper.decrStock(new DecrStockCommand(items))) {
             throw new RuntimeException("库存扣减失败！");
         }
-
-        OrderShippingAddress orderShippingAddress = orderShippingAddressAssembler.fromShippingAddress(shippingAddress);
 
         // 构造订单商品信息
         Order order = new Order(orderItems, null, orderShippingAddress);

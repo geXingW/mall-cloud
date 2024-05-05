@@ -3,6 +3,7 @@ package com.gexingw.mall.domain.model.order;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.IdUtil;
 import com.gexingw.mall.common.core.domain.AggregationRoot;
+import com.gexingw.mall.common.exception.BizNotFoundException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -70,6 +71,9 @@ public class Order implements AggregationRoot {
         this.items = items.stream().map(item -> item.setOrder(this)).collect(Collectors.toList());
 
         // 订单收货地址信息
+        if (shippingAddress == null) {
+            throw new BizNotFoundException("收货地址不存在！");
+        }
         this.shippingAddress = shippingAddress.setOrder(this);
     }
 
@@ -80,6 +84,15 @@ public class Order implements AggregationRoot {
      */
     public Order cancel() {
         this.status = 2;
+        return this;
+    }
+
+    public Order changeShippingAddress(OrderShippingAddress shippingAddress) {
+        if (shippingAddress == null) {
+            throw new BizNotFoundException("收货地址不存在！");
+        }
+        this.shippingAddress = shippingAddress.setOrder(this);
+
         return this;
     }
 
