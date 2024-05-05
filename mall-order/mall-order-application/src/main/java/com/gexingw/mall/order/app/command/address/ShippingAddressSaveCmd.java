@@ -12,32 +12,32 @@ public class ShippingAddressSaveCmd implements ICommand {
     /**
      * 收货人
      */
-    private String name;
+    private String recvUserName;
 
     /**
      * 电话
      */
-    private String phone;
+    private String recvUserPhone;
 
     /**
      * 省
      */
-    private String province;
+    private String recvProvince;
 
     /**
      * 市
      */
-    private String city;
+    private String recvCity;
 
     /**
      * 区/县
      */
-    private String district;
+    private String recvDistrict;
 
     /**
      * 详细地址
      */
-    private String address;
+    private String recvAddress;
 
     /**
      * 是否默认

@@ -11,7 +11,7 @@ import com.gexingw.mall.domain.model.order.Order;
 public interface OrderGateway {
 
     @SuppressWarnings("unused")
-    Order getById(Long id);
+    Order selectById(Long id);
 
     boolean exist(Long id);
 

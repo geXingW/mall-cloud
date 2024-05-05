@@ -13,17 +13,17 @@ public class ShippingAddressPO extends BasePO {
 
     private Long userId;
 
-    private String name;
+    private String recvUserName;
 
-    private String phone;
+    private String recvUserPhone;
 
-    private String province;
+    private String recvProvince;
 
-    private String city;
+    private String recvCity;
 
-    private String district;
+    private String recvDistrict;
 
-    private String address;
+    private String recvAddress;
 
     private Long tagId;
 

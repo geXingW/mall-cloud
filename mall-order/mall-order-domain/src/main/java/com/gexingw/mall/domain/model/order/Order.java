@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * mall-user-service
@@ -57,15 +58,19 @@ public class Order implements AggregationRoot {
 
     public Order(List<OrderItem> items, OrderCreator creator, OrderShippingAddress shippingAddress) {
         this.id = IdUtil.getSnowflakeNextId();
-        this.items = items;
+        this.number = LocalDateTimeUtil.format(LocalDateTime.now(), "yyyyMMddHHmmss");
+
+        // 下单人
         this.creator = creator;
-        this.shippingAddress = shippingAddress;
 
         // 订单总金额
         this.totalAmount = items.stream().map(OrderItem::getTotalAmount).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
-        this.number = LocalDateTimeUtil.format(LocalDateTime.now(), "yyyyMMddHHmmss");
 
-        this.items.forEach(item -> item.setOrder(this));
+        // 订单商品信息
+        this.items = items.stream().map(item -> item.setOrder(this)).collect(Collectors.toList());
+
+        // 订单收货地址信息
+        this.shippingAddress = shippingAddress.setOrder(this);
     }
 
     /**

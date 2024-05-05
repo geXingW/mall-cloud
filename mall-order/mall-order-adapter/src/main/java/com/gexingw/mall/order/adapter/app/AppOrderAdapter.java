@@ -5,6 +5,7 @@ import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.db.support.Pager;
 import com.gexingw.mall.common.spring.command.CommandBus;
 import com.gexingw.mall.order.app.command.order.AppOrderCancelCommand;
+import com.gexingw.mall.order.app.command.order.AppOrderChangeShippingAddressCmd;
 import com.gexingw.mall.order.app.command.order.AppOrderDeleteCommand;
 import com.gexingw.mall.order.app.command.order.AppOrderSubmitCommand;
 import com.gexingw.mall.order.app.service.OrderService;
@@ -48,6 +49,13 @@ public class AppOrderAdapter {
     @PostMapping("/{id}/cancel")
     public R<Object> cancel(@PathVariable Long id) {
         commandBus.execute(new AppOrderCancelCommand(id));
+
+        return R.ok();
+    }
+
+    @PostMapping("/{id}/shipping-address")
+    public R<Object> changeShippingAddress(@PathVariable Long id) {
+        commandBus.execute(new AppOrderChangeShippingAddressCmd(id));
 
         return R.ok();
     }
