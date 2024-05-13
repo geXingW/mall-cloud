@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @date 2024/2/17 13:03
  */
 @Data
-public class AuthRegisteredClientDO extends BasePO {
+public class AuthRegisteredClientPO extends BasePO {
 
     private String clientName;
 

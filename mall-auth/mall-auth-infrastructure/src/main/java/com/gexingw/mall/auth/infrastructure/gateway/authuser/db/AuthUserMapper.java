@@ -1,6 +1,6 @@
 package com.gexingw.mall.auth.infrastructure.gateway.authuser.db;
 
-import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserDO;
+import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserPO;
 import com.gexingw.mall.common.db.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,6 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2024/2/16 20:07
  */
 @Mapper
-public interface AuthUserMapper extends BaseMapper<AuthUserDO> {
+public interface AuthUserMapper extends BaseMapper<AuthUserPO> {
 
 }

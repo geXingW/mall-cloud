@@ -1,9 +1,9 @@
 package com.gexingw.mall.user.infra.gatewayimpl;
 
-import com.gexingw.mall.user.domain.user.model.User;
 import com.gexingw.mall.user.domain.user.UserGateway;
+import com.gexingw.mall.user.domain.user.model.User;
+import com.gexingw.mall.user.infra.dataobject.UserPO;
 import com.gexingw.mall.user.infra.gatewayimpl.db.UserMapper;
-import com.gexingw.mall.user.infra.dataobject.UserDO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class UserGatewayImpl implements UserGateway {
 
     @Override
     public User getById(Long id) {
-        UserDO userPo = userMapper.selectById(id);
+        UserPO userPo = userMapper.selectById(id);
         if (userPo == null) {
             return null;
         }

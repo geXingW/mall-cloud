@@ -1,7 +1,7 @@
 package com.gexingw.mall.auth.application.executor;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserDO;
+import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserPO;
 import com.gexingw.mall.auth.infrastructure.gateway.authuser.db.AuthUserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
@@ -19,8 +19,8 @@ public class AuthUserCommandExecutor {
 
     private final AuthUserMapper authUserMapper;
 
-    public AuthUserDO getByUsername(String username){
-        LambdaQueryWrapper<AuthUserDO> qryWrapper = new LambdaQueryWrapper<AuthUserDO>().eq(AuthUserDO::getUsername, username);
+    public AuthUserPO getByUsername(String username) {
+        LambdaQueryWrapper<AuthUserPO> qryWrapper = new LambdaQueryWrapper<AuthUserPO>().eq(AuthUserPO::getUsername, username);
 
         return authUserMapper.selectOne(qryWrapper);
     }

@@ -1,7 +1,7 @@
 package com.gexingw.mall.user.infra.dataobject;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gexingw.mall.common.db.dataobject.BaseDO;
+import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @TableName("user")
-public class UserDO extends BaseDO implements Serializable {
+public class UserPO extends BasePO implements Serializable {
 
     private String name;
 

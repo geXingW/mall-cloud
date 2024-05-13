@@ -1,7 +1,7 @@
 package com.gexingw.mall.order.infrastructure.dataobject;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gexingw.mall.common.db.dataobject.BaseDO;
+import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @Data
 @TableName("order_item")
 @Accessors(chain = true)
-public class OrderItemDO extends BaseDO {
+public class OrderItemPO extends BasePO {
 
     /**
      * 订单Id

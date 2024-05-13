@@ -1,6 +1,6 @@
 package com.gexingw.mall.auth.infrastructure.component.provider;
 
-import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserDO;
+import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserPO;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
 import com.gexingw.mall.common.core.domain.AuthInfo;
 import com.gexingw.mall.common.spring.util.SpringUtil;
@@ -90,13 +90,13 @@ public abstract class AbstractOAuth2AuthenticationProvider implements Authentica
     /**
      * 构建一个AuthInfo信息
      *
-     * @param authUserDO       用户信息
+     * @param authUserPO       用户信息
      * @param registeredClient 客户端信息
      * @return AuthInfo
      */
-    public AuthInfo buildAuthInfo(AuthUserDO authUserDO, RegisteredClient registeredClient) {
+    public AuthInfo buildAuthInfo(AuthUserPO authUserPO, RegisteredClient registeredClient) {
         Long clientId = Long.valueOf(registeredClient.getId());
-        AuthInfo.User user = new AuthInfo.User(authUserDO.getId(), authUserDO.getUsername(), authUserDO.getPhone());
+        AuthInfo.User user = new AuthInfo.User(authUserPO.getId(), authUserPO.getUsername(), authUserPO.getPhone());
         AuthInfo.Client client = new AuthInfo.Client(clientId, registeredClient.getClientId(), registeredClient.getScopes());
 
         return new AuthInfo(user, client);

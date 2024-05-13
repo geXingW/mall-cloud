@@ -1,7 +1,7 @@
 package com.gexingw.mall.order.infrastructure.dataobject;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gexingw.mall.common.db.dataobject.BaseDO;
+import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 
 /**
@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 @TableName("order_shipping_address")
-public class OrderShippingAddressDO extends BaseDO {
+public class OrderShippingAddressPO extends BasePO {
 
     private Long orderId;
 

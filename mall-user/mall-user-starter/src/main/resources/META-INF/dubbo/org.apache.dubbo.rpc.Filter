@@ -1,1 +1,1 @@
-dubboRpcExceptionHandler=com.gexingw.mall.common.exception.handler.DubboRpcExceptionHandler
+dubboRpcExceptionHandler=com.gexingw.mall.common.exception.DubboRpcExceptionHandler

@@ -3,7 +3,7 @@ package com.gexingw.mall.auth.infrastructure.component.provider;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gexingw.mall.auth.infrastructure.component.token.OAuth2PasswordAuthenticationToken;
 import com.gexingw.mall.auth.infrastructure.constant.ParameterConstant;
-import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserDO;
+import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserPO;
 import com.gexingw.mall.auth.infrastructure.gateway.authuser.db.AuthUserMapper;
 import com.gexingw.mall.common.core.domain.AuthInfo;
 import com.gexingw.mall.common.spring.util.SpringUtil;
@@ -54,24 +54,24 @@ public class OAuth2PasswordAuthenticationProvider extends AbstractOAuth2Authenti
         }
 
         // 根据用户名查找用户信息
-        LambdaQueryWrapper<AuthUserDO> qryWrapper = new LambdaQueryWrapper<AuthUserDO>().eq(AuthUserDO::getUsername, username);
+        LambdaQueryWrapper<AuthUserPO> qryWrapper = new LambdaQueryWrapper<AuthUserPO>().eq(AuthUserPO::getUsername, username);
         AuthUserMapper bean = SpringUtil.getBean(AuthUserMapper.class);
-        AuthUserDO authUserDO = bean.selectOne(qryWrapper);
-        if (authUserDO == null) {
+        AuthUserPO authUserPO = bean.selectOne(qryWrapper);
+        if (authUserPO == null) {
             throw new OAuth2AuthenticationException(
                     new OAuth2Error(USERNAME_PASSWD_INVALID.getSubCode().toString()), USERNAME_PASSWD_INVALID.getMessage()
             );
         }
 
         // 校验密码
-        if (!password.equals(authUserDO.getPassword())) {
+        if (!password.equals(authUserPO.getPassword())) {
             throw new OAuth2AuthenticationException(
                     new OAuth2Error(USERNAME_PASSWD_INVALID.getSubCode().toString()), USERNAME_PASSWD_INVALID.getMessage()
             );
         }
 
         // 认证信息
-        AuthInfo authInfo = this.buildAuthInfo(authUserDO, registeredClient);
+        AuthInfo authInfo = this.buildAuthInfo(authUserPO, registeredClient);
 
         return new UsernamePasswordAuthenticationToken(authInfo, password, new ArrayList<>());
     }

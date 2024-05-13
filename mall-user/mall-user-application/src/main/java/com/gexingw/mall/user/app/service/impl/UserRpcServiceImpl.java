@@ -4,8 +4,8 @@ import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.exception.BizNotFoundException;
 import com.gexingw.mall.user.client.clientobject.user.UserCO;
 import com.gexingw.mall.user.client.dubbo.UserRpcService;
+import com.gexingw.mall.user.infra.dataobject.UserPO;
 import com.gexingw.mall.user.infra.gatewayimpl.db.UserMapper;
-import com.gexingw.mall.user.infra.dataobject.UserDO;
 import lombok.RequiredArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.context.annotation.Lazy;
@@ -24,7 +24,7 @@ public class UserRpcServiceImpl implements UserRpcService {
 
     @Override
     public R<UserCO> getById(Long id) {
-        UserDO userPo = userMapper.selectById(id);
+        UserPO userPo = userMapper.selectById(id);
         if (userPo == null) {
             throw new BizNotFoundException("用户信息不存在！");
         }

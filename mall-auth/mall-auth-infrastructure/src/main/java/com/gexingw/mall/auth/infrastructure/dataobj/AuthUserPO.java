@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("auth_user")
-public class AuthUserDO extends BasePO {
+public class AuthUserPO extends BasePO {
 
     private String username;
 

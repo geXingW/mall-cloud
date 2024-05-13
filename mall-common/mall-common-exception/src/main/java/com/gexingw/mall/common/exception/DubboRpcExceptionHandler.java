@@ -1,8 +1,7 @@
-package com.gexingw.mall.common.exception.handler;
+package com.gexingw.mall.common.exception;
 
 import com.gexingw.mall.common.core.interfaces.IRespCode;
 import com.gexingw.mall.common.core.util.R;
-import com.gexingw.mall.common.exception.BizErrorException;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.*;
 import org.apache.dubbo.rpc.service.GenericService;
