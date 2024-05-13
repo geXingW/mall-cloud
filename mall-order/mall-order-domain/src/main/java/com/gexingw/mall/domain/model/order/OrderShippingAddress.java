@@ -3,7 +3,9 @@ package com.gexingw.mall.domain.model.order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.ObjectUtils;
+import org.javers.core.metamodel.annotation.Id;
 
 /**
  * mall-user-service
@@ -14,7 +16,11 @@ import org.apache.commons.lang3.ObjectUtils;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 public class OrderShippingAddress {
+
+    @Id
+    private Long id;
 
     private Long orderId;
 

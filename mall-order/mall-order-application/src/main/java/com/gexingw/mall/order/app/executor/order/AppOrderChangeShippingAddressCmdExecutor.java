@@ -40,6 +40,9 @@ public class AppOrderChangeShippingAddressCmdExecutor implements ICommandExecuto
 
         // 检查收货地址是否存在
         ShippingAddress shippingAddress = shippingAddressGateway.find(changeShippingAddressCmd.getShippingAddressId());
+        if (shippingAddress == null) {
+            throw new BizNotFoundException("收货地址不存在！");
+        }
         OrderShippingAddress orderShippingAddress = orderShippingAddressAssembler.fromShippingAddress(shippingAddress);
 
         // 修改订单收货地址

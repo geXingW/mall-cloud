@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  */
 @SuppressWarnings("unused")
 @Data
-public class Product implements AggregationRoot {
+public class Product implements AggregationRoot<Long> {
 
     /**
      * id

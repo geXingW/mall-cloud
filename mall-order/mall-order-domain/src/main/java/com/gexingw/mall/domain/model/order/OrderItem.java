@@ -5,8 +5,10 @@ import com.gexingw.mall.common.exception.ParamInvalidException;
 import com.gexingw.mall.domain.model.product.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.javers.core.metamodel.annotation.Id;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +23,13 @@ import java.math.BigDecimal;
  */
 @Data
 @NoArgsConstructor
+@Accessors(chain = true)
 public class OrderItem implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(OrderItem.class);
+
+    @Id
+    private Long id;
 
     private Long orderId;
 

@@ -7,6 +7,8 @@ import com.gexingw.mall.common.exception.BizNotFoundException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.javers.core.metamodel.annotation.Entity;
+import org.javers.core.metamodel.annotation.Id;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,10 +23,12 @@ import java.util.stream.Collectors;
  * @date 2024/1/27 15:58
  */
 @Data
+@Entity
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Order implements AggregationRoot {
+public class Order implements AggregationRoot<Long> {
 
+    @Id
     private Long id;
 
     /**

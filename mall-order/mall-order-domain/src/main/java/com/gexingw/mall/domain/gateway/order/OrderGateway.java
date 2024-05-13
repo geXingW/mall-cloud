@@ -17,4 +17,8 @@ public interface OrderGateway {
 
     Long insert(Order order);
 
+    boolean delete(Long id);
+
+    boolean update(Order order);
+
 }

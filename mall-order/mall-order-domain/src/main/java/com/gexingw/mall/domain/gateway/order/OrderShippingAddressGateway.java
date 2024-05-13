@@ -14,4 +14,6 @@ public interface OrderShippingAddressGateway {
 
     Long save(OrderShippingAddress shippingAddress);
 
+    boolean delete(Long id);
+
 }

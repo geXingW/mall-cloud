@@ -54,8 +54,8 @@ public class AppOrderAdapter {
     }
 
     @PostMapping("/{id}/shipping-address")
-    public R<Object> changeShippingAddress(@PathVariable Long id) {
-        commandBus.execute(new AppOrderChangeShippingAddressCmd(id));
+    public R<Object> changeShippingAddress(@PathVariable Long id, @RequestBody AppOrderChangeShippingAddressCmd cmd) {
+        commandBus.execute(cmd.setId(id));
 
         return R.ok();
     }

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -40,6 +41,11 @@ public class OrderItemGatewayImpl implements OrderItemGateway {
         LambdaQueryWrapper<OrderItemPO> itemQryWrp = new LambdaQueryWrapper<OrderItemPO>().eq(OrderItemPO::getOrderId, id);
 
         return orderItemMapper.selectList(itemQryWrp).stream().map(orderItemConvert::toDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean delete(Set<Long> ids) {
+        return orderItemMapper.deleteBatchIds(ids) == ids.size();
     }
 
 }

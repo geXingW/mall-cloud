@@ -3,6 +3,7 @@ package com.gexingw.mall.order.app.command.order;
 import com.gexingw.mall.common.core.support.ICommand;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * mall-cloud
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@Accessors(chain = true)
 public class AppOrderChangeShippingAddressCmd implements ICommand {
 
     private Long id;
@@ -21,8 +23,9 @@ public class AppOrderChangeShippingAddressCmd implements ICommand {
      */
     private Long shippingAddressId;
 
-    public AppOrderChangeShippingAddressCmd(Long id) {
+    public AppOrderChangeShippingAddressCmd(Long id, Long shippingAddressId) {
         this.id = id;
+        this.shippingAddressId = shippingAddressId;
     }
 
 }

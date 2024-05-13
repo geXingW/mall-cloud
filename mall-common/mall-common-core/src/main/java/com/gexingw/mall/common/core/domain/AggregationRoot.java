@@ -1,6 +1,7 @@
 package com.gexingw.mall.common.core.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * mall-user-service
@@ -9,8 +10,12 @@ import java.io.Serializable;
  * @author GeXingW
  * @date 2024/2/15 13:12
  */
-public interface AggregationRoot extends Serializable {
+public interface AggregationRoot<ID extends Serializable> extends Serializable {
 
-    Long getId();
+    ID getId();
+
+    public default List<Object> getChanges() {
+        return null;
+    }
 
 }

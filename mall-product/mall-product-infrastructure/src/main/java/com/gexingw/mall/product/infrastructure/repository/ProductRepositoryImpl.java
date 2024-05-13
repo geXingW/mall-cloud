@@ -4,6 +4,7 @@ import com.gexingw.mall.product.domain.gateway.ProductGateway;
 import com.gexingw.mall.product.domain.model.Product;
 import com.gexingw.mall.product.domain.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
@@ -20,12 +21,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     private final ProductGateway productGateway;
 
     @Override
-    public Product find(Long id) {
+    public Product find(@NotNull Long id) {
         return productGateway.find(id);
     }
 
     @Override
-    public Boolean save(Product product) {
+    public @NotNull Boolean save(@NotNull Product product) {
         if (product.getId() == null || product.getId() <= 0) {
             if (!productGateway.insert(product)) {
                 throw new RuntimeException("保存失败！");
@@ -42,7 +43,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Boolean remove(Product product) {
+    public @NotNull Boolean remove(@NotNull Product product) {
         return productGateway.delete(product);
     }
 

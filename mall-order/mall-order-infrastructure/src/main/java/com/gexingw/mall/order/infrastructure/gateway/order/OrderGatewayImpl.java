@@ -69,4 +69,16 @@ public class OrderGatewayImpl implements OrderGateway {
     public boolean exist(Long id) {
         return false;
     }
+
+    @Override
+    public boolean update(Order order) {
+        OrderPO orderPO = orderConvert.toPO(order);
+        return orderMapper.updateById(orderPO) > 0;
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        return orderMapper.deleteById(id) > 0;
+    }
+
 }

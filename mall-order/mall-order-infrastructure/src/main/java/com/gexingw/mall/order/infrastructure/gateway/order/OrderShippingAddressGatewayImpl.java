@@ -42,4 +42,9 @@ public class OrderShippingAddressGatewayImpl implements OrderShippingAddressGate
         return shippingAddressPO.getId();
     }
 
+    @Override
+    public boolean delete(Long id) {
+        return mapper.deleteById(id) > 0;
+    }
+
 }
