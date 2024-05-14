@@ -1,9 +1,12 @@
 package com.gexingw.mall.order.app.executor.order;
 
+import cn.hutool.core.util.IdUtil;
 import com.gexingw.mall.common.core.support.ICommand;
 import com.gexingw.mall.common.exception.BizNotFoundException;
 import com.gexingw.mall.common.spring.command.CommandHandler;
 import com.gexingw.mall.common.spring.command.ICommandExecutor;
+import com.gexingw.mall.common.spring.event.EventBus;
+import com.gexingw.mall.domain.event.order.OrderCreatedEvent;
 import com.gexingw.mall.domain.gateway.address.ShippingAddressGateway;
 import com.gexingw.mall.domain.gateway.product.ProductGateway;
 import com.gexingw.mall.domain.model.address.ShippingAddress;
@@ -12,7 +15,6 @@ import com.gexingw.mall.domain.model.order.OrderItem;
 import com.gexingw.mall.domain.model.order.OrderShippingAddress;
 import com.gexingw.mall.domain.model.product.Product;
 import com.gexingw.mall.domain.repository.order.OrderRepository;
-import com.gexingw.mall.order.app.assembler.OrderItemAssembler;
 import com.gexingw.mall.order.app.assembler.OrderShippingAddressAssembler;
 import com.gexingw.mall.order.app.command.order.AppOrderAddCommand;
 import com.gexingw.mall.order.app.command.order.AppOrderSubmitCommand;
@@ -42,12 +44,13 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
     private final ShippingAddressGateway shippingAddressGateway;
     private final ProductGateway productGateway;
 
-    private final OrderItemAssembler orderItemAssembler;
     private final OrderShippingAddressAssembler orderShippingAddressAssembler;
 
     private final OrderRepository orderRepository;
 
     private final ProductRpcMapper productRpcMapper;
+
+    private final EventBus eventBus;
 
     @Override
     @GlobalTransactional
@@ -60,7 +63,7 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
             throw new BizNotFoundException("收货地址不存在！");
         }
         OrderShippingAddress orderShippingAddress = orderShippingAddressAssembler.fromShippingAddress(shippingAddress);
-
+        orderShippingAddress.setId(IdUtil.getSnowflakeNextId());
         // 查询商品信息
         Map<Long, Product> productMap = queryProducts(submitCommand);
 
@@ -86,7 +89,12 @@ public class AppOrderSubmitCommandExecutor implements ICommandExecutor {
 
         // 构造订单商品信息
         Order order = new Order(orderItems, null, orderShippingAddress);
-        orderRepository.save(order);
+        if (!orderRepository.save(order)) {
+            throw new RuntimeException("订单保存失败！");
+        }
+
+        // 发送订单创建成功的事件
+        eventBus.publish(new OrderCreatedEvent(order));
 
         return order.getId();
     }

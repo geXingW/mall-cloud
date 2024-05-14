@@ -63,13 +63,13 @@ public class OrderRepositoryImpl extends DbRepository<Order, Long> implements Or
 
         // 保存订单商品信息
         for (OrderItem item : order.getItems()) {
-            if (orderItemGateway.insert(item) == 0) {
+            if (orderItemGateway.insert(item.setOrderId(orderId)) == 0) {
                 throw new RuntimeException("订单保存失败！");
             }
         }
 
         // 保存收货地址信息
-        if (orderShippingAddressGateway.save(order.getShippingAddress()) == 0) {
+        if (orderShippingAddressGateway.save(order.getShippingAddress().setOrderId(orderId)) == 0) {
             throw new RuntimeException("订单保存失败！");
         }
 

@@ -1,7 +1,6 @@
 package com.gexingw.mall.domain.model.order;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
-import cn.hutool.core.util.IdUtil;
 import com.gexingw.mall.common.core.domain.AggregationRoot;
 import com.gexingw.mall.common.exception.BizNotFoundException;
 import lombok.Data;
@@ -62,7 +61,6 @@ public class Order implements AggregationRoot<Long> {
     private OrderCreator creator;
 
     public Order(List<OrderItem> items, OrderCreator creator, OrderShippingAddress shippingAddress) {
-        this.id = IdUtil.getSnowflakeNextId();
         this.number = LocalDateTimeUtil.format(LocalDateTime.now(), "yyyyMMddHHmmss");
 
         // 下单人

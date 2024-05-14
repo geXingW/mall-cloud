@@ -29,7 +29,7 @@ public class OrderBaseEvent implements IEvent {
     }
 
     @Override
-    public AggregationRoot getPayload() {
+    public AggregationRoot<Long> getPayload() {
         return this.order;
     }
 

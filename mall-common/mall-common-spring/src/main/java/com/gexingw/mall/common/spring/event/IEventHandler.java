@@ -7,8 +7,8 @@ package com.gexingw.mall.common.spring.event;
  * @date 2024/2/26 16:24
  */
 @SuppressWarnings("unused")
-public interface IEventHandler {
+public interface IEventHandler<T extends IEvent> {
 
-    Boolean handle(IEvent event);
+    Boolean handle(T event);
 
 }

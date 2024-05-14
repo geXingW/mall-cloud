@@ -39,7 +39,7 @@ public class OrderShippingAddress {
     private String recvAddress;
 
     public OrderShippingAddress setOrder(Order order) {
-        if (ObjectUtils.anyNull(order, order.getId(), order.getNumber())) {
+        if (ObjectUtils.anyNull(order, order.getNumber())) {
             throw new RuntimeException("订单信息不完整！");
         }
 
