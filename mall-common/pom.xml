@@ -21,6 +21,7 @@
         <module>mall-common-security</module>
         <module>mall-common-redis</module>
         <module>mall-common-spring</module>
+        <module>mall-common-test</module>
     </modules>
 
     <properties>
