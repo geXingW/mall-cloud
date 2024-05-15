@@ -16,6 +16,7 @@
         <coommons-lang3.version>3.12.0</coommons-lang3.version>
         <oauth2-server.version>0.4.5</oauth2-server.version>
         <javers-core.version>6.14.0</javers-core.version>
+        <spock.version>2.3-groovy-4.0</spock.version>
     </properties>
 
     <dependencyManagement>
@@ -218,6 +219,13 @@
                 <groupId>org.javers</groupId>
                 <artifactId>javers-core</artifactId>
                 <version>${javers-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-core</artifactId>
+                <version>${spock.version}</version>
+                <scope>test</scope>
             </dependency>
 
         </dependencies>
