@@ -1,4 +1,4 @@
-package com.gexingw.mall.auth.infrastructure.dataobj;
+package com.gexingw.mall.auth.infrastructure.po;
 
 import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @date 2024/2/17 13:03
  */
 @Data
-public class AuthRegisteredClientPO extends BasePO {
+public class RegisteredClientPO extends BasePO {
 
     private String clientName;
 

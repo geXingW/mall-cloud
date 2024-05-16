@@ -21,7 +21,7 @@ import java.util.function.Function;
 @SuppressWarnings("SqlNoDataSourceInspection")
 public class DbOAuth2RegisteredClientRepository extends JdbcRegisteredClientRepository {
     private static final String COLUMN_NAMES = "id, client_id, client_id_issued_at, client_secret, client_secret_expires_at, client_name, client_authentication_methods, authorization_grant_types, redirect_uris, scopes, client_settings,token_settings";
-    private static final String TABLE_NAME = "auth_registered_client";
+    private static final String TABLE_NAME = "oauth2_registered_client";
 
     private static final String CLIENT_ID_COUNT_SQL = String.format("SELECT COUNT(*) FROM %s WHERE client_id = ?", TABLE_NAME);
     private static final String CLIENT_SECRET_COUNT_SQL = String.format("SELECT COUNT(*) FROM %s WHERE client_secret = ?", TABLE_NAME);

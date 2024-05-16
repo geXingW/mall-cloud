@@ -1,6 +1,6 @@
 package com.gexingw.mall.auth.infrastructure.component.provider;
 
-import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserPO;
+import com.gexingw.mall.auth.infrastructure.po.AuthUserPO;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
 import com.gexingw.mall.common.core.domain.AuthInfo;
 import com.gexingw.mall.common.spring.util.SpringUtil;

@@ -1,4 +1,4 @@
-package com.gexingw.mall.auth.infrastructure.dataobj;
+package com.gexingw.mall.auth.infrastructure.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gexingw.mall.common.db.support.BasePO;

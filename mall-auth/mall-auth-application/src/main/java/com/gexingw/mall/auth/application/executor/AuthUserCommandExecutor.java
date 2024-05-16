@@ -1,8 +1,8 @@
 package com.gexingw.mall.auth.application.executor;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.gexingw.mall.auth.infrastructure.dataobj.AuthUserPO;
 import com.gexingw.mall.auth.infrastructure.gateway.authuser.db.AuthUserMapper;
+import com.gexingw.mall.auth.infrastructure.po.AuthUserPO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
