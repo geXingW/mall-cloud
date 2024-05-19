@@ -1,6 +1,8 @@
 package com.gexingw.mall.auth.infrastructure.component.provider;
 
+import com.gexingw.mall.auth.infrastructure.gateway.regsteredclient.db.RegisteredClientMapper;
 import com.gexingw.mall.auth.infrastructure.po.AuthUserPO;
+import com.gexingw.mall.auth.infrastructure.po.RegisteredClientPO;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
 import com.gexingw.mall.common.core.domain.AuthInfo;
 import com.gexingw.mall.common.spring.util.SpringUtil;
@@ -26,6 +28,7 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 import org.springframework.util.Assert;
 
 import java.security.Principal;
+import java.util.HashSet;
 
 /**
  * mall-user-service
@@ -45,7 +48,9 @@ public abstract class AbstractOAuth2AuthenticationProvider implements Authentica
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
         Assert.notNull(registeredClient, "RegisteredClient should not be null!");
 
-        Authentication userAuthentication = this.getAuthentication(clientAuthentication, registeredClient);
+        RegisteredClientPO registeredClientPO = SpringUtil.getBean(RegisteredClientMapper.class).selectById(registeredClient.getId());
+        Authentication userAuthentication = this.getAuthentication(clientAuthentication, registeredClientPO);
+
         // AccessToken
         DefaultOAuth2TokenContext accessTokenContext = DefaultOAuth2TokenContext.builder().registeredClient(registeredClient)
                 .principal(userAuthentication).tokenType(OAuth2TokenType.ACCESS_TOKEN).authorizedScopes(registeredClient.getScopes())
@@ -94,10 +99,10 @@ public abstract class AbstractOAuth2AuthenticationProvider implements Authentica
      * @param registeredClient 客户端信息
      * @return AuthInfo
      */
-    public AuthInfo buildAuthInfo(AuthUserPO authUserPO, RegisteredClient registeredClient) {
-        Long clientId = Long.valueOf(registeredClient.getId());
+    public AuthInfo buildAuthInfo(AuthUserPO authUserPO, RegisteredClientPO registeredClient) {
+        Long clientId = registeredClient.getId();
         AuthInfo.User user = new AuthInfo.User(authUserPO.getId(), authUserPO.getUsername(), authUserPO.getPhone());
-        AuthInfo.Client client = new AuthInfo.Client(clientId, registeredClient.getClientId(), registeredClient.getScopes());
+        AuthInfo.Client client = new AuthInfo.Client(clientId, registeredClient.getClientId(), new HashSet<>());
 
         return new AuthInfo(user, client);
     }
@@ -107,6 +112,6 @@ public abstract class AbstractOAuth2AuthenticationProvider implements Authentica
 
     public abstract String grantType();
 
-    public abstract Authentication getAuthentication(Authentication authentication, RegisteredClient registeredClient);
+    public abstract Authentication getAuthentication(Authentication authentication, RegisteredClientPO registeredClient);
 
 }

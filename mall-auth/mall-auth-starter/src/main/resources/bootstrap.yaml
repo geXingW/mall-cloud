@@ -10,9 +10,6 @@ spring:
       path: "/auth"
 
   cloud:
-    #    inetutils:
-    #      preferred-networks: "192.168.100"
-
     nacos:
       server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}
       username: ${NACOS_USERNAME:nacos}

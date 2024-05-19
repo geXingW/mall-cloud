@@ -7,41 +7,40 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * mall-user-service
+ * mall-cloud
  *
  * @author GeXingW
- * @date 2024/2/16 17:02
+ * @date 2024/5/17 17:10
  */
 @Data
 @NoArgsConstructor
-public class AuthUser implements AggregationRoot<Long> {
+public class MallUser implements AggregationRoot<Long> {
 
     private Long id;
 
-    private String name;
-
     private String username;
-
-    private String phone;
 
     private String password;
 
-    private Integer userType;
+    private String phone;
 
     private LocalDateTime lastLoginTime;
 
     private LocalDateTime passwdResetTime;
 
-    public AuthUser(String phone, String password, Integer userType) {
-        this(phone, phone, phone, password, userType);
+    private Long createUser;
+
+    private LocalDateTime createTime;
+
+    public MallUser(String phone, String password) {
+        this(phone, phone, password);
     }
 
-    public AuthUser(String name, String username, String phone, String password, Integer userType) {
-        this.name = name;
+    public MallUser(String username, String phone, String password) {
         this.username = username;
         this.phone = phone;
         this.password = password;
-        this.userType = userType;
     }
+
 
 }

@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gexingw.mall.auth.infrastructure.component.token.OAuth2PasswordAuthenticationToken;
 import com.gexingw.mall.auth.infrastructure.constant.ParameterConstant;
 import com.gexingw.mall.auth.infrastructure.gateway.authuser.db.AuthUserMapper;
+import com.gexingw.mall.auth.infrastructure.gateway.authuser.db.MallUserMapper;
 import com.gexingw.mall.auth.infrastructure.po.AuthUserPO;
+import com.gexingw.mall.auth.infrastructure.po.RegisteredClientPO;
 import com.gexingw.mall.common.core.domain.AuthInfo;
 import com.gexingw.mall.common.spring.util.SpringUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +14,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
-import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class OAuth2PasswordAuthenticationProvider extends AbstractOAuth2Authenti
 
     public static final String GRANT_TYPE = "password";
 
+    public final AuthUserMapper authUserMapper = SpringUtil.getBean(AuthUserMapper.class);
+
     @Override
     public boolean supports(Class<?> authentication) {
         return OAuth2PasswordAuthenticationToken.class.isAssignableFrom(authentication);
@@ -40,7 +43,7 @@ public class OAuth2PasswordAuthenticationProvider extends AbstractOAuth2Authenti
     }
 
     @Override
-    public Authentication getAuthentication(Authentication authentication, RegisteredClient registeredClient) {
+    public Authentication getAuthentication(Authentication authentication, RegisteredClientPO registeredClient) {
         OAuth2PasswordAuthenticationToken passwordAuthentication = (OAuth2PasswordAuthenticationToken) authentication;
 
         // 获取用户名
@@ -53,25 +56,19 @@ public class OAuth2PasswordAuthenticationProvider extends AbstractOAuth2Authenti
             );
         }
 
-        // 根据用户名查找用户信息
-        LambdaQueryWrapper<AuthUserPO> qryWrapper = new LambdaQueryWrapper<AuthUserPO>().eq(AuthUserPO::getUsername, username);
-        AuthUserMapper bean = SpringUtil.getBean(AuthUserMapper.class);
-        AuthUserPO authUserPO = bean.selectOne(qryWrapper);
-        if (authUserPO == null) {
-            throw new OAuth2AuthenticationException(
-                    new OAuth2Error(USERNAME_PASSWD_INVALID.getSubCode().toString()), USERNAME_PASSWD_INVALID.getMessage()
-            );
-        }
+        // 本次登录的用户
+        SpringUtil.getBean(MallUserMapper.class);
 
-        // 校验密码
-        if (!password.equals(authUserPO.getPassword())) {
+        AuthUserPO authUser = authUserMapper.selectOne(new LambdaQueryWrapper<AuthUserPO>().eq(AuthUserPO::getUsername, username));
+        if (authUser == null || !password.equals(authUser.getPassword())) {
+            // 用户不存在
             throw new OAuth2AuthenticationException(
                     new OAuth2Error(USERNAME_PASSWD_INVALID.getSubCode().toString()), USERNAME_PASSWD_INVALID.getMessage()
             );
         }
 
         // 认证信息
-        AuthInfo authInfo = this.buildAuthInfo(authUserPO, registeredClient);
+        AuthInfo authInfo = this.buildAuthInfo(authUser, registeredClient);
 
         return new UsernamePasswordAuthenticationToken(authInfo, password, new ArrayList<>());
     }

@@ -19,7 +19,6 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
-import org.springframework.stereotype.Component;
 
 import java.security.Principal;
 import java.time.Duration;
@@ -33,7 +32,7 @@ import java.util.Optional;
  * @author GeXingW
  * @date 2024/2/17 12:11
  */
-@Component
+//@Component
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationService {
 
