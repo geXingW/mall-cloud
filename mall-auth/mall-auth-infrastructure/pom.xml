@@ -24,10 +24,10 @@
         </dependency>
 
         <!--suppress VulnerableLibrariesLocal -->
-        <dependency>
-            <groupId>com.gexingw</groupId>
-            <artifactId>mall-common-db</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.gexingw</groupId>-->
+        <!--            <artifactId>mall-common-db</artifactId>-->
+        <!--        </dependency>-->
 
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
@@ -63,6 +63,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
         <dependency>

@@ -4,6 +4,7 @@ import com.gexingw.mall.auth.domain.model.RegisteredClient;
 import com.gexingw.mall.auth.infrastructure.po.RegisteredClientPO;
 import com.gexingw.mall.common.core.convert.DomainPOConvert;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -19,11 +20,11 @@ import java.util.stream.Collectors;
 public interface RegisteredClientConvert extends DomainPOConvert<RegisteredClient, RegisteredClientPO> {
 
     @Override
-//    @Mapping(target = "scopes", expression = "java(scopesToString(registeredClient.getScopes()))")
+    @Mapping(target = "scopes", expression = "java(scopesToString(registeredClient.getScopes()))")
     RegisteredClientPO toPO(RegisteredClient registeredClient);
 
     @Override
-//    @Mapping(target = "scopes", expression = "java(stringToScopes(registeredClientPO.getScopes()))")
+    @Mapping(target = "scopes", expression = "java(stringToScopes(registeredClientPO.getScopes()))")
     RegisteredClient toDomain(RegisteredClientPO registeredClientPO);
 
     default String scopesToString(Set<String> scopes) {

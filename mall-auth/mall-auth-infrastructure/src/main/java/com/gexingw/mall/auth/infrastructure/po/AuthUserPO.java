@@ -1,10 +1,12 @@
 package com.gexingw.mall.auth.infrastructure.po;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
@@ -14,9 +16,14 @@ import java.time.LocalDateTime;
  * @date 2024/5/18 17:51
  */
 @Data
+@Entity
 @Accessors(chain = true)
-@TableName("auth_user")
-public class AuthUserPO extends BasePO {
+@Table(name = "auth_user")
+public class AuthUserPO {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     /**
      * 姓名

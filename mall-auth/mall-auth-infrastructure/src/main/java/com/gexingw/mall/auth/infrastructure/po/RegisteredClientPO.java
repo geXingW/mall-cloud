@@ -1,11 +1,12 @@
 package com.gexingw.mall.auth.infrastructure.po;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 /**
  * mall-user-service
@@ -13,9 +14,14 @@ import java.util.Set;
  * @author GeXingW
  * @date 2024/2/17 13:03
  */
+@Entity
 @Data
-@TableName("oauth2_registered_client")
-public class RegisteredClientPO extends BasePO {
+@Table(name = "oauth2_registered_client")
+public class RegisteredClientPO {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     private String clientName;
 
@@ -33,7 +39,7 @@ public class RegisteredClientPO extends BasePO {
 
     private String redirectUris;
 
-    private Set<String> scopes;
+    private String scopes;
 
     private String clientSettings;
 
