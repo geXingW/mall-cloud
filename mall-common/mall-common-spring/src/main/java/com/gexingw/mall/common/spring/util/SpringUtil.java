@@ -1,7 +1,9 @@
 package com.gexingw.mall.common.spring.util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.lang.Nullable;
@@ -26,20 +28,31 @@ public class SpringUtil implements ApplicationContextAware {
         context = applicationContext;
     }
 
+    @NotNull
     public static <T> T getBean(Class<T> clazz) {
-        return clazz == null ? null : context.getBean(clazz);
-    }
-
-    public static Object getBean(String beanId) {
-        return beanId == null ? null : context.getBean(beanId);
-    }
-
-    public static <T> T getBean(String beanName, Class<T> clazz) {
-        if (StringUtils.isNotBlank(beanName)) {
-            return clazz == null ? null : context.getBean(beanName, clazz);
+        if (clazz == null) {
+            throw new NoSuchBeanDefinitionException("null");
         }
 
-        return null;
+        return context.getBean(clazz);
+    }
+
+    @NotNull
+    public static Object getBean(String beanId) {
+        if (beanId == null) {
+            throw new NoSuchBeanDefinitionException("null");
+        }
+
+        return context.getBean(beanId);
+    }
+
+    @NotNull
+    public static <T> T getBean(String beanName, Class<T> clazz) {
+        if (StringUtils.isBlank(beanName) || clazz == null) {
+            throw new NoSuchBeanDefinitionException("null");
+        }
+
+        return context.getBean(beanName, clazz);
     }
 
     public static <T> Map<String, T> getBeansOfType(Class<T> type) throws BeansException {
