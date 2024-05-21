@@ -56,7 +56,7 @@ public class OAuth2PasswordAuthenticationProvider extends AbstractOAuth2Authenti
 
         // 本次登录的用户
         AuthUserPO authUser = authUserDao.findByUsername(username);
-        if (authUser == null || !password.equals(authUser.getPassword())) {
+        if (authUser == null || !passwordVerify(password, authUser.getPassword())) {
             // 用户不存在
             throw new OAuth2AuthenticationException(
                     new OAuth2Error(USERNAME_PASSWD_INVALID.getSubCode().toString()), USERNAME_PASSWD_INVALID.getMessage()

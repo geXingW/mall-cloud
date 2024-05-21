@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;
@@ -41,6 +42,8 @@ public abstract class AbstractOAuth2AuthenticationProvider implements Authentica
 
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(AbstractOAuth2AuthenticationProvider.class);
+
+    private volatile PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication clientAuthentication) throws AuthenticationException {
@@ -106,6 +109,18 @@ public abstract class AbstractOAuth2AuthenticationProvider implements Authentica
         AuthInfo.Client client = new AuthInfo.Client(clientId, registeredClient.getClientId(), new HashSet<>());
 
         return new AuthInfo(user, client);
+    }
+
+    public Boolean passwordVerify(String rawPassword, String encodePassword) {
+        if (passwordEncoder == null) {
+            synchronized (this) {
+                if (passwordEncoder == null) {
+                    passwordEncoder = SpringUtil.getBean(PasswordEncoder.class);
+                }
+            }
+        }
+
+        return passwordEncoder.matches(rawPassword, encodePassword);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.gexingw.mall.common.spring.command.CommandHandler;
 import com.gexingw.mall.common.spring.command.ICommandExecutor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * mall-cloud
@@ -20,11 +21,14 @@ public class AuthUserAddCmdExecutor implements ICommandExecutor {
 
     private final AuthUserRepository authUserRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public Long handleWithResult(ICommand command) {
         AuthUserAddCmd cmd = (AuthUserAddCmd) command;
 
-        AuthUser authUser = new AuthUser(cmd.getPhone(), cmd.getPassword(), cmd.getUserType());
+        String encryptPasswd = passwordEncoder.encode(cmd.getPassword());
+        AuthUser authUser = new AuthUser(cmd.getPhone(), encryptPasswd, cmd.getUserType());
         authUserRepository.save(authUser);
 
         return authUser.getId();

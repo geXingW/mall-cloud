@@ -1,6 +1,7 @@
 package com.gexingw.mall.auth.infrastructure.po;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,8 @@ import java.time.LocalDateTime;
 public class RegisteredClientPO {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "snowflake-id-generator")
+    @GenericGenerator(name = "snowflake-id-generator", strategy = "com.gexingw.mall.auth.infrastructure.SnowflakeIdGenerator")
     private Long id;
 
     private String clientName;

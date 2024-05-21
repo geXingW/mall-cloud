@@ -2,6 +2,9 @@ package com.gexingw.mall.auth.infrastructure.po;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,12 +20,15 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Accessors(chain = true)
 @Table(name = "auth_user")
 public class AuthUserPO {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "snowflake-id-generator")
+    @GenericGenerator(name = "snowflake-id-generator", strategy = "com.gexingw.mall.auth.infrastructure.SnowflakeIdGenerator")
     private Long id;
 
     /**
@@ -38,7 +44,7 @@ public class AuthUserPO {
     /**
      * 邮箱
      */
-    private String email;
+    private String email = "";
 
     /**
      * 用户名
