@@ -23,6 +23,7 @@
         <module>mall-auth</module>
         <module>mall-gateway</module>
         <module>mall-product</module>
+        <module>mall-account</module>
     </modules>
 
     <properties>
@@ -40,7 +41,8 @@
         <mysql-connector-j.version>8.1.0</mysql-connector-j.version>
 
         <fastjson2.version>2.0.36</fastjson2.version>
-        <apache-common.version>3.12.0</apache-common.version>
+        <apache-common-lang.version>3.12.0</apache-common-lang.version>
+        <apache-common-beantuil.version>1.9.4</apache-common-beantuil.version>
         <hutool.version>5.8.18</hutool.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
 
@@ -133,7 +135,14 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>${apache-common.version}</version>
+                <version>${apache-common-lang.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${apache-common-beantuil.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->

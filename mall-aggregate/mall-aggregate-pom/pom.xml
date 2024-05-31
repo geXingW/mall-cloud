@@ -190,6 +190,33 @@
                 <version>${revision}</version>
             </dependency>
 
+
+            <!-- Account Service -->
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-account-adapter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-account-application</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-account-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gexingw</groupId>
+                <artifactId>mall-account-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>

@@ -10,4 +10,4 @@ clientSecret：sv34uc070c8ip44ti6sq7fucrr697u
 - mall-order：8002
 - mall-user: 8003
 - mall-product：8004
-- mall-seata：8005
+- mall-account：8005

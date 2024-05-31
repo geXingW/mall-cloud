@@ -17,11 +17,19 @@
 
     <dependencies>
 
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>com.gexingw</groupId>
             <artifactId>mall-common-core</artifactId>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-common-spring</artifactId>
+        </dependency>
+
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -36,6 +44,12 @@
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
             <artifactId>fastjson2-extension-spring5</artifactId>
+        </dependency>
+
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
         </dependency>
 
     </dependencies>
