@@ -8,6 +8,7 @@ import org.mapstruct.MapperConfig;
  * @author GeXingW
  * @date 2024/7/14 12:50
  */
+@SuppressWarnings("DefaultAnnotationParam")
 @MapperConfig(
         uses = {
                 NicknameMapping.class

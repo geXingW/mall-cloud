@@ -32,10 +32,6 @@ public class User implements AggregationRoot<Long> {
         this(null, authUserId, phone, new Nickname());
     }
 
-    public User(Long id, Long authUserId, String phone) {
-        this(id, authUserId, phone, new Nickname());
-    }
-
     @Default
     public User(Long id, Long authUserId, String phone, Nickname nickname) {
         this.id = id;

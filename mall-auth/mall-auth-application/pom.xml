@@ -24,6 +24,11 @@
             <artifactId>mall-auth-infrastructure</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-auth-client</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

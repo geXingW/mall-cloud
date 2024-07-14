@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author GeXingW
  * @date 2024/7/14 12:56
  */
+@SuppressWarnings("unused")
 public class NicknameMapping {
 
     public String map(Nickname nickname) {

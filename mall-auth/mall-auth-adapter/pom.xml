@@ -19,12 +19,6 @@
 
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!--suppress VulnerableLibrariesLocal -->
-        <dependency>
             <groupId>com.gexingw</groupId>
             <artifactId>mall-auth-application</artifactId>
         </dependency>
@@ -32,6 +26,17 @@
         <dependency>
             <groupId>com.gexingw</groupId>
             <artifactId>mall-common-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
     </dependencies>

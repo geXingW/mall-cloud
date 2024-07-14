@@ -1,5 +1,6 @@
 package com.gexingw.mall.common.core.support;
 
+import com.gexingw.mall.common.core.domain.AggregationManager;
 import com.gexingw.mall.common.core.domain.AggregationRoot;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,6 +14,9 @@ import java.io.Serializable;
  * @date 2024/5/10 13:07
  */
 public interface Repository<T extends AggregationRoot<ID>, ID extends Serializable> {
+
+    @NotNull
+    AggregationManager<T, ID> getAggregationManager();
 
     /**
      * 查找聚合

@@ -1,5 +1,6 @@
 package com.gexingw.mall.auth.application.command.client;
 
+import com.gexingw.mall.auth.client.support.SupportGrantType;
 import com.gexingw.mall.common.core.support.ICommand;
 import lombok.Data;
 
@@ -19,5 +20,7 @@ public class RegisteredClientAddCmd implements ICommand {
     private Integer type;
 
     private Set<String> scopes;
+
+    private Set<SupportGrantType> grantTypes;
 
 }

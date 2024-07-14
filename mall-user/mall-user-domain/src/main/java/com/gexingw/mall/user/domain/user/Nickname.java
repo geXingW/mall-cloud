@@ -11,9 +11,9 @@ import java.util.UUID;
  * @author GeXingW
  * @date 2024/7/12 22:28
  */
+@Getter
 public class Nickname implements ValueObject<String> {
 
-    @Getter
     private final String value;
 
     public Nickname() {

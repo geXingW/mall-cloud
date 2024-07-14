@@ -91,6 +91,7 @@ public abstract class DbRepository<T extends AggregationRoot<ID>, ID extends Ser
     protected abstract Boolean delete(@NotNull T aggregationRoot);
 
     @NotNull
-    protected abstract AggregationManager<T, ID> getAggregationManager();
+    @Override
+    public abstract AggregationManager<T, ID> getAggregationManager();
 
 }

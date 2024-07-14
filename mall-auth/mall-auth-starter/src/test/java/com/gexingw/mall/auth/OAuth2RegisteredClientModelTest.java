@@ -1,53 +1,52 @@
-package com.gexingw.mall.auth.infrastucture;
+package com.gexingw.mall.auth;
 
-import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.RandomUtil;
-import lombok.RequiredArgsConstructor;
+import com.gexingw.mall.auth.starter.MallAuthApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 
+import javax.annotation.Resource;
 import java.time.Duration;
 
 /**
- * mall-cloud
+ * mall-user-service
  *
  * @author GeXingW
- * @date 2024/5/16 13:49
+ * @date 2024/2/17 15:59
  */
-@SpringBootTest
-@RequiredArgsConstructor(onConstructor_ = {@Lazy})
-public class RegisteredClientTest {
+@SpringBootTest(classes = MallAuthApplication.class)
+public class OAuth2RegisteredClientModelTest {
 
-    private final RegisteredClientRepository registeredClientRepository;
+    @Resource
+    private RegisteredClientRepository registeredClientRepository;
 
     @Test
-    public void testGenerateClient() {
-        System.out.println("client info:");
+    public void testSave() {
         String clientId = RandomUtil.randomString(15);
         System.out.println(clientId);
         String clientSecret = RandomUtil.randomString(30);
         System.out.println(clientSecret);
 
-        TokenSettings tokenSettings = TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.REFERENCE).accessTokenTimeToLive(Duration.ofHours(24))
-                .refreshTokenTimeToLive(Duration.ofHours(5)).build();
-
-        RegisteredClient registeredClient = RegisteredClient.withId(LocalDateTimeUtil.format(LocalDateTimeUtil.now(), "yyyyMMddHHmmssSSS"))
+        RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId(clientId)
                 .clientSecret("{bcrypt}" + new BCryptPasswordEncoder().encode(clientSecret))
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .scope("oidc")
-                .tokenSettings(tokenSettings)
-                .redirectUri("www.baidu.com").build();
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .scope("mall")
+                .redirectUri("https://mall-cloud.com")
+                .tokenSettings(TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.REFERENCE).accessTokenTimeToLive(Duration.ofMinutes(10)).build())
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
+                .build();
         registeredClientRepository.save(registeredClient);
     }
 

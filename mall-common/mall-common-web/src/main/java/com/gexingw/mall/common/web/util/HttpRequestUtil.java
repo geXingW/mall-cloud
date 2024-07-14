@@ -24,6 +24,7 @@ import java.util.Map;
  * @date 2024/5/21 14:39
  */
 @Slf4j
+@SuppressWarnings("unused")
 public class HttpRequestUtil {
 
     private static volatile RestTemplate restTemplate;

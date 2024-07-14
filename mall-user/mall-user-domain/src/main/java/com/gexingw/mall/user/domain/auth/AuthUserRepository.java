@@ -12,6 +12,4 @@ public interface AuthUserRepository {
 
     AuthToken login(String phone, String password);
 
-    AuthUser findByPhone(String phone);
-
 }

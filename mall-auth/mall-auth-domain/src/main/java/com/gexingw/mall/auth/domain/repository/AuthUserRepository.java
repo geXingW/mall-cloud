@@ -11,4 +11,6 @@ import com.gexingw.mall.common.core.support.Repository;
  */
 public interface AuthUserRepository extends Repository<AuthUser, Long> {
 
+    AuthUser findByUsername(String username);
+
 }

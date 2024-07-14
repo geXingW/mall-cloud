@@ -49,7 +49,7 @@ public abstract class AbstractOAuth2AuthenticationProvider implements Authentica
     public Authentication authenticate(Authentication clientAuthentication) throws AuthenticationException {
         OAuth2ClientAuthenticationToken clientPrincipal = (OAuth2ClientAuthenticationToken) clientAuthentication.getPrincipal();
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
-        Assert.notNull(registeredClient, "RegisteredClient should not be null!");
+        Assert.notNull(registeredClient, "RegisteredClientModel should not be null!");
 
         Long registeredClientId = Long.valueOf(registeredClient.getId());
         RegisteredClientPO registeredClientPO = SpringUtil.getBean(RegisteredClientDAO.class).findById(registeredClientId).orElse(null);

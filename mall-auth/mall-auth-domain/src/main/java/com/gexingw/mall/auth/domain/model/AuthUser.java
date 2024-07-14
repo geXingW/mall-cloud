@@ -32,15 +32,19 @@ public class AuthUser implements AggregationRoot<Long> {
 
     private LocalDateTime passwdResetTime;
 
-    public AuthUser(String phone, String password, Integer userType) {
-        this(phone, phone, phone, password, userType);
+    public AuthUser(String phone, String encodePassword) {
+        this(phone, phone, phone, encodePassword, 0);
     }
 
-    public AuthUser(String name, String username, String phone, String password, Integer userType) {
+    public AuthUser(String phone, String encodePassword, Integer userType) {
+        this(phone, phone, phone, encodePassword, userType);
+    }
+
+    public AuthUser(String name, String username, String phone, String encodePassword, Integer userType) {
         this.name = name;
         this.username = username;
         this.phone = phone;
-        this.password = password;
+        this.password = encodePassword;
         this.userType = userType;
     }
 

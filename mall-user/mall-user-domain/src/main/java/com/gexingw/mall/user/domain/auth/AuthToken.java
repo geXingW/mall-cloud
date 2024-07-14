@@ -23,10 +23,6 @@ public class AuthToken implements Serializable {
 
     private final Long expiresIn;
 
-    public AuthToken(String accessToken, String tokenType, String scope, Long expiresIn) {
-        this(accessToken, null, tokenType, scope, expiresIn);
-    }
-
     public AuthToken(String accessToken, String refreshToken, String tokenType, String scope, Long expiresIn) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;

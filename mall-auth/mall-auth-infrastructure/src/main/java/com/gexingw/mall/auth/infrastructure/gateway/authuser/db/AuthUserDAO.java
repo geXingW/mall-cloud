@@ -15,4 +15,6 @@ public interface AuthUserDAO extends JpaRepository<AuthUserPO, Long> {
 
     AuthUserPO findByUsername(String username);
 
+    AuthUserPO getByPhone(String phone);
+
 }

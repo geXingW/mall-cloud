@@ -1,6 +1,7 @@
 package com.gexingw.mall.auth.adapter.web;
 
 import com.gexingw.mall.auth.application.command.user.AuthUserAddCmd;
+import com.gexingw.mall.auth.application.service.AuthUserCommandService;
 import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.spring.command.CommandBus;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 public class AuthUserAdapter {
 
     private final CommandBus commandBus;
+
+    private final AuthUserCommandService authUserCommandService;
 
     @GetMapping
     public R<Object> index() {
