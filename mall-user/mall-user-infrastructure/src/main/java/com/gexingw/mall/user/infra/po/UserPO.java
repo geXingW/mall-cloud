@@ -1,4 +1,4 @@
-package com.gexingw.mall.user.infra.dataobject;
+package com.gexingw.mall.user.infra.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gexingw.mall.common.db.support.BasePO;
@@ -16,6 +16,10 @@ import java.io.Serializable;
 @TableName("user")
 public class UserPO extends BasePO implements Serializable {
 
-    private String name;
+    private Long authUserId;
+
+    private String nickname;
+
+    private String phone;
 
 }

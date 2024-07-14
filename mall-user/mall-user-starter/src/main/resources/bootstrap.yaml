@@ -10,8 +10,8 @@ spring:
       path: "/user"
 
   cloud:
-    #    inetutils:
-    #      preferred-networks: "192.168.10"
+    inetutils:
+      preferred-networks: "192.168.10"
 
     nacos:
       server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}

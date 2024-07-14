@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <coommons-lang3.version>3.12.0</coommons-lang3.version>
         <oauth2-server.version>0.4.5</oauth2-server.version>
         <javers-core.version>6.14.0</javers-core.version>

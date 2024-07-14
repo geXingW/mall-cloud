@@ -22,7 +22,8 @@
                     "lastY",
                     "PO",
                     "CO",
-                    "DTO"
+                    "DTO",
+                    "RPC"
                 ]
             },
             "ClassNamingShouldBeCamelRule": {

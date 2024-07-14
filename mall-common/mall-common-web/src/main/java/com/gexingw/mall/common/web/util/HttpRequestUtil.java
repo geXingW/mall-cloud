@@ -44,7 +44,7 @@ public class HttpRequestUtil {
         return execute(url, HttpMethod.POST, httpEntity, null, responseType);
     }
 
-    public static <T> T postJson(String url, Map<String, Object> bodyParams, Class<T> responseType) {
+    public static <T> T postJson(String url, Object bodyParams, Class<T> responseType) {
         return execute(url, HttpMethod.POST, buildJsonHttpEntity(bodyParams), null, responseType);
     }
 
@@ -109,7 +109,7 @@ public class HttpRequestUtil {
         return restTemplate;
     }
 
-    private static HttpEntity<Map<String, Object>> buildJsonHttpEntity(Map<String, Object> bodyParams) {
+    private static HttpEntity<Object> buildJsonHttpEntity(Object bodyParams) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 

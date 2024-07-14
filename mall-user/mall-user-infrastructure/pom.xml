@@ -23,16 +23,34 @@
             <artifactId>mall-user-domain</artifactId>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>com.gexingw</groupId>
             <artifactId>mall-common-core</artifactId>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>com.gexingw</groupId>
             <artifactId>mall-common-db</artifactId>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-common-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gexingw</groupId>
+            <artifactId>mall-auth-client</artifactId>
+        </dependency>
+
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
 
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
