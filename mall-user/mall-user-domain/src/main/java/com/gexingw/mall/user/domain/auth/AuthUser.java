@@ -2,6 +2,7 @@ package com.gexingw.mall.user.domain.auth;
 
 import com.gexingw.mall.common.core.annotation.ValueObject;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -16,6 +17,9 @@ import java.io.Serializable;
 public class AuthUser implements Serializable {
 
     private Long id;
+
+    @Setter
+    private Long authUserId;
 
     private final String name;
 

@@ -2,12 +2,12 @@ package com.gexingw.mall.user.app.service.impl;
 
 import com.gexingw.mall.user.app.assembler.MallAuthAssembler;
 import com.gexingw.mall.user.app.command.auth.AppAuthLoginCommand;
+import com.gexingw.mall.user.app.command.auth.WebMallAuthLoginCommand;
 import com.gexingw.mall.user.app.service.AuthCommandService;
 import com.gexingw.mall.user.app.vo.mall.AppAuthLoginVO;
+import com.gexingw.mall.user.app.vo.web.mall.auth.WebMallAuthLoginVO;
 import com.gexingw.mall.user.domain.auth.AuthToken;
-import com.gexingw.mall.user.domain.auth.AuthUserRepository;
 import com.gexingw.mall.user.domain.user.UserDomainService;
-import com.gexingw.mall.user.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.context.annotation.Lazy;
@@ -26,11 +26,6 @@ public class AuthCommandServiceImpl implements AuthCommandService {
 
     private final MallAuthAssembler mallAuthAssembler;
 
-    private final AuthUserRepository authUserRepository;
-    private final UserRepository userRepository;
-
-    private final AuthCommandService authCommandService;
-
     private final UserDomainService userDomainService;
 
     @Override
@@ -43,6 +38,13 @@ public class AuthCommandServiceImpl implements AuthCommandService {
     @Override
     public void logout(AppAuthLoginCommand loginCmd) {
 
+    }
+
+    @Override
+    public WebMallAuthLoginVO login(WebMallAuthLoginCommand loginCommand) {
+        AuthToken authToken = userDomainService.login(loginCommand.getPhone(), loginCommand.getPassword());
+
+        return mallAuthAssembler.toWebVO(authToken);
     }
 
 }

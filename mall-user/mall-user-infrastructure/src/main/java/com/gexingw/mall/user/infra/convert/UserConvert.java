@@ -2,7 +2,7 @@ package com.gexingw.mall.user.infra.convert;
 
 import com.gexingw.mall.user.domain.user.User;
 import com.gexingw.mall.user.infra.config.MapStructConfig;
-import com.gexingw.mall.user.infra.po.UserPO;
+import com.gexingw.mall.user.infra.dao.user.po.UserPO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

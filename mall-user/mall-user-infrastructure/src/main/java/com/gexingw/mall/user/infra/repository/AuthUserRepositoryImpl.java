@@ -2,16 +2,13 @@ package com.gexingw.mall.user.infra.repository;
 
 import com.gexingw.mall.auth.client.co.TokenInfoCO;
 import com.gexingw.mall.auth.client.command.PasswordLoginCommand;
-import com.gexingw.mall.auth.client.command.user.UserRegisterCommand;
-import com.gexingw.mall.auth.client.rpc.AuthUserRPCClient;
-import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.web.util.HttpRequestUtil;
 import com.gexingw.mall.user.domain.auth.AuthToken;
 import com.gexingw.mall.user.domain.auth.AuthUser;
 import com.gexingw.mall.user.domain.auth.AuthUserRepository;
 import com.gexingw.mall.user.infra.config.AuthClientConfig;
+import com.gexingw.mall.user.infra.rpc.auth.AuthUserRPCClient;
 import lombok.RequiredArgsConstructor;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
@@ -27,17 +24,12 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
 
     private final AuthClientConfig authClientConfig;
 
-    @DubboReference
-    private AuthUserRPCClient authUserRPCClient;
+    private final AuthUserRPCClient authUserRPCClient;
 
     @Override
     public Long register(AuthUser authUser) {
-        R<Long> registerResult = authUserRPCClient.register(new UserRegisterCommand(authUser.getPhone(), authUser.getPassword(), authUser.getPhone()));
-        if (!registerResult.isSuccess()) {
-            throw new RuntimeException("注册失败！");
-        }
-
-        return registerResult.getData();
+        // 向认证中心注册用户信息
+        return authUserRPCClient.registerUser(authUser.getPhone(), authUser.getPassword());
     }
 
     @Override

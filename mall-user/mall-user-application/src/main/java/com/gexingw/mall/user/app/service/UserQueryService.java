@@ -10,7 +10,7 @@ import com.gexingw.mall.user.app.vo.user.WebUserVO;
  * @author GeXingW
  * @date 2024/1/23 22:04
  */
-public interface UserServiceI {
+public interface UserQueryService {
 
     AppUserVO getAppUserById(Long id);
 

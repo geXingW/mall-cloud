@@ -1,6 +1,6 @@
 package com.gexingw.mall.user.adapter.app;
 
-import com.gexingw.mall.user.app.service.UserServiceI;
+import com.gexingw.mall.user.app.service.UserQueryService;
 import com.gexingw.mall.user.app.vo.user.AppUserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class AppUserAdapter {
 
-    private final UserServiceI userServiceI;
+    private final UserQueryService userQueryService;
 
     @GetMapping("/{id}")
     public AppUserVO index(@PathVariable Long id) {
-        return userServiceI.getAppUserById(id);
+        return userQueryService.getAppUserById(id);
     }
 
 }
