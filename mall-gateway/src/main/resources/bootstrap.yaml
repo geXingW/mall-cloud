@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8100
 
 
 spring:
@@ -12,16 +12,7 @@ spring:
 
   cloud:
     inetutils:
-      preferred-networks: "192.168.100"
-
-    gateway:
-      routes:
-        - id: mall-product
-          uri: lb://mall-cloud-product
-          predicates:
-            - Path=/api/product/**
-          filters:
-            - RewritePath=/api/?(?<segment>.*), /$\{segment}
+      preferred-networks: "192.168.10"
 
     nacos:
       server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}

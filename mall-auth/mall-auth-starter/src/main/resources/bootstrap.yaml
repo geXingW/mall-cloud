@@ -1,13 +1,9 @@
 server:
-  port: 8001
+  port: 8101
 
 spring:
   application:
     name: mall-cloud-auth
-
-  mvc:
-    servlet:
-      path: "/auth"
 
   cloud:
     inetutils:
