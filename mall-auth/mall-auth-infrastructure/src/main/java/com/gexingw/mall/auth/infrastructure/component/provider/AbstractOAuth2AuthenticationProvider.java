@@ -4,7 +4,7 @@ import com.gexingw.mall.auth.infrastructure.gateway.regsteredclient.db.Registere
 import com.gexingw.mall.auth.infrastructure.po.AuthUserPO;
 import com.gexingw.mall.auth.infrastructure.po.RegisteredClientPO;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
-import com.gexingw.mall.common.core.domain.AuthInfo;
+import com.gexingw.mall.common.security.support.AuthInfo;
 import com.gexingw.mall.common.spring.util.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

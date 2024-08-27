@@ -26,15 +26,13 @@ public class AuthenticationConfiguration {
     private final List<String> skipTokenUrl = new ArrayList<>();
 
     public boolean shouldSkipToken(String path) {
-        return true;
-//
-//        for (String url : skipTokenUrl) {
-//            if (ANT_PATH_MATCHER.match(url, path)) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
+        for (String url : skipTokenUrl) {
+            if (ANT_PATH_MATCHER.match(url, path)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

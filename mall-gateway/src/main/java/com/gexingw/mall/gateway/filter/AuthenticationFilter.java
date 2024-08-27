@@ -2,9 +2,9 @@ package com.gexingw.mall.gateway.filter;
 
 import cn.hutool.core.codec.Base64;
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.nacos.common.utils.JacksonUtils;
 import com.gexingw.mall.common.core.constant.AuthConstant;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
-import com.gexingw.mall.common.core.domain.AuthInfo;
 import com.gexingw.mall.common.core.enums.AuthRespCode;
 import com.gexingw.mall.common.core.interfaces.IRespCode;
 import com.gexingw.mall.common.core.util.R;
@@ -55,13 +55,13 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             return this.handlerResponse(AuthRespCode.TOKEN_EXPIRED, exchange.getResponse());
         }
 
-        AuthInfo authInfo = RedisUtil.get(String.format(OAuth2Constant.ACCESS_TOKEN_AUTH_INFO_CACHE_NAME, accessToken));
+        Object authInfo = RedisUtil.get(String.format(OAuth2Constant.ACCESS_TOKEN_AUTH_INFO_CACHE_NAME, accessToken));
         if (authInfo == null) {
             return this.handlerResponse(AuthRespCode.TOKEN_EXPIRED, exchange.getResponse());
         }
 
         // 通过Header进行用户信息的透传
-        request.mutate().header(AuthConstant.HEADER_AUTH_INFO, Base64.encode(JSON.toJSONString(authInfo)));
+        request.mutate().header(AuthConstant.HEADER_AUTH_INFO, Base64.encode(JacksonUtils.toJson(authInfo)));
 
         return chain.filter(exchange);
     }

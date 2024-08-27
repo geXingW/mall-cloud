@@ -2,8 +2,8 @@ package com.gexingw.mall.auth.infrastructure.component;
 
 import cn.hutool.core.lang.Assert;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
-import com.gexingw.mall.common.core.domain.AuthInfo;
 import com.gexingw.mall.common.core.enums.AuthRespCode;
+import com.gexingw.mall.common.security.support.AuthInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;

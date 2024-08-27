@@ -5,7 +5,7 @@ import com.gexingw.mall.user.app.command.auth.AppAuthLoginCommand;
 import com.gexingw.mall.user.app.command.auth.WebMallAuthLoginCommand;
 import com.gexingw.mall.user.app.service.AuthCommandService;
 import com.gexingw.mall.user.app.vo.mall.AppAuthLoginVO;
-import com.gexingw.mall.user.app.vo.web.mall.auth.WebMallAuthLoginVO;
+import com.gexingw.mall.user.app.vo.web.mall.auth.WebMallAuthTokenVO;
 import com.gexingw.mall.user.domain.auth.AuthToken;
 import com.gexingw.mall.user.domain.user.UserDomainService;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +41,7 @@ public class AuthCommandServiceImpl implements AuthCommandService {
     }
 
     @Override
-    public WebMallAuthLoginVO login(WebMallAuthLoginCommand loginCommand) {
+    public WebMallAuthTokenVO login(WebMallAuthLoginCommand loginCommand) {
         AuthToken authToken = userDomainService.login(loginCommand.getPhone(), loginCommand.getPassword());
 
         return mallAuthAssembler.toWebVO(authToken);

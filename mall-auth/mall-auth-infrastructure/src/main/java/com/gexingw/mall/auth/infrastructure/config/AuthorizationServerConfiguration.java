@@ -1,5 +1,6 @@
 package com.gexingw.mall.auth.infrastructure.config;
 
+import com.gexingw.mall.auth.infrastructure.component.RedisOAuth2AuthorizationService;
 import com.gexingw.mall.auth.infrastructure.component.convert.OAuth2PasswordAuthenticationConvert;
 import com.gexingw.mall.auth.infrastructure.component.filter.ServletRequestJsonParamsWrapperFilter;
 import com.gexingw.mall.auth.infrastructure.component.provider.OAuth2PasswordAuthenticationProvider;
@@ -12,13 +13,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.OAuth2Token;
-import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.token.DelegatingOAuth2TokenGenerator;
@@ -90,9 +90,14 @@ public class AuthorizationServerConfiguration {
         return AuthorizationServerSettings.builder().build();
     }
 
+//    @Bean
+//    public OAuth2AuthorizationService oAuth2AuthorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
+//        return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
+//    }
+
     @Bean
-    public OAuth2AuthorizationService oAuth2AuthorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
-        return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
+    public OAuth2AuthorizationService oAuth2AuthorizationService(RedisTemplate<Object, Object> restTemplate, RedisSerializer<Object> redisSerializer) {
+        return new RedisOAuth2AuthorizationService(restTemplate, redisSerializer);
     }
 
 }

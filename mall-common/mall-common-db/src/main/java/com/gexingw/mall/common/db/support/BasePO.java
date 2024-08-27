@@ -42,7 +42,7 @@ public class BasePO implements Serializable {
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = DateTimeConstant.STANDARD_DATE_TIME_FORMAT)
+    @JsonFormat(pattern = DateTimeConstant.STD_DATE_TIME_FORMAT)
     private LocalDateTime createTime;
 
     /**
@@ -56,7 +56,7 @@ public class BasePO implements Serializable {
      * 更新时间
      */
     @TableField(fill = FieldFill.UPDATE)
-    @JsonFormat(pattern = DateTimeConstant.STANDARD_DATE_TIME_FORMAT)
+    @JsonFormat(pattern = DateTimeConstant.STD_DATE_TIME_FORMAT)
     private LocalDateTime updateTime;
 
 

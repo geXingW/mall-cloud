@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @date 2024/8/26 14:13
  */
 @Data
-public class WebMallAuthLoginVO implements Serializable {
+public class WebMallAuthTokenVO implements Serializable {
 
     private String accessToken;
 

@@ -8,6 +8,6 @@ package com.gexingw.mall.common.core.constant;
  */
 public interface DateTimeConstant {
 
-    String STANDARD_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    String STD_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 }

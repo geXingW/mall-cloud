@@ -49,7 +49,8 @@ public class AuthUserRPCClient {
         authLoginCommand.withClient(authClientConfig.getMall().getClientId(), authClientConfig.getMall().getClientSecret());
         authLoginCommand.withCredential(phone, password);
 
-        TokenInfoCO tokenInfoCO = HttpRequestUtil.postJson("http://localhost:8001/oauth2/token", authLoginCommand, TokenInfoCO.class);
+        // 根据服务名进行调用认证服务
+        TokenInfoCO tokenInfoCO = HttpRequestUtil.postJson("http://mall-cloud-auth/oauth2/token", authLoginCommand, TokenInfoCO.class);
         if (tokenInfoCO == null) {
             throw new RuntimeException("登录失败！");
         }

@@ -31,30 +31,14 @@ public class PasswordLoginCommand implements Serializable {
     @JsonProperty("password")
     private String password = "";
 
-    public PasswordLoginCommand(String clientId, String clientSecret) {
+    public void withClient(String clientId, String clientSecret) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
     }
 
-    public PasswordLoginCommand(String clientId, String clientSecret, String username, String password) {
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
+    public void withCredential(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public PasswordLoginCommand withClient(String clientId, String clientSecret) {
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-
-        return this;
-    }
-
-    public PasswordLoginCommand withCredential(String username, String password) {
-        this.username = username;
-        this.password = password;
-
-        return this;
     }
 
 }

@@ -43,6 +43,11 @@
 
         <dependency>
             <groupId>com.gexingw</groupId>
+            <artifactId>mall-common-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gexingw</groupId>
             <artifactId>mall-auth-client</artifactId>
         </dependency>
 

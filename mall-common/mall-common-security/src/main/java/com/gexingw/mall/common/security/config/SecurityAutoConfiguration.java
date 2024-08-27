@@ -6,9 +6,9 @@ import com.gexingw.mall.common.security.handler.AccessDeniedHandler;
 import com.gexingw.mall.common.security.handler.AuthenticationEntryPointHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,9 +30,9 @@ import java.util.Map;
  * @author GeXingW
  * @date 2024/2/17 9:05
  */
-@Configuration
+@AutoConfiguration
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
-public class SecurityConfiguration {
+public class SecurityAutoConfiguration {
 
     private final AuthenticationFilter authenticationFilter;
     private final AuthenticationEntryPoint authenticationEntryPoint;
@@ -72,6 +72,12 @@ public class SecurityConfiguration {
     @ConditionalOnMissingBean
     public AuthenticationEntryPoint authenticationEntryPoint() {
         return new AuthenticationEntryPointHandler();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public AuthenticationFilter authenticationFilter() {
+        return new AuthenticationFilter();
     }
 
 }

@@ -1,9 +1,11 @@
-package com.gexingw.mall.common.core.domain;
+package com.gexingw.mall.common.security.support;
 
+import com.gexingw.mall.common.core.domain.Entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -15,11 +17,12 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class AuthInfo implements AggregationRoot {
+public class AuthInfo implements Serializable {
 
     private Long id;
 
     private User authUser;
+
     private Client client;
 
     /**
@@ -67,6 +70,10 @@ public class AuthInfo implements AggregationRoot {
         this.id = authUser.getId();
         this.authUser = authUser;
         this.client = client;
+    }
+
+    public String getAuthUserName() {
+        return this.authUser.getUsername();
     }
 
 }
