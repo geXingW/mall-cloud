@@ -1,15 +1,15 @@
-package com.gexingw.mall.auth.client.rpc;
+package com.gexingw.mall.auth.client.dubbo;
 
 import com.gexingw.mall.auth.client.command.user.UserRegisterCommand;
 import com.gexingw.mall.common.core.util.R;
 
 /**
- * mall-user-service
+ * mall-cloud
  *
  * @author GeXingW
- * @date 2024/2/16 17:00
+ * @date 2024/8/27 15:10
  */
-public interface AuthUserRPCClient {
+public interface AuthUserDubboService {
 
     R<Long> register(UserRegisterCommand registerCommand);
 

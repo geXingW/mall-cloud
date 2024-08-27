@@ -19,4 +19,6 @@ public interface AuthCommandService {
 
     WebMallAuthTokenVO login(WebMallAuthLoginCommand loginCommand);
 
+    void logout(String authorization);
+
 }

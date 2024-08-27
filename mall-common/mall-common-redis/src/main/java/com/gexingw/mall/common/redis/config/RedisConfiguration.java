@@ -30,28 +30,41 @@ public class RedisConfiguration {
      * @return StringRedisSerializer
      */
     @Bean("keySerializer")
-    public RedisSerializer<String> keySerializer(){
+    public RedisSerializer<String> keySerializer() {
         return new StringRedisSerializer();
     }
 
     /**
      * Value序列化
+     *
      * @return GenericFastJsonRedisSerializer
      */
     @Bean("valueSerializer")
-    public RedisSerializer<Object> valueSerializer(){
+    public RedisSerializer<Object> valueSerializer() {
         return new GenericFastJsonRedisSerializer();
     }
 
     @Bean
     @Primary
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(connectionFactory);
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
         redisTemplate.setKeySerializer(keySerializer);
         redisTemplate.setValueSerializer(valueSerializer);
         redisTemplate.setHashKeySerializer(keySerializer);
         redisTemplate.setHashValueSerializer(valueSerializer);
+
+        return redisTemplate;
+    }
+
+    @Bean("javaSerializerRedisTemplate")
+    public RedisTemplate<String, Object> javaSerializerRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        redisTemplate.setKeySerializer(keySerializer);
+        redisTemplate.setValueSerializer(RedisSerializer.java());
+        redisTemplate.setHashKeySerializer(keySerializer);
+        redisTemplate.setHashValueSerializer(RedisSerializer.java());
 
         return redisTemplate;
     }

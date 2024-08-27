@@ -3,6 +3,8 @@ package com.gexingw.mall.user.infra.rpc.auth;
 import com.gexingw.mall.auth.client.co.TokenInfoCO;
 import com.gexingw.mall.auth.client.command.PasswordLoginCommand;
 import com.gexingw.mall.auth.client.command.user.UserRegisterCommand;
+import com.gexingw.mall.auth.client.dubbo.AuthDubboService;
+import com.gexingw.mall.auth.client.dubbo.AuthUserDubboService;
 import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.web.util.HttpRequestUtil;
 import com.gexingw.mall.user.domain.auth.AuthToken;
@@ -25,7 +27,9 @@ public class AuthUserRPCClient {
     private final AuthClientConfig authClientConfig;
 
     @DubboReference
-    private com.gexingw.mall.auth.client.rpc.AuthUserRPCClient authUserRPCClient;
+    private AuthUserDubboService authUserDubboService;
+    @DubboReference
+    private AuthDubboService authDubboService;
 
     /**
      * 注册用户
@@ -35,7 +39,7 @@ public class AuthUserRPCClient {
      * @return 新用户Id
      */
     public Long registerUser(String phone, String password) {
-        R<Long> registerResult = authUserRPCClient.register(new UserRegisterCommand(phone, password, phone));
+        R<Long> registerResult = authUserDubboService.register(new UserRegisterCommand(phone, password, phone));
         if (!registerResult.isSuccess()) {
             throw new RuntimeException("注册失败！");
         }
@@ -59,6 +63,15 @@ public class AuthUserRPCClient {
                 tokenInfoCO.getAccessToken(), tokenInfoCO.getRefreshToken(), tokenInfoCO.getTokenType(), tokenInfoCO.getScope()
                 , tokenInfoCO.getExpiresIn()
         );
+    }
+
+    /**
+     * 根据AccessToken退出登录
+     *
+     * @param accessToken Token
+     */
+    public void logout(String accessToken) {
+        authDubboService.logout(accessToken);
     }
 
 }

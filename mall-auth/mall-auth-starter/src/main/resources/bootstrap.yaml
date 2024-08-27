@@ -5,6 +5,10 @@ spring:
   application:
     name: mall-cloud-auth
 
+  mvc:
+    servlet:
+      path: "/auth"
+
   cloud:
     inetutils:
       preferred-networks: "192.168.10"

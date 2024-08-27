@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/web/user/auth")
+@RequestMapping("/web/mall/auth")
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
-public class WebUserAuthAdapter {
+public class WebMallAuthAdapter {
 
     private final AuthQueryService authQueryService;
     private final AuthCommandService authCommandService;
@@ -37,7 +37,8 @@ public class WebUserAuthAdapter {
     }
 
     @PostMapping("logout")
-    public R<Object> logout() {
+    public R<Object> logout(@RequestHeader(value = "Authorization", required = false) String accessToken) {
+        authCommandService.logout(accessToken);
         return R.ok();
     }
 

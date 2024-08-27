@@ -1,5 +1,7 @@
 package com.gexingw.mall.common.security.support;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.gexingw.mall.common.core.domain.Entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,12 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = AuthInfo.class, name = "AuthInfo"),
+        @JsonSubTypes.Type(value = AuthInfo.User.class, name = "User"),
+        @JsonSubTypes.Type(value = AuthInfo.Client.class, name = "Client")
+})
 public class AuthInfo implements Serializable {
 
     private Long id;

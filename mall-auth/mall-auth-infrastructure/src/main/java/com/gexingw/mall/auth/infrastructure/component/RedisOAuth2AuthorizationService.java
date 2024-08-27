@@ -125,7 +125,7 @@ public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationServi
 
         TokenSettings tokenSettings = authorization.getAttribute(OAuth2Constant.TOKEN_SETTINGS);
         OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken = authorization.getRefreshToken();
-        if (refreshToken != null && tokenSettings != null && !tokenSettings.isReuseRefreshTokens()) {
+        if (refreshToken != null && tokenSettings != null) {
             redisTemplate.delete(String.format(OAuth2Constant.REFRESH_TOKEN_CACHE_NAME, refreshToken.getToken().getTokenValue()));
         }
 

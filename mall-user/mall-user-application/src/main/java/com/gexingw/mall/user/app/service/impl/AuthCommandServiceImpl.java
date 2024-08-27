@@ -47,4 +47,9 @@ public class AuthCommandServiceImpl implements AuthCommandService {
         return mallAuthAssembler.toWebVO(authToken);
     }
 
+    @Override
+    public void logout(String accessToken) {
+        userDomainService.logout(accessToken);
+    }
+
 }

@@ -34,4 +34,9 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
         return authUserRPCClient.loginUser(phone, password);
     }
 
+    @Override
+    public void logout(String accessToken) {
+        authUserRPCClient.logout(accessToken);
+    }
+
 }

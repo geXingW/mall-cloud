@@ -1,11 +1,15 @@
 package com.gexingw.mall.common.security.support;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 /**
  * mall-cloud
@@ -14,6 +18,10 @@ import java.util.Collection;
  * @date 2024/8/26 18:24
  */
 @NoArgsConstructor
+@JsonTypeInfo(use = Id.CLASS, property = "@class")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Authentication.class, name = "Authentication")
+})
 public class Authentication implements org.springframework.security.core.Authentication {
 
     private boolean authenticated;

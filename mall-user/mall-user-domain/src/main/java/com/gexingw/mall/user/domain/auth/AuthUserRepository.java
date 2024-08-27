@@ -12,4 +12,6 @@ public interface AuthUserRepository {
 
     AuthToken login(String phone, String password);
 
+    void logout(String authorization);
+
 }

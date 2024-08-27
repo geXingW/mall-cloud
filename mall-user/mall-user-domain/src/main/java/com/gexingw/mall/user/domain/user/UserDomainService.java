@@ -4,6 +4,7 @@ import com.gexingw.mall.user.domain.auth.AuthToken;
 import com.gexingw.mall.user.domain.auth.AuthUser;
 import com.gexingw.mall.user.domain.auth.AuthUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,10 @@ public class UserDomainService {
 
         // 获取用户Token信息
         return authUserRepository.login(phone, password);
+    }
+
+    public void logout(@NotNull String accessToken) {
+        authUserRepository.logout(accessToken);
     }
 
 }
