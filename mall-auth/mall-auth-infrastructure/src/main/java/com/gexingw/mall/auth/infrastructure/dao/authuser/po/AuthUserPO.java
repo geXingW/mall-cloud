@@ -1,15 +1,10 @@
-package com.gexingw.mall.auth.infrastructure.po;
+package com.gexingw.mall.auth.infrastructure.dao.authuser.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
@@ -19,17 +14,9 @@ import java.time.LocalDateTime;
  * @date 2024/5/18 17:51
  */
 @Data
-@Entity
-@DynamicInsert
-@DynamicUpdate
 @Accessors(chain = true)
-@Table(name = "auth_user")
-public class AuthUserPO {
-
-    @Id
-    @GeneratedValue(generator = "snowflake-id-generator")
-    @GenericGenerator(name = "snowflake-id-generator", strategy = "com.gexingw.mall.auth.infrastructure.SnowflakeIdGenerator")
-    private Long id;
+@TableName("auth_user")
+public class AuthUserPO extends BasePO {
 
     /**
      * 姓名

@@ -1,5 +1,6 @@
 package com.gexingw.mall.product.infrastructure.repository;
 
+import com.gexingw.mall.common.core.domain.AggregationManager;
 import com.gexingw.mall.product.domain.gateway.ProductGateway;
 import com.gexingw.mall.product.domain.model.Product;
 import com.gexingw.mall.product.domain.repository.ProductRepository;
@@ -19,6 +20,11 @@ import org.springframework.stereotype.Repository;
 public class ProductRepositoryImpl implements ProductRepository {
 
     private final ProductGateway productGateway;
+
+    @Override
+    public @NotNull AggregationManager<Product, Long> getAggregationManager() {
+        return null;
+    }
 
     @Override
     public Product find(@NotNull Long id) {

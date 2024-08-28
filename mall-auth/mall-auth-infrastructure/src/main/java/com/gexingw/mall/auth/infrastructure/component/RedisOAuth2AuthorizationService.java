@@ -3,6 +3,7 @@ package com.gexingw.mall.auth.infrastructure.component;
 import cn.hutool.core.lang.Assert;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
 import com.gexingw.mall.common.core.enums.AuthRespCode;
+import com.gexingw.mall.common.redis.config.RedisUtil;
 import com.gexingw.mall.common.security.support.AuthInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
@@ -37,18 +38,20 @@ import java.util.Optional;
 public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationService {
 
     private final RedisTemplate<Object, Object> redisTemplate;
-    private final RedisSerializer<Object> valueSerializer;
+    private final RedisTemplate<String, Object> javaSerialRedisTemplate;
+
+//    private final RedisSerializer<Object> valueSerializer;
 
     @Override
     public void save(OAuth2Authorization authorization) {
         Assert.notNull(authorization, "Authorization cannot be null.");
-        redisTemplate.setValueSerializer(RedisSerializer.java());
+        javaSerialRedisTemplate.setValueSerializer(RedisSerializer.java());
 
         // 当前的秒数
         long curTimeSeconds = System.currentTimeMillis() / 1000;
         if (authorization.getAttribute(OAuth2ParameterNames.STATE) != null) {
             String token = authorization.getAttribute(OAuth2ParameterNames.STATE);
-            redisTemplate.opsForValue().set(
+            javaSerialRedisTemplate.opsForValue().set(
                     String.format(OAuth2Constant.STATE_TOKEN_CACHE_NAME, token), authorization, Duration.ofMinutes(10).getSeconds()
             );
         }
@@ -60,7 +63,7 @@ public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationServi
                 OAuth2AuthorizationCode authorizationCodeToken = authorizationCode.getToken();
                 long expireSeconds = Optional.ofNullable(authorizationCodeToken.getExpiresAt()).orElse(Instant.now()).getEpochSecond();
 
-                redisTemplate.opsForValue().set(
+                javaSerialRedisTemplate.opsForValue().set(
                         String.format(OAuth2Constant.AUTHORIZATION_CODE_CACHE_NAME, authorizationCodeToken), authorization,
                         Duration.ofSeconds(expireSeconds, curTimeSeconds)
                 );
@@ -72,7 +75,7 @@ public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationServi
         if (refreshToken != null) {
             String refreshTokenValue = refreshToken.getToken().getTokenValue();
             long refreshTokenExpiresSeconds = Optional.ofNullable(refreshToken.getToken().getExpiresAt()).orElse(Instant.now()).getEpochSecond();
-            redisTemplate.opsForValue().set(
+            javaSerialRedisTemplate.opsForValue().set(
                     String.format(OAuth2Constant.REFRESH_TOKEN_CACHE_NAME, refreshTokenValue), authorization,
                     Duration.ofSeconds(refreshTokenExpiresSeconds - curTimeSeconds)
             );
@@ -93,17 +96,22 @@ public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationServi
 
             long accessTokenExpireSeconds = Optional.ofNullable(accessToken.getToken().getExpiresAt()).orElse(Instant.now()).getEpochSecond();
             Duration accessTokenExpireDuration = getDiffSeconds(accessTokenExpireSeconds, curTimeSeconds);
-            redisTemplate.opsForValue().set(String.format(OAuth2Constant.ACCESS_TOKEN_CACHE_NAME, accessTokenValue), authorization, accessTokenExpireDuration);
+            javaSerialRedisTemplate.opsForValue().set(
+                    String.format(OAuth2Constant.ACCESS_TOKEN_CACHE_NAME, accessTokenValue), authorization, accessTokenExpireDuration
+            );
 
             // 当前认证用户的AuthInfo信息
-            AuthInfo authInfo = (AuthInfo)authenticationToken.getPrincipal();
-            if(authInfo != null) {
-                redisTemplate.setValueSerializer(valueSerializer);
-                redisTemplate.opsForValue().set(String.format(OAuth2Constant.ACCESS_TOKEN_AUTH_INFO_CACHE_NAME, accessTokenValue), authInfo, accessTokenExpireDuration);
+            AuthInfo authInfo = (AuthInfo) authenticationToken.getPrincipal();
+            if (authInfo != null) {
+                RedisUtil.set(
+                        String.format(OAuth2Constant.ACCESS_TOKEN_AUTH_INFO_CACHE_NAME, accessTokenValue), authInfo
+                        , accessTokenExpireDuration.getSeconds()
+                );
+//                redisTemplate.opsForValue().set(
+//                        String.format(OAuth2Constant.ACCESS_TOKEN_AUTH_INFO_CACHE_NAME, accessTokenValue), authInfo, accessTokenExpireDuration
+//                );
             }
         }
-
-        redisTemplate.setValueSerializer(valueSerializer);
     }
 
     @Override
@@ -112,26 +120,28 @@ public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationServi
 
         if (authorization.getAttribute(OAuth2ParameterNames.STATE) != null) {
             String token = authorization.getAttribute(OAuth2ParameterNames.STATE);
-            redisTemplate.delete(String.format(OAuth2Constant.STATE_TOKEN_CACHE_NAME, token));
+            RedisUtil.del(String.format(OAuth2Constant.STATE_TOKEN_CACHE_NAME, token));
         }
 
         if (authorization.getToken(OAuth2AuthorizationCode.class) != null) {
             OAuth2Authorization.Token<OAuth2AuthorizationCode> authorizationCode = authorization.getToken(OAuth2AuthorizationCode.class);
             if (authorizationCode != null) {
                 OAuth2AuthorizationCode authorizationCodeToken = authorizationCode.getToken();
-                redisTemplate.delete(String.format(OAuth2Constant.AUTHORIZATION_CODE_CACHE_NAME, authorizationCodeToken));
+                RedisUtil.del(String.format(OAuth2Constant.AUTHORIZATION_CODE_CACHE_NAME, authorizationCodeToken));
             }
         }
 
         TokenSettings tokenSettings = authorization.getAttribute(OAuth2Constant.TOKEN_SETTINGS);
         OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken = authorization.getRefreshToken();
         if (refreshToken != null && tokenSettings != null) {
-            redisTemplate.delete(String.format(OAuth2Constant.REFRESH_TOKEN_CACHE_NAME, refreshToken.getToken().getTokenValue()));
+            RedisUtil.del(String.format(OAuth2Constant.REFRESH_TOKEN_CACHE_NAME, refreshToken.getToken().getTokenValue()));
         }
 
         OAuth2Authorization.Token<OAuth2AccessToken> accessToken = authorization.getAccessToken();
         if (accessToken != null) {
-            redisTemplate.delete(String.format(OAuth2Constant.ACCESS_TOKEN_CACHE_NAME, accessToken.getToken().getTokenValue()));
+            String accessTokenValue = accessToken.getToken().getTokenValue();
+            RedisUtil.del(String.format(OAuth2Constant.ACCESS_TOKEN_CACHE_NAME, accessTokenValue));
+            RedisUtil.del(String.format(OAuth2Constant.ACCESS_TOKEN_AUTH_INFO_CACHE_NAME, accessTokenValue));
         }
     }
 
@@ -145,10 +155,7 @@ public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationServi
         org.springframework.util.Assert.hasText(token, "token cannot be empty");
         org.springframework.util.Assert.notNull(tokenType, "tokenType cannot be empty");
 
-        redisTemplate.setValueSerializer(RedisSerializer.java());
-        Object redisObject = redisTemplate.opsForValue().get(String.format(OAuth2Constant.ACCESS_TOKEN_CACHE_NAME, token));
-        redisTemplate.setValueSerializer(valueSerializer);
-
+        Object redisObject = javaSerialRedisTemplate.opsForValue().get(String.format(OAuth2Constant.ACCESS_TOKEN_CACHE_NAME, token));
         return (OAuth2Authorization) redisObject;
     }
 

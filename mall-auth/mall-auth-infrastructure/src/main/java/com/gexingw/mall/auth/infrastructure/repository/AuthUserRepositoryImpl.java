@@ -1,10 +1,11 @@
 package com.gexingw.mall.auth.infrastructure.repository;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gexingw.mall.auth.domain.model.AuthUser;
 import com.gexingw.mall.auth.domain.repository.AuthUserRepository;
 import com.gexingw.mall.auth.infrastructure.convert.AuthUserConvert;
-import com.gexingw.mall.auth.infrastructure.gateway.authuser.db.AuthUserDAO;
-import com.gexingw.mall.auth.infrastructure.po.AuthUserPO;
+import com.gexingw.mall.auth.infrastructure.dao.authuser.mapper.AuthUserMapper;
+import com.gexingw.mall.auth.infrastructure.dao.authuser.po.AuthUserPO;
 import com.gexingw.mall.common.core.domain.AggregationManager;
 import com.gexingw.mall.common.core.support.ThreadLocalAggregationManager;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 /**
  * mall-cloud
@@ -27,7 +26,7 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
 
     private final AggregationManager<AuthUser, Long> aggregationManager = new ThreadLocalAggregationManager<>();
 
-    private final AuthUserDAO authUserDAO;
+    private final AuthUserMapper authUserMapper;
 
     private final AuthUserConvert authUserConvert;
 
@@ -38,7 +37,8 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
 
     @Override
     public AuthUser findByUsername(String username) {
-        AuthUserPO authUserPO = authUserDAO.findByUsername(username);
+        LambdaQueryWrapper<AuthUserPO> queryWrapper = new LambdaQueryWrapper<AuthUserPO>().eq(AuthUserPO::getUsername, username);
+        AuthUserPO authUserPO = authUserMapper.selectOne(queryWrapper);
 
         return authUserConvert.toDomain(authUserPO);
     }
@@ -51,13 +51,13 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
         }
 
         // 从数据库中查询
-        Optional<AuthUserPO> authUserPO = authUserDAO.findById(id);
-        if (!authUserPO.isPresent()) {
+        AuthUserPO authUserPO = authUserMapper.selectById(id);
+        if (authUserPO == null) {
             return null;
         }
 
         // 从数据库中查询
-        authUser = authUserConvert.toDomain(authUserPO.get());
+        authUser = authUserConvert.toDomain(authUserPO);
         aggregationManager.set(authUser);
 
         return authUser;
@@ -66,7 +66,7 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
     @Override
     public @NotNull Boolean remove(@NotNull AuthUser aggregationRoot) {
         // 从数据库删除
-        authUserDAO.deleteById(aggregationRoot.getId());
+        authUserMapper.deleteById(aggregationRoot.getId());
         aggregationManager.remove(aggregationRoot.getId());
 
         return true;
@@ -75,7 +75,7 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
     @Override
     public @NotNull Boolean save(@NotNull AuthUser authUser) {
         AuthUserPO authUserPO = authUserConvert.toPO(authUser);
-        authUserDAO.save(authUserPO);
+        authUserMapper.insert(authUserPO);
 
         authUser.setId(authUserPO.getId());
         aggregationManager.set(authUser);

@@ -45,6 +45,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         // 写入到 SecurityContextHolder
         SecurityContextHolder.getContext().setAuthentication(new Authentication(authInfo));
         filterChain.doFilter(request, response);
+
+        // 清除认证信息
+        SecurityContextHolder.clearContext();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.gexingw.mall.auth.infrastructure.handler;
+package com.gexingw.mall.auth.infrastructure.support;
 
 import com.gexingw.mall.common.core.enums.AuthRespCode;
 import com.gexingw.mall.common.core.enums.CommonRespCode;

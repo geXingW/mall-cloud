@@ -1,7 +1,7 @@
 package com.gexingw.mall.auth.infrastructure.convert;
 
 import com.gexingw.mall.auth.domain.model.AuthUser;
-import com.gexingw.mall.auth.infrastructure.po.AuthUserPO;
+import com.gexingw.mall.auth.infrastructure.dao.authuser.po.AuthUserPO;
 import com.gexingw.mall.common.core.convert.DomainPOConvert;
 import org.mapstruct.Mapper;
 

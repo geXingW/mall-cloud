@@ -1,6 +1,8 @@
 package com.gexingw.mall.auth.application.service.impl;
 
 import com.gexingw.mall.auth.application.service.AuthCommandService;
+import com.gexingw.mall.auth.infrastructure.support.AuthRespCode;
+import com.gexingw.mall.auth.infrastructure.support.MallAuthBizException;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -31,11 +33,14 @@ public class AuthCommandServiceImpl implements AuthCommandService {
     @Override
     public void logout(@Nullable String accessToken) {
         if (StringUtils.isBlank(accessToken)) {
-            throw new RuntimeException("请先登录！");
+            throw new MallAuthBizException(AuthRespCode.UN_AUTHORIZED);
         }
 
         String redisAccessTokenKey = String.format(OAuth2Constant.ACCESS_TOKEN_CACHE_NAME, accessToken);
         OAuth2Authorization authorization = (OAuth2Authorization) javaSerializerRedisTemplate.opsForValue().get(redisAccessTokenKey);
+        if (authorization == null) {
+            throw new MallAuthBizException(AuthRespCode.UN_AUTHORIZED);
+        }
 
         oAuth2AuthorizationService.remove(authorization);
     }

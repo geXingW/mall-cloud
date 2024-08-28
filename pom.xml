@@ -31,7 +31,9 @@
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
 
-        <dubbo.version>3.2.7</dubbo.version>
+        <!--        <dubbo.version>3.2.7</dubbo.version>-->
+        <dubbo.version>3.2.15</dubbo.version>
+        <!--        <dubbo.version>3.1.11</dubbo.version>-->
 
         <oauth2-authorization-server.version>0.4.3</oauth2-authorization-server.version>
 

@@ -32,3 +32,13 @@ spring:
         extension-configs:
           - data-id: mall-cloud-base.yaml
             refresh: true
+dubbo:
+  application:
+    auto-trust-serialize-class: true
+    qos-port: 22222
+    qos-enable: true
+    check-serializable: false
+  protocol:
+    serialization: fastjson2
+  consumer:
+    filter: -authenticationPrepare,-contextHolderParametersSelectedTransfer

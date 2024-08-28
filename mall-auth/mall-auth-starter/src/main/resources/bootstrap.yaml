@@ -32,3 +32,9 @@ spring:
         extension-configs:
           - data-id: mall-cloud-base.yaml
             refresh: true
+
+dubbo:
+  application:
+    auto-trust-serialize-class: true
+    qos-port: 22223
+    qos-enable: true

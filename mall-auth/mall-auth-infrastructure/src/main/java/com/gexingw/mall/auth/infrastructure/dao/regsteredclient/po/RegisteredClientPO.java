@@ -1,12 +1,9 @@
-package com.gexingw.mall.auth.infrastructure.po;
+package com.gexingw.mall.auth.infrastructure.dao.regsteredclient.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
@@ -15,15 +12,9 @@ import java.time.LocalDateTime;
  * @author GeXingW
  * @date 2024/2/17 13:03
  */
-@Entity
 @Data
-@Table(name = "oauth2_registered_client")
-public class RegisteredClientPO {
-
-    @Id
-    @GeneratedValue(generator = "snowflake-id-generator")
-    @GenericGenerator(name = "snowflake-id-generator", strategy = "com.gexingw.mall.auth.infrastructure.SnowflakeIdGenerator")
-    private Long id;
+@TableName("oauth2_registered_client")
+public class RegisteredClientPO extends BasePO {
 
     private String clientName;
 

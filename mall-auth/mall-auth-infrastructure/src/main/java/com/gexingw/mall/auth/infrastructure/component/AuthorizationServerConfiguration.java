@@ -1,20 +1,19 @@
-package com.gexingw.mall.auth.infrastructure.config;
+package com.gexingw.mall.auth.infrastructure.component;
 
-import com.gexingw.mall.auth.infrastructure.component.RedisOAuth2AuthorizationService;
 import com.gexingw.mall.auth.infrastructure.component.convert.OAuth2PasswordAuthenticationConvert;
 import com.gexingw.mall.auth.infrastructure.component.filter.ServletRequestJsonParamsWrapperFilter;
 import com.gexingw.mall.auth.infrastructure.component.provider.OAuth2PasswordAuthenticationProvider;
-import com.gexingw.mall.auth.infrastructure.handler.AuthenticationFailureHandler;
+import com.gexingw.mall.auth.infrastructure.support.AuthenticationFailureHandler;
 import com.gexingw.mall.common.security.handler.AccessDeniedHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.OAuth2Token;
@@ -96,8 +95,10 @@ public class AuthorizationServerConfiguration {
 //    }
 
     @Bean
-    public OAuth2AuthorizationService oAuth2AuthorizationService(RedisTemplate<Object, Object> restTemplate, RedisSerializer<Object> redisSerializer) {
-        return new RedisOAuth2AuthorizationService(restTemplate, redisSerializer);
+    public OAuth2AuthorizationService oAuth2AuthorizationService(
+            RedisTemplate<Object, Object> restTemplate, @Qualifier("javaSerializerRedisTemplate") RedisTemplate<String, Object> javaSerializerRedisTemplate
+    ) {
+        return new RedisOAuth2AuthorizationService(restTemplate, javaSerializerRedisTemplate);
     }
 
 }

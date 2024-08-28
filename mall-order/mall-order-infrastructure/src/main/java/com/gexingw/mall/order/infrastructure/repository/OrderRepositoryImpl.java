@@ -132,7 +132,7 @@ public class OrderRepositoryImpl extends DbRepository<Order, Long> implements Or
     }
 
     @Override
-    protected @NotNull AggregationManager<Order, Long> getAggregationManager() {
+    public @NotNull AggregationManager<Order, Long> getAggregationManager() {
         return this.aggregationManager;
     }
 

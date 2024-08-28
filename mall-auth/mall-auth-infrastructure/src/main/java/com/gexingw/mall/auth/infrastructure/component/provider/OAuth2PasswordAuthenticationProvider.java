@@ -1,10 +1,11 @@
 package com.gexingw.mall.auth.infrastructure.component.provider;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gexingw.mall.auth.infrastructure.component.token.OAuth2PasswordAuthenticationToken;
 import com.gexingw.mall.auth.infrastructure.constant.ParameterConstant;
-import com.gexingw.mall.auth.infrastructure.gateway.authuser.db.AuthUserDAO;
-import com.gexingw.mall.auth.infrastructure.po.AuthUserPO;
-import com.gexingw.mall.auth.infrastructure.po.RegisteredClientPO;
+import com.gexingw.mall.auth.infrastructure.dao.authuser.mapper.AuthUserMapper;
+import com.gexingw.mall.auth.infrastructure.dao.authuser.po.AuthUserPO;
+import com.gexingw.mall.auth.infrastructure.dao.regsteredclient.po.RegisteredClientPO;
 import com.gexingw.mall.common.security.support.AuthInfo;
 import com.gexingw.mall.common.spring.util.SpringUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +29,7 @@ public class OAuth2PasswordAuthenticationProvider extends AbstractOAuth2Authenti
 
     public static final String GRANT_TYPE = "password";
 
-    public final AuthUserDAO authUserDao = SpringUtil.getBean(AuthUserDAO.class);
+    public final AuthUserMapper authUserMapper = SpringUtil.getBean(AuthUserMapper.class);
 
     @Override
     public boolean supports(Class<?> authentication) {
@@ -55,7 +56,7 @@ public class OAuth2PasswordAuthenticationProvider extends AbstractOAuth2Authenti
         }
 
         // 本次登录的用户
-        AuthUserPO authUser = authUserDao.findByUsername(username);
+        AuthUserPO authUser = authUserMapper.selectOne(new LambdaQueryWrapper<AuthUserPO>().eq(AuthUserPO::getUsername, username));
         if (authUser == null || !passwordVerify(password, authUser.getPassword())) {
             // 用户不存在
             throw new OAuth2AuthenticationException(

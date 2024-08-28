@@ -27,6 +27,7 @@ spring:
           - data-id: mall-cloud-base.yaml
             refresh: true
 
+
 seata:
   tx-service-group: mall-cloud-tx-group
   service:
@@ -51,6 +52,7 @@ seata:
       group: SEATA_GROUP
       username: ${spring.cloud.nacos.username}
       password: ${spring.cloud.nacos.password}
+
 
 
 

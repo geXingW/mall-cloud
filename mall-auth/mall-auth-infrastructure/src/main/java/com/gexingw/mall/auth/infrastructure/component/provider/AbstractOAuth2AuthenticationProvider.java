@@ -1,8 +1,8 @@
 package com.gexingw.mall.auth.infrastructure.component.provider;
 
-import com.gexingw.mall.auth.infrastructure.gateway.regsteredclient.db.RegisteredClientDAO;
-import com.gexingw.mall.auth.infrastructure.po.AuthUserPO;
-import com.gexingw.mall.auth.infrastructure.po.RegisteredClientPO;
+import com.gexingw.mall.auth.infrastructure.dao.authuser.po.AuthUserPO;
+import com.gexingw.mall.auth.infrastructure.dao.regsteredclient.mapper.RegisteredClientMapper;
+import com.gexingw.mall.auth.infrastructure.dao.regsteredclient.po.RegisteredClientPO;
 import com.gexingw.mall.common.core.constant.OAuth2Constant;
 import com.gexingw.mall.common.security.support.AuthInfo;
 import com.gexingw.mall.common.spring.util.SpringUtil;
@@ -52,7 +52,7 @@ public abstract class AbstractOAuth2AuthenticationProvider implements Authentica
         Assert.notNull(registeredClient, "RegisteredClientModel should not be null!");
 
         Long registeredClientId = Long.valueOf(registeredClient.getId());
-        RegisteredClientPO registeredClientPO = SpringUtil.getBean(RegisteredClientDAO.class).findById(registeredClientId).orElse(null);
+        RegisteredClientPO registeredClientPO = SpringUtil.getBean(RegisteredClientMapper.class).selectById(registeredClientId);
         Authentication userAuthentication = this.getAuthentication(clientAuthentication, registeredClientPO);
 
         // AccessToken
