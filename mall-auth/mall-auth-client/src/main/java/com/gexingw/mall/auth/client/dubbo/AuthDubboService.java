@@ -1,5 +1,6 @@
 package com.gexingw.mall.auth.client.dubbo;
 
+import com.gexingw.mall.auth.client.co.AuthInfoCO;
 import com.gexingw.mall.common.core.util.R;
 
 /**
@@ -12,4 +13,6 @@ public interface AuthDubboService {
 
     R<Boolean> logout(String accessToken);
 
+    R<AuthInfoCO> info();
+    
 }

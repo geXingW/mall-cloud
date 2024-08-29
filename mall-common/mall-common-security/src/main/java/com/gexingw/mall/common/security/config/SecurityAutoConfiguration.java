@@ -80,4 +80,10 @@ public class SecurityAutoConfiguration {
         return new AuthenticationFilter();
     }
 
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public ObjectMapperCodecCustomer accessDeniedHandler() {
+//        return new SecurityObjectMapperCodecCustomer();
+//    }
+
 }

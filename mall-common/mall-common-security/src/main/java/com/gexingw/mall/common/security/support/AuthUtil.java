@@ -18,6 +18,10 @@ public class AuthUtil {
         return getAuthInfo().map(AuthInfo::getId).orElse(0L);
     }
 
+    public static @NotNull String getAuthUsername() {
+        return getAuthInfo().map(AuthInfo::getAuthUserName).orElse("");
+    }
+
     public static Optional<AuthInfo> getAuthInfo() {
         return getAuthentication().map(Authentication::getAuthInfo);
     }

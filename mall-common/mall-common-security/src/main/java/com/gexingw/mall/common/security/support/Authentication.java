@@ -1,6 +1,6 @@
 package com.gexingw.mall.common.security.support;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,9 +19,6 @@ import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  */
 @NoArgsConstructor
 @JsonTypeInfo(use = Id.CLASS, property = "@class")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Authentication.class, name = "Authentication")
-})
 public class Authentication implements org.springframework.security.core.Authentication {
 
     private boolean authenticated;
@@ -35,21 +32,25 @@ public class Authentication implements org.springframework.security.core.Authent
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
 
     @Override
+    @JsonIgnore
     public Object getCredentials() {
         return null;
     }
 
     @Override
+    @JsonIgnore
     public Object getDetails() {
         return null;
     }
 
     @Override
+    @JsonIgnore
     public Object getPrincipal() {
         return null;
     }
@@ -65,6 +66,7 @@ public class Authentication implements org.springframework.security.core.Authent
     }
 
     @Override
+    @JsonIgnore
     public String getName() {
         return this.getAuthInfo().getAuthUserName();
     }

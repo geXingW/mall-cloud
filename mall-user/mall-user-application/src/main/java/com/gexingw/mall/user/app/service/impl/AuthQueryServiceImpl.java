@@ -1,6 +1,9 @@
 package com.gexingw.mall.user.app.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.gexingw.mall.auth.client.co.AuthInfoCO;
+import com.gexingw.mall.auth.client.dubbo.AuthDubboService;
+import com.gexingw.mall.common.core.util.R;
 import com.gexingw.mall.common.db.support.MyBatisPlusService;
 import com.gexingw.mall.common.security.support.AuthInfo;
 import com.gexingw.mall.common.security.support.AuthUtil;
@@ -29,8 +32,16 @@ public class AuthQueryServiceImpl extends MyBatisPlusService<UserMapper, UserPO>
 
     private final UserMapper userMapper;
 
+    private final AuthDubboService authDubboService;
+
     @Override
     public WebMallAuthInfoVO queryWebUserInfo() {
+
+        R<AuthInfoCO> respInfo = authDubboService.info();
+        if (!respInfo.isSuccess()) {
+            throw new RuntimeException("请先登录！");
+        }
+
         Optional<AuthInfo> authInfo = AuthUtil.getAuthInfo();
         if (!authInfo.isPresent()) {
             return null;

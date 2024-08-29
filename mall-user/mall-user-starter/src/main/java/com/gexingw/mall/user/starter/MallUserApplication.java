@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author GeXingW
  */
-@EnableDubbo(scanBasePackages = {"com.gexingw.mall.user"})
+@EnableDubbo(scanBasePackages = {"com.gexingw.mall"})
 @MapperScan(basePackages = {"com.gexingw.mall.user.infra"})
 @SpringBootApplication(scanBasePackages = {"com.gexingw.mall.user", "com.gexingw.mall.common"})
 public class MallUserApplication {

@@ -1,5 +1,6 @@
 package com.gexingw.mall.common.security.support;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.gexingw.mall.common.core.domain.Entity;
@@ -22,8 +23,8 @@ import java.util.Set;
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = AuthInfo.class, name = "AuthInfo"),
-        @JsonSubTypes.Type(value = AuthInfo.User.class, name = "User"),
-        @JsonSubTypes.Type(value = AuthInfo.Client.class, name = "Client")
+        @JsonSubTypes.Type(value = AuthInfo.User.class, name = "authUser"),
+        @JsonSubTypes.Type(value = AuthInfo.Client.class, name = "client")
 })
 public class AuthInfo implements Serializable {
 
@@ -38,6 +39,7 @@ public class AuthInfo implements Serializable {
      */
     @Data
     @Accessors(chain = true)
+    @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
     public static class User implements Entity {
 
         private Long id;
@@ -58,6 +60,7 @@ public class AuthInfo implements Serializable {
      */
     @Data
     @Accessors(chain = true)
+    @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
     public static class Client implements Entity {
 
         private Long id;
@@ -80,6 +83,7 @@ public class AuthInfo implements Serializable {
         this.client = client;
     }
 
+    @JsonIgnore
     public String getAuthUserName() {
         return this.authUser.getUsername();
     }
