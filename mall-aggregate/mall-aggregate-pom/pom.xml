@@ -190,30 +190,35 @@
                 <version>${revision}</version>
             </dependency>
 
-
-            <!-- Account Service -->
+            <!-- User Service -->
             <dependency>
-                <groupId>com.gexingw</groupId>
-                <artifactId>mall-account-adapter</artifactId>
-                <version>${revision}</version>
+                <groupId>top.gexingw</groupId>
+                <artifactId>mall-service-user-client</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.gexingw</groupId>
-                <artifactId>mall-account-application</artifactId>
-                <version>${revision}</version>
+                <groupId>top.gexingw</groupId>
+                <artifactId>mall-service-user-adapter</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.gexingw</groupId>
-                <artifactId>mall-account-infrastructure</artifactId>
-                <version>${revision}</version>
+                <groupId>top.gexingw</groupId>
+                <artifactId>mall-service-user-app</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.gexingw</groupId>
-                <artifactId>mall-account-domain</artifactId>
-                <version>${revision}</version>
+                <groupId>top.gexingw</groupId>
+                <artifactId>mall-service-user-infra</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>top.gexingw</groupId>
+                <artifactId>mall-service-user-domain</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
 
