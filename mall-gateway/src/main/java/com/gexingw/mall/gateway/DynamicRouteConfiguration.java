@@ -7,9 +7,9 @@ import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Mono;
@@ -30,10 +30,15 @@ public class DynamicRouteConfiguration {
 
     private final NacosConfigProperties nacosConfigProperties;
     private final RouteDefinitionWriter routeDefinitionWriter;
+    private final RouteDefinitionLocator routeDefinitionLocator;
 
-    public DynamicRouteConfiguration(NacosConfigProperties nacosConfigProperties, RouteDefinitionWriter routeDefinitionWriter) throws NacosException {
+    public DynamicRouteConfiguration(
+            NacosConfigProperties nacosConfigProperties, RouteDefinitionWriter routeDefinitionWriter
+            , RouteDefinitionLocator routeDefinitionLocator
+    ) throws NacosException {
         this.nacosConfigProperties = nacosConfigProperties;
         this.routeDefinitionWriter = routeDefinitionWriter;
+        this.routeDefinitionLocator = routeDefinitionLocator;
 
         // 注册路由更新方法
         routeListener();
@@ -78,13 +83,21 @@ public class DynamicRouteConfiguration {
     public void updateRoutes(List<RouteDefinition> routes) {
         routes.forEach(route -> {
             try {
-                this.routeDefinitionWriter.delete(Mono.just(route.getId())).subscribe();
+                String routeId = route.getId();
+                List<RouteDefinition> routeDefinitions = this.routeDefinitionLocator.getRouteDefinitions()
+                        .filter(rd -> rd.getId().equals(routeId))
+                        .collectList()
+                        .block();
+                boolean routeExists = routeDefinitions != null && routeDefinitions.stream().anyMatch(rd -> rd.getId().equals(routeId));
+                if (routeExists) {
+                    this.routeDefinitionWriter.delete(Mono.just(routeId)).subscribe();
+                }
             } catch (Exception e) {
                 log.error("网关路由更新异常：路由删除异常！{}", JSON.toJSONString(route), e);
             }
 
             try {
-                routeDefinitionWriter.save(Mono.just(route)).subscribe();
+                this.routeDefinitionWriter.save(Mono.just(route)).subscribe();
             } catch (Exception e) {
                 log.error("网关路由更新异常：路由保存异常！{}", JSON.toJSONString(route), e);
             }
