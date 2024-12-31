@@ -1,10 +1,10 @@
 package com.gexingw.mall.order.infrastructure.dataobject;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gexingw.mall.common.core.domain.AggregationRoot;
 import com.gexingw.mall.common.db.support.BasePO;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import top.gexingw.ddd.core.AggregateRoot;
 
 /**
  * mall-user-service
@@ -21,6 +21,6 @@ public class OrderDomainEventDO extends BasePO {
 
     private String eventType;
 
-    private AggregationRoot eventPayload;
+    private AggregateRoot eventPayload;
 
 }

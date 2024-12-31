@@ -1,6 +1,5 @@
 package com.gexingw.mall.product.infrastructure.repository;
 
-import com.gexingw.mall.common.core.domain.AggregationManager;
 import com.gexingw.mall.product.domain.gateway.ProductGateway;
 import com.gexingw.mall.product.domain.model.Product;
 import com.gexingw.mall.product.domain.repository.ProductRepository;
@@ -8,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import top.gexingw.ddd.core.AggregateManager;
 
 /**
  * mall-cloud
@@ -22,7 +22,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     private final ProductGateway productGateway;
 
     @Override
-    public @NotNull AggregationManager<Product, Long> getAggregationManager() {
+    public @NotNull AggregateManager<Product, Long> getAggregationManager() {
         return null;
     }
 

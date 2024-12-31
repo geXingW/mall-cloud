@@ -1,8 +1,8 @@
 package com.gexingw.mall.domain.event.order;
 
-import com.gexingw.mall.common.core.domain.AggregationRoot;
 import com.gexingw.mall.common.spring.event.IEvent;
 import com.gexingw.mall.domain.model.order.Order;
+import top.gexingw.ddd.core.AggregateRoot;
 
 /**
  * mall-user-service
@@ -29,7 +29,7 @@ public class OrderBaseEvent implements IEvent {
     }
 
     @Override
-    public AggregationRoot<Long> getPayload() {
+    public AggregateRoot<Long> getPayload() {
         return this.order;
     }
 

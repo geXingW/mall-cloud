@@ -1,6 +1,5 @@
 package com.gexingw.mall.order.infrastructure.repository;
 
-import com.gexingw.mall.common.core.domain.AggregationManager;
 import com.gexingw.mall.common.core.support.*;
 import com.gexingw.mall.common.core.util.DiffUtil;
 import com.gexingw.mall.domain.gateway.order.OrderGateway;
@@ -15,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import top.gexingw.ddd.core.AggregateManager;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +33,7 @@ public class OrderRepositoryImpl extends DbRepository<Order, Long> implements Or
     private final OrderItemGateway orderItemGateway;
     private final OrderShippingAddressGateway orderShippingAddressGateway;
 
-    protected AggregationManager<Order, Long> aggregationManager = new ThreadLocalAggregationManager<>();
+    protected AggregateManager<Order, Long> aggregationManager = new ThreadLocalAggregationManager<>();
 
     @Override
     protected @Nullable Order select(@NotNull Long id) {
@@ -132,7 +132,7 @@ public class OrderRepositoryImpl extends DbRepository<Order, Long> implements Or
     }
 
     @Override
-    public @NotNull AggregationManager<Order, Long> getAggregationManager() {
+    public @NotNull AggregateManager<Order, Long> getAggregationManager() {
         return this.aggregationManager;
     }
 

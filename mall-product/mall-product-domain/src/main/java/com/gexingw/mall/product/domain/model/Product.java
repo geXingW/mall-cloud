@@ -1,8 +1,8 @@
 package com.gexingw.mall.product.domain.model;
 
-import com.gexingw.mall.common.core.domain.AggregationRoot;
 import com.gexingw.mall.common.exception.ParamInvalidException;
 import lombok.Data;
+import top.gexingw.ddd.core.AggregateRoot;
 
 import java.math.BigDecimal;
 
@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  */
 @SuppressWarnings("unused")
 @Data
-public class Product implements AggregationRoot<Long> {
+public class Product implements AggregateRoot<Long> {
 
     /**
      * id

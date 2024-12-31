@@ -1,13 +1,13 @@
 package com.gexingw.mall.domain.model.order;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
-import com.gexingw.mall.common.core.domain.AggregationRoot;
 import com.gexingw.mall.common.exception.BizNotFoundException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.javers.core.metamodel.annotation.Entity;
 import org.javers.core.metamodel.annotation.Id;
+import top.gexingw.ddd.core.AggregateRoot;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Entity
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Order implements AggregationRoot<Long> {
+public class Order implements AggregateRoot<Long> {
 
     @Id
     private Long id;
