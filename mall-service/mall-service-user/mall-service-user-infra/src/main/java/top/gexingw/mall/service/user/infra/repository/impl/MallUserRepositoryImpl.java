@@ -5,8 +5,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import top.gexingw.mall.service.user.dao.mall.user.MallUserMapper;
+import top.gexingw.mall.service.user.dao.mall.user.MallUserPO;
 import top.gexingw.mall.service.user.domain.mall.user.MallUser;
 import top.gexingw.mall.service.user.domain.mall.user.MallUserRepository;
+import top.gexingw.mall.service.user.infra.convert.MallUserConvert;
 import top.gexingw.mall.service.user.rpc.auth.AuthUserRPCClient;
 
 @Repository
@@ -14,6 +17,10 @@ import top.gexingw.mall.service.user.rpc.auth.AuthUserRPCClient;
 public class MallUserRepositoryImpl implements MallUserRepository {
 
     private final AuthUserRPCClient authUserRPCClient;
+
+    private final MallUserMapper mallUserMapper;
+
+    private final MallUserConvert mallUserConvert;
 
     @Override
     public MallUser findByPhone(String phone) {
@@ -32,8 +39,13 @@ public class MallUserRepositoryImpl implements MallUserRepository {
 
     @Override
     public @NotNull Boolean save(@NotNull MallUser mallUser) {
+        // 生成Auth User
         Long registeredMallUserId = authUserRPCClient.registerUser(mallUser.getPhone(), mallUser.getPassword());
-        mallUser.setId(registeredMallUserId);
+        mallUser.registered(registeredMallUserId);
+
+        // 生成Mall User
+        MallUserPO mallUserPO = mallUserConvert.toPO(mallUser);
+        this.mallUserMapper.insert(mallUserPO);
 
         return true;
     }

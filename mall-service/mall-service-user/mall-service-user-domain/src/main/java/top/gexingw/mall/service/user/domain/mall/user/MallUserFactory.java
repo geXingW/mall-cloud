@@ -9,7 +9,7 @@ package top.gexingw.mall.service.user.domain.mall.user;
 public class MallUserFactory {
 
     public static MallUser create(String phone, String password) {
-        return new MallUser(null, phone, phone, password);
+        return new MallUser(null, 0L, phone, phone, password);
     }
 
 }

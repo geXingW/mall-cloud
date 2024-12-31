@@ -53,7 +53,6 @@ public class MallUserCommandServiceImpl implements MallUserCommandService {
 
         // Create the user
         MallUser mallUser = MallUserFactory.create(command.getPhone(), command.getPassword());
-
         // Save the user to the database
         if (!mallUserRepository.save(mallUser)) {
             throw new RuntimeException("用户创建失败！");

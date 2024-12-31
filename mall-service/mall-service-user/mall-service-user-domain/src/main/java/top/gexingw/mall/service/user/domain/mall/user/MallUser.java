@@ -20,10 +20,16 @@ public class MallUser implements AggregateRoot<Long> {
     @Setter
     private Long id;
 
+    private Long authUserId;
+
     private String username;
 
     private String phone;
 
     private String password;
+
+    public void registered(Long authUserId) {
+        this.authUserId = authUserId;
+    }
 
 }
