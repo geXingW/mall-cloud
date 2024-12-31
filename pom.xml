@@ -18,7 +18,6 @@
     <modules>
         <module>mall-aggregate</module>
         <module>mall-common</module>
-        <module>mall-user</module>
         <module>mall-order</module>
         <module>mall-auth</module>
         <module>mall-gateway</module>
