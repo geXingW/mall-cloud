@@ -1,8 +1,8 @@
 package com.gexingw.mall.auth.domain.model;
 
-import com.gexingw.mall.common.core.domain.AggregationRoot;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import top.gexingw.ddd.core.AggregateRoot;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @NoArgsConstructor
-public class AuthUser implements AggregationRoot<Long> {
+public class AuthUser implements AggregateRoot<Long> {
 
     private Long id;
 

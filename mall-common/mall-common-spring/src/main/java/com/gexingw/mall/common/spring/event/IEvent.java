@@ -1,6 +1,6 @@
 package com.gexingw.mall.common.spring.event;
 
-import com.gexingw.mall.common.core.domain.AggregationRoot;
+import top.gexingw.ddd.core.AggregateRoot;
 
 /**
  * mall-user-service
@@ -14,6 +14,6 @@ public interface IEvent {
 
     String getType();
 
-    AggregationRoot getPayload();
+    AggregateRoot getPayload();
 
 }

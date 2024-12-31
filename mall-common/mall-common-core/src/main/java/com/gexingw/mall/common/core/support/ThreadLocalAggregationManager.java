@@ -1,8 +1,8 @@
 package com.gexingw.mall.common.core.support;
 
 import com.alibaba.fastjson2.JSON;
-import com.gexingw.mall.common.core.domain.AggregationManager;
-import com.gexingw.mall.common.core.domain.AggregationRoot;
+import top.gexingw.ddd.core.AggregateManager;
+import top.gexingw.ddd.core.AggregateRoot;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @author GeXingW
  * @date 2024/5/10 12:23
  */
-public class ThreadLocalAggregationManager<T extends AggregationRoot<ID>, ID extends Serializable> implements AggregationManager<T, ID> {
+public class ThreadLocalAggregationManager<T extends AggregateRoot<ID>, ID extends Serializable> implements AggregateManager<T, ID> {
 
     private final ThreadLocal<ThreadLocalContext<T, ID>> threadLocalContext = ThreadLocal.withInitial(ThreadLocalContext::new);
 
@@ -24,7 +24,7 @@ public class ThreadLocalAggregationManager<T extends AggregationRoot<ID>, ID ext
     }
 
     @Override
-    public AggregationRoot<ID> set(T aggregationRoot) {
+    public AggregateRoot<ID> set(T aggregationRoot) {
         return threadLocalContext.get().set(aggregationRoot.getId(), aggregationRoot);
     }
 
@@ -38,7 +38,7 @@ public class ThreadLocalAggregationManager<T extends AggregationRoot<ID>, ID ext
         threadLocalContext.get().remove(id);
     }
 
-    private static class ThreadLocalContext<T extends AggregationRoot<ID>, ID extends Serializable> {
+    private static class ThreadLocalContext<T extends AggregateRoot<ID>, ID extends Serializable> {
 
         private Class<? extends T> clazz;
 

@@ -6,13 +6,13 @@ import com.gexingw.mall.auth.domain.repository.AuthUserRepository;
 import com.gexingw.mall.auth.infrastructure.convert.AuthUserConvert;
 import com.gexingw.mall.auth.infrastructure.dao.authuser.mapper.AuthUserMapper;
 import com.gexingw.mall.auth.infrastructure.dao.authuser.po.AuthUserPO;
-import com.gexingw.mall.common.core.domain.AggregationManager;
 import com.gexingw.mall.common.core.support.ThreadLocalAggregationManager;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import top.gexingw.ddd.core.AggregateManager;
 
 /**
  * mall-cloud
@@ -24,14 +24,14 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class AuthUserRepositoryImpl implements AuthUserRepository {
 
-    private final AggregationManager<AuthUser, Long> aggregationManager = new ThreadLocalAggregationManager<>();
+    private final AggregateManager<AuthUser, Long> aggregationManager = new ThreadLocalAggregationManager<>();
 
     private final AuthUserMapper authUserMapper;
 
     private final AuthUserConvert authUserConvert;
 
     @Override
-    public @NotNull AggregationManager<AuthUser, Long> getAggregationManager() {
+    public @NotNull AggregateManager<AuthUser, Long> getAggregationManager() {
         return aggregationManager;
     }
 

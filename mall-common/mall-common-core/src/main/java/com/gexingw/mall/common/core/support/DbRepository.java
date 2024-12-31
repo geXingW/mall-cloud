@@ -1,9 +1,8 @@
 package com.gexingw.mall.common.core.support;
 
-import com.gexingw.mall.common.core.domain.AggregationManager;
-import com.gexingw.mall.common.core.domain.AggregationRoot;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import top.gexingw.ddd.core.AggregateRoot;
 
 import java.io.Serializable;
 
@@ -13,7 +12,7 @@ import java.io.Serializable;
  * @author GeXingW
  * @date 2024/5/10 13:34
  */
-public abstract class DbRepository<T extends AggregationRoot<ID>, ID extends Serializable> implements Repository<T, ID> {
+public abstract class DbRepository<T extends AggregateRoot<ID>, ID extends Serializable> implements Repository<T, ID> {
 
 //    protected AggregationManager<T, ID> aggregationManager;
 
@@ -90,8 +89,5 @@ public abstract class DbRepository<T extends AggregationRoot<ID>, ID extends Ser
     @NotNull
     protected abstract Boolean delete(@NotNull T aggregationRoot);
 
-    @NotNull
-    @Override
-    public abstract AggregationManager<T, ID> getAggregationManager();
 
 }
